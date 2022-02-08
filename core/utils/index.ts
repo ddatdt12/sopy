@@ -1,2 +1,2 @@
 export * from './DeviceUtils';
-export * from './HanlderUtils';
+export * from './HandlerUtils';

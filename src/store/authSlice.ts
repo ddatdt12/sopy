@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {authApi} from '@src/api';
 
-export type AuthState = Partial<{
+export type IAuthState = Partial<{
     token: string;
     refreshToken: string;
     userId: string;
@@ -14,13 +14,13 @@ const login = createAsyncThunk('auth/login', async (data: any, thunkAPI) => {
     return response;
 });
 
-export const initialState: AuthState = {};
+export const initialState: IAuthState = {};
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        update: (state, action: PayloadAction<AuthState>) => {
+        update: (state, action: PayloadAction<IAuthState>) => {
             state = {...state, ...action.payload};
         },
     },

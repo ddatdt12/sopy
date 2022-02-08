@@ -63,6 +63,8 @@ export const setupInterceptors = (store: IStore) => {
                         const res = await authApi.refreshToken();
                         store.dispatch(authActions.update(res as any));
 
+                        // @ts-ignore
+                        originalConfig._isRetry = true;
                         return axiosInstance(originalConfig);
                     } catch (_error) {
                         return Promise.reject(_error);

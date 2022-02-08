@@ -4,8 +4,8 @@ const {width, height} = Dimensions.get('window');
 
 const [shortDimension, longDimension] = width < height ? [width, height] : [height, width];
 
-const guidelineBaseWidth = 350;
-const guidelineBaseHeight = 680;
+const guidelineBaseWidth = 375;
+const guidelineBaseHeight = 812;
 
 const screenSize = Math.sqrt(width * height) / 100;
 
