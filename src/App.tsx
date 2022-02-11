@@ -1,17 +1,24 @@
-import React, {FC} from 'react';
-import {Text, View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import React, {FC, Suspense, useEffect} from 'react';
 import {Provider} from 'react-redux';
-import RoleScreen from '@src/screens/role';
+import {setupInterceptors} from './api/instance';
+import AppNavigator from './navigations/AppNavigator';
 import {store} from './store';
-import LoginScreen from './screens/login';
 
 const App: FC = () => {
+    useEffect(() => {}, []);
+
     return (
-        <Provider store={store}>
-            <LoginScreen />
-            {/* <RoleScreen /> */}
-        </Provider>
+        <Suspense fallback="Loading...">
+            <Provider store={store}>
+                <NavigationContainer>
+                    <AppNavigator />
+                </NavigationContainer>
+            </Provider>
+        </Suspense>
     );
 };
+
+setupInterceptors(store);
 
 export default App;

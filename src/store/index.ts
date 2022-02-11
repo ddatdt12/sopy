@@ -8,3 +8,5 @@ export const store = configureStore({
 });
 
 export type IStore = typeof store;
+export type IRootState = ReturnType<typeof store.getState>;
+export type IAppDispatch = typeof store.dispatch;
