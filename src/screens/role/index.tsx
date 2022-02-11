@@ -1,32 +1,21 @@
-import {
-    Alert,
-    Image,
-    SafeAreaView,
-    StyleSheet,
-    Text,
-    TouchableHighlight,
-    TouchableOpacityBase,
-    View,
-} from 'react-native';
-import React from 'react';
+import {scaleSize} from '@core/utils';
+import {IMAGES} from '@src/assets';
 import Card from '@src/components/Card';
+import {RoleChooseScreenProps} from '@src/navigations/RootStackParams';
+import React from 'react';
+import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import ImageBackground from '../login/components/ImageBackground';
 
-const RoleScreen = () => {
+const RoleScreen: React.FC<RoleChooseScreenProps> = ({navigation}) => {
     return (
-        <SafeAreaView style={styles.container}>
-            <Image
-                style={styles.background}
-                source={require('@src/assets/images/background.png')}
-                resizeMode="cover"
-                blurRadius={3}
-            />
+        <ImageBackground source={IMAGES.bg_intro_step_1}>
             <View style={styles.contentWrapper}>
                 <Text style={styles.title}>Who are you?</Text>
                 <TouchableHighlight
                     style={styles.touchableHighlight}
                     activeOpacity={0.6}
                     underlayColor="#B4D1FC"
-                    onPress={() => Alert.alert('A user')}>
+                    onPress={() => navigation.push('UserLogin')}>
                     <Card style={styles.roleCard}>
                         <Text style={styles.text}>A User</Text>
                     </Card>
@@ -35,13 +24,13 @@ const RoleScreen = () => {
                     style={styles.touchableHighlight}
                     activeOpacity={0.6}
                     underlayColor="#B4D1FC"
-                    onPress={() => Alert.alert('An Expert')}>
+                    onPress={() => navigation.push('ExpertLogin')}>
                     <Card style={styles.roleCard}>
                         <Text style={styles.text}>An Expert</Text>
                     </Card>
                 </TouchableHighlight>
             </View>
-        </SafeAreaView>
+        </ImageBackground>
     );
 };
 
@@ -69,7 +58,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         alignItems: 'center',
         justifyContent: 'center',
-        // marginTo:30,
+        marginTop: scaleSize(100),
     },
     title: {
         fontSize: 44,

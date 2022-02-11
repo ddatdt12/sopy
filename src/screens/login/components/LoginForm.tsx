@@ -44,10 +44,9 @@ const LoginForm: React.FC<LoginProps> = props => {
                 // Signed in
                 const user = userCredential.user;
                 Alert.alert('Notice', 'Success: ' + user.email);
-                console.log('Success: ', user);
+                console.log('Success: ', user.email);
             })
             .catch(error => {
-                const errorCode = error.code;
                 const errorMessage = error.message;
                 Alert.alert('Notice', errorMessage);
                 console.log(error);

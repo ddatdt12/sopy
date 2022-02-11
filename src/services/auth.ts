@@ -9,8 +9,6 @@ const googleSignIn = async () => {
         const {idToken, accessToken} = await GoogleSignin.getTokens();
         const credential = GoogleAuthProvider.credential(idToken, accessToken);
         const userCredential = await signInWithCredential(auth, credential);
-        console.log('Success:', userCredential.user.email);
-
         return {user: userCredential.user, error: null};
     } catch (error: any) {
         let errorMessage: string | null = null;

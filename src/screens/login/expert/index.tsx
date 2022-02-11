@@ -1,15 +1,14 @@
 import {scaleSize} from '@core/utils';
 import {IMAGES} from '@src/assets';
 import {COLORS} from '@src/assets/const';
-import Button from '@src/components/Button';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {Alert, Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import ImageBackground from '../components/ImageBackground';
-import LoginForm, {LoginData} from '../components/LoginForm';
+import LoginForm from '../components/LoginForm';
 
 const ExpertLoginScreen = () => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     return (
         <ImageBackground source={IMAGES.bg_intro_step_1}>
@@ -21,21 +20,6 @@ const ExpertLoginScreen = () => {
                 <LoginForm />
                 <View style={styles.footer}>
                     <Text style={styles.footerText}>{t('Mail us for creating account for Expert')}</Text>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                    <Button
-                        title="Viêt nam"
-                        onPress={() => {
-                            i18n.changeLanguage('vn');
-                        }}
-                    />
-                    <Button
-                        title="English"
-                        onPress={() => {
-                            i18n.changeLanguage('en');
-                        }}
-                        style={{backgroundColor: 'gray', marginLeft: 10}}
-                    />
                 </View>
             </View>
         </ImageBackground>

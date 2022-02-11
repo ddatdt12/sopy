@@ -4,6 +4,7 @@ export type RootStackParamList = {
     Intro: undefined;
     Home: undefined;
     Explore: undefined;
+    RoleChoose: undefined;
     ExpertLogin: undefined;
     UserLogin: undefined;
     Register: undefined;
@@ -14,5 +15,13 @@ type ExpertLoginScreenProps = NativeStackScreenProps<RootStackParamList, 'Expert
 type UserLoginScreenProps = NativeStackScreenProps<RootStackParamList, 'UserLogin'>;
 type RegisterScreenProps = NativeStackScreenProps<RootStackParamList, 'Register'>;
 type IntroScreenProps = NativeStackScreenProps<RootStackParamList, 'Intro'>;
+type RoleChooseScreenProps = NativeStackScreenProps<RootStackParamList, 'RoleChoose'>;
 
-export type {HomeScreenProps, ExpertLoginScreenProps, UserLoginScreenProps, RegisterScreenProps, IntroScreenProps};
+export type {
+    HomeScreenProps,
+    ExpertLoginScreenProps,
+    UserLoginScreenProps,
+    RegisterScreenProps,
+    IntroScreenProps,
+    RoleChooseScreenProps,
+};
