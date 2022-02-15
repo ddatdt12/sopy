@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         fontSize: scaleSize(44),
         fontWeight: 'bold',
         marginVertical: scaleSize(6),
-        color: '#193566',
+        color: COLORS.black_1,
     },
     subtitle: {
         fontSize: scaleSize(24),

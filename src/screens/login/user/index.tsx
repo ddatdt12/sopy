@@ -1,15 +1,12 @@
 import {scaleSize} from '@core/utils';
-import {GoogleSignin, statusCodes} from '@react-native-google-signin/google-signin';
 import {IMAGES} from '@src/assets';
 import {COLORS} from '@src/assets/const';
-import TextLink from '@src/components/TextLink';
-import {auth} from '@src/config/firebase';
+import Text from '@src/components/Text';
 import {UserLoginScreenProps} from '@src/navigations/RootStackParams';
 import {googleSignIn} from '@src/services/auth';
-import {GoogleAuthProvider, signInWithCredential} from 'firebase/auth';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {Alert, GestureResponderEvent, StyleSheet, Text, View} from 'react-native';
+import {Alert, GestureResponderEvent, StyleSheet, View} from 'react-native';
 import ImageBackground from '../components/ImageBackground';
 import LoginForm from '../components/LoginForm';
 import LogoButton from '../components/LogoButton';
@@ -54,11 +51,9 @@ const UserLoginScreen: React.FC<UserLoginScreenProps> = ({navigation}) => {
                 </View>
                 <View style={styles.footer}>
                     <Text style={styles.footerText}>{t("Don't have an account?")}</Text>
-                    <TextLink
-                        text={t('Sign up')}
-                        style={styles.footerText}
-                        onPress={() => navigation.push('Register')}
-                    />
+                    <Text underline style={styles.footerText} onPress={() => navigation.push('Register')}>
+                        {t('Sign up')}
+                    </Text>
                 </View>
             </View>
         </ImageBackground>

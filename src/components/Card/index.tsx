@@ -1,3 +1,5 @@
+import {scaleSize} from '@core/utils';
+import {COLORS} from '@src/assets/const';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
@@ -12,14 +14,14 @@ export default Card;
 
 const styles = StyleSheet.create({
     card: {
-        borderRadius: 12,
-        shadowColor: '#8A9BBD',
+        borderRadius: scaleSize(12),
+        shadowColor: COLORS.dark_gray_1,
         shadowOffset: {
-            width: 4,
-            height: 4,
+            width: 2,
+            height: 12,
         },
-        shadowOpacity: 0.48,
-        shadowRadius: 18,
+        shadowOpacity: 1,
+        shadowRadius: 16,
 
         elevation: 15,
     },

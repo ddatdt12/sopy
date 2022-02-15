@@ -1,16 +1,30 @@
+import {scaleSize} from '@core/utils';
+import {COLORS} from '@src/assets/const';
 import React from 'react';
-import {StyleProp, StyleSheet, Text, TouchableHighlight, TouchableHighlightProps, ViewStyle} from 'react-native';
+import {
+    StyleProp,
+    StyleSheet,
+    Text,
+    TextStyle,
+    TouchableHighlight,
+    TouchableHighlightProps,
+    ViewStyle,
+} from 'react-native';
 
 interface IButtonProps extends TouchableHighlightProps {
     title: string;
     style?: StyleProp<ViewStyle>;
-    textStyle?: StyleProp<ViewStyle>;
+    textStyle?: StyleProp<TextStyle>;
 }
 
 const Button: React.FC<IButtonProps> = props => {
     const {title = 'Save', style, textStyle, ...otherProps} = props;
     return (
-        <TouchableHighlight style={[styles.button, style]} activeOpacity={0.6} underlayColor="#B4D1FC" {...otherProps}>
+        <TouchableHighlight
+            style={[styles.button, style]}
+            activeOpacity={0.6}
+            underlayColor={COLORS.light_blue_1}
+            {...otherProps}>
             <Text style={[styles.text, textStyle]}>{title}</Text>
         </TouchableHighlight>
     );
@@ -22,13 +36,13 @@ const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 60,
-        backgroundColor: '#F5F9FD',
+        paddingVertical: scaleSize(12),
+        paddingHorizontal: scaleSize(32),
+        borderRadius: scaleSize(60),
+        backgroundColor: COLORS.white_1,
 
         //shadow
-        shadowColor: '#8A9BBD',
+        shadowColor: COLORS.dark_blue_1,
         shadowOffset: {
             width: 3,
             height: 3,
@@ -39,7 +53,7 @@ const styles = StyleSheet.create({
         elevation: 15,
     },
     text: {
-        fontSize: 20,
+        fontSize: scaleSize(20),
         color: 'black',
         fontWeight: 'bold',
     },

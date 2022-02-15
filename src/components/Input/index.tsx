@@ -3,37 +3,32 @@ import {StyleProp, StyleSheet, Text, TextInput, TextInputProps, View, ViewStyle}
 // import {Shadow} from 'react-native-neomorph-shadows';
 // import Text from '../Text';
 import {scaleSize} from '@core/utils/DeviceUtils';
-import InnerShadow from '../InnerShadow';
 import {COLORS} from '@src/assets/const';
+import InnerShadow from './InnerShadow';
 interface InputProps extends TextInputProps {
     style?: StyleProp<ViewStyle>;
-    icon?: React.Component;
+    icon?: React.ReactElement;
     width?: number;
     height?: number;
     inputStyle?: StyleProp<ViewStyle>;
     error?: string;
+    iconPosition?: 'start' | 'end';
 }
 
 const Input: FC<InputProps> = props => {
-    const {style, children, width, height, inputStyle, icon, error, ...inputProps} = props;
+    const {style, children, width, height, inputStyle, icon, iconPosition, error, ...inputProps} = props;
+
+    const iconInputStyle: StyleProp<ViewStyle> =
+        (icon &&
+            iconPosition === 'end' && {
+                flexDirection: 'row-reverse',
+            }) ||
+        undefined;
     return (
-        <View>
-            <InnerShadow
-                style={[
-                    {
-                        shadowOffset: {width: scaleSize(5), height: scaleSize(3)},
-                        shadowOpacity: 0.8,
-                        shadowColor: '#AEAEC0',
-                        shadowRadius: scaleSize(6),
-                        borderRadius: scaleSize(25),
-                        width: width ?? scaleSize(300),
-                        height: height ?? scaleSize(50),
-                        // ...include most of View/Layout styles
-                    },
-                    styles.inputWrapper,
-                    style,
-                ]}>
-                <View>{icon && icon}</View>
+        <View style={style}>
+            {/* FIXME: Implement inner shadow */}
+            <InnerShadow style={[styles.inputWrapper, iconInputStyle]}>
+                {icon && <View style={styles.icon}>{icon}</View>}
                 <TextInput style={[styles.input, inputStyle]} {...inputProps} />
             </InnerShadow>
             {error && <Text style={styles.error}>{error}</Text>}
@@ -46,9 +41,13 @@ export default Input;
 const styles = StyleSheet.create({
     inputWrapper: {
         flexDirection: 'row',
-        paddingHorizontal: scaleSize(10),
         alignItems: 'center',
-        backgroundColor: '#F5F9FD',
+        justifyContent: 'center',
+        paddingHorizontal: scaleSize(10),
+        backgroundColor: COLORS.white_1,
+        borderRadius: scaleSize(40),
+        borderColor: 'gray',
+        borderWidth: 1,
     },
     input: {
         flex: 1,
@@ -58,5 +57,9 @@ const styles = StyleSheet.create({
         fontSize: scaleSize(16),
         marginTop: scaleSize(4),
         marginLeft: scaleSize(8),
+    },
+    icon: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
