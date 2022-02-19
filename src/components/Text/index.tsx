@@ -3,7 +3,8 @@ import {Text as RText} from 'react-native';
 import {ITextProps} from './types';
 
 const Text: FC<ITextProps> = props => {
-    const {color, fontSize, lineHeight, textAlign, fontWeight, style, children, underline, ...others} = props;
+    const {color, fontSize, lineHeight, textAlign, fontWeight, style, letterSpacing, children, underline, ...others} =
+        props;
     return (
         <RText
             style={[
@@ -13,6 +14,7 @@ const Text: FC<ITextProps> = props => {
                     lineHeight,
                     textAlign,
                     fontWeight,
+                    letterSpacing,
                     textDecorationLine: underline ? 'underline' : 'none',
                 },
                 style,

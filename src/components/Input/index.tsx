@@ -1,22 +1,20 @@
-import React, {FC} from 'react';
-import {StyleProp, StyleSheet, Text, TextInput, TextInputProps, View, ViewStyle} from 'react-native';
 // import {Shadow} from 'react-native-neomorph-shadows';
 // import Text from '../Text';
 import {scaleSize} from '@core/utils/DeviceUtils';
 import {COLORS} from '@src/assets/const';
-import InnerShadow from './InnerShadow';
+import React, {FC} from 'react';
+import {StyleProp, StyleSheet, Text, TextInput, TextInputProps, TextStyle, View, ViewStyle} from 'react-native';
 interface InputProps extends TextInputProps {
     style?: StyleProp<ViewStyle>;
     icon?: React.ReactElement;
-    width?: number;
-    height?: number;
     inputStyle?: StyleProp<ViewStyle>;
+    textInputStyle?: StyleProp<TextStyle>;
     error?: string;
     iconPosition?: 'start' | 'end';
 }
 
 const Input: FC<InputProps> = props => {
-    const {style, children, width, height, inputStyle, icon, iconPosition, error, ...inputProps} = props;
+    const {style, children, inputStyle, textInputStyle, icon, iconPosition, error, ...inputProps} = props;
 
     const iconInputStyle: StyleProp<ViewStyle> =
         (icon &&
@@ -27,10 +25,15 @@ const Input: FC<InputProps> = props => {
     return (
         <View style={style}>
             {/* FIXME: Implement inner shadow */}
-            <InnerShadow style={[styles.inputWrapper, iconInputStyle]}>
+            <View style={[styles.inputWrapper, iconInputStyle, inputStyle]}>
                 {icon && <View style={styles.icon}>{icon}</View>}
-                <TextInput style={[styles.input, inputStyle]} {...inputProps} />
-            </InnerShadow>
+                <TextInput
+                    style={[styles.input, textInputStyle]}
+                    {...inputProps}
+                    autoComplete={'off'}
+                    autoCorrect={false}
+                />
+            </View>
             {error && <Text style={styles.error}>{error}</Text>}
         </View>
     );
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: scaleSize(10),
         backgroundColor: COLORS.white_1,
         borderRadius: scaleSize(40),
-        borderColor: 'gray',
+        borderColor: COLORS.dark_gray_2,
         borderWidth: 1,
     },
     input: {

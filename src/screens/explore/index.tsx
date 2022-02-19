@@ -1,6 +1,6 @@
 import {scaleSize} from '@core/utils';
 import {COLORS} from '@src/assets/const';
-import Container from '@src/components/Container';
+import Box from '@src/components/Box';
 import Stack from '@src/components/Stack';
 import {ExploreScreenProps} from '@src/navigations/RootStackParams';
 import React from 'react';
@@ -12,15 +12,15 @@ const ExploreScreen: React.FC<ExploreScreenProps> = () => {
     const {t} = useTranslation();
 
     return (
-        <Container bgColor={COLORS.gray_1} fullScreen paddingHorizontal={scaleSize(10)}>
-            <Stack direction="row" justifyContent="center" marginVertical={scaleSize(6)}>
+        <Box bgColor={COLORS.gray_1} container paddingHorizontal={scaleSize(10)}>
+            <Stack direction="row" space={scaleSize(20)} style={styles.buttonContainer}>
                 {/* FIXME: Change to Button component */}
                 <RNButton title={t('Event')} onPress={() => Alert.alert('test')} />
-                <RNButton title={t('Post')} />
+                <RNButton title={t('Post')} onPress={() => Alert.alert('test')} />
             </Stack>
-            {/* <PostScreen /> */}
+            {/* <PostsScreen /> */}
             <EventScreen />
-        </Container>
+        </Box>
     );
 };
 
@@ -32,5 +32,9 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: scaleSize(10),
         position: 'relative',
+    },
+    buttonContainer: {
+        justifyContent: 'center',
+        marginVertical: scaleSize(12),
     },
 });

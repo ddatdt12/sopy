@@ -16,7 +16,7 @@ const PostsScreen = ({}: IProps) => {
     };
     return (
         <>
-            <Stack direction="row" space={scaleSize(10)} marginVertical={scaleSize(6)} paddingVertical={scaleSize(4)}>
+            <Stack direction="row" space={scaleSize(10)} style={styles.tabWrapper}>
                 <RNButton title={t('All')} />
                 <RNButton title={t('Happy')} />
                 <RNButton title={t('Sad')} />
@@ -35,4 +35,9 @@ const PostsScreen = ({}: IProps) => {
 
 export default PostsScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    tabWrapper: {
+        marginVertical: scaleSize(6),
+        paddingVertical: scaleSize(4),
+    },
+});

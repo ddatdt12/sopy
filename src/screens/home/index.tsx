@@ -1,35 +1,21 @@
 import {scaleSize} from '@core/utils';
 import {COLORS} from '@src/assets/const';
 import Button from '@src/components/Button';
-import Center from '@src/components/Center';
 import Stack from '@src/components/Stack';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {StyleSheet, Text, View} from 'react-native';
 import BackgroundImage from './components/BackgroundImage';
+import FeelingModal from './components/FeelingModal';
 
 const HomeScreen = () => {
     const {t} = useTranslation();
     return (
         <BackgroundImage>
-            <View style={styles.titleWrapper}>
-                <Text style={styles.title}>{t('Hi Tan')},</Text>
-                <Text style={styles.title}>{t('Have a nice day')}</Text>
+            <View>
+                <Text>Home</Text>
             </View>
-
-            <Center style={{position: 'relative'}}>
-                <Button title={t('Create post')} style={styles.button} textStyle={styles.text} />
-                <Button title={t('Create event')} style={styles.button} textStyle={styles.text} />
-                {/* <Stack justifyContent="center" style={styles.leftLine}>
-                    <Center>
-                        <View style={styles.dot} />
-                    </Center>
-                    <View style={styles.verticalLine} />
-                    <Center>
-                        <View style={styles.dot} />
-                    </Center>
-                </Stack> */}
-            </Center>
+            <FeelingModal />
         </BackgroundImage>
     );
 };

@@ -21,18 +21,20 @@ const PostCard: React.FC<IPostCard> = props => {
     const {title, author, image, style} = props;
 
     return (
-        <TouchableOpacity
-            onPress={() => {
-                navigation.navigate('PostDetails');
-            }}>
-            <Card style={[styles.card, {width: style?.width, margin: style?.margin}]}>
-                <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
-                <View style={styles.content}>
-                    <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.subtitle}>{author}</Text>
-                </View>
-            </Card>
-        </TouchableOpacity>
+        <View>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate('PostDetails');
+                }}>
+                <Card style={[styles.card, {width: style?.width, margin: style?.margin}]}>
+                    <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
+                    <View style={styles.content}>
+                        <Text style={styles.title}>{title}</Text>
+                        <Text style={styles.subtitle}>{author}</Text>
+                    </View>
+                </Card>
+            </TouchableOpacity>
+        </View>
     );
 };
 
@@ -44,17 +46,17 @@ const styles = StyleSheet.create({
         height: scaleSize(225),
         backgroundColor: COLORS.white_1,
         //shadow
-        borderRadius: scaleSize(4),
+        borderRadius: scaleSize(6),
         overflow: 'hidden',
-        minWidth: width - scaleSize(20),
+        // flex: 1,
+        minWidth: width - scaleSize(24),
         maxWidth: width - scaleSize(10),
         marginBottom: scaleSize(20),
+        marginHorizontal: scaleSize(6),
     },
 
-    imageWrapper: {},
     image: {
         width: '100%',
-        // height: '100%',
         height: scaleSize(150),
     },
     content: {

@@ -4,15 +4,16 @@ import {IStackProps} from './types';
 import {getSpacedChildren} from './utils';
 
 const Stack: FC<IStackProps> = props => {
-    const {children, space, direction, ...other} = props;
+    const {children, space, direction, style, ...other} = props;
     return (
         <View
             style={[
                 {
                     flexDirection: direction || 'column',
                 },
-                other,
-            ]}>
+                style,
+            ]}
+            {...other}>
             {getSpacedChildren(children, space, direction === 'row' ? 'X' : 'Y')}
         </View>
     );

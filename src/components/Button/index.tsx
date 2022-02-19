@@ -8,6 +8,7 @@ import {
     TextStyle,
     TouchableHighlight,
     TouchableHighlightProps,
+    View,
     ViewStyle,
 } from 'react-native';
 
@@ -21,7 +22,7 @@ const Button: React.FC<IButtonProps> = props => {
     const {title = 'Save', style, textStyle, ...otherProps} = props;
     return (
         <TouchableHighlight
-            style={[styles.button, style]}
+            style={[styles.button, styles.shadow, style]}
             activeOpacity={0.6}
             underlayColor={COLORS.light_blue_1}
             {...otherProps}>
@@ -40,18 +41,19 @@ const styles = StyleSheet.create({
         paddingHorizontal: scaleSize(32),
         borderRadius: scaleSize(60),
         backgroundColor: COLORS.white_1,
-
+    },
+    shadow: {
         //shadow
         shadowColor: COLORS.dark_blue_1,
         shadowOffset: {
-            width: 3,
-            height: 3,
+            width: 6,
+            height: 6,
         },
         shadowOpacity: 0.48,
-        // shadowRadius: 18,
-
-        elevation: 15,
+        shadowRadius: 10,
+        elevation: 8,
     },
+
     text: {
         fontSize: scaleSize(20),
         color: 'black',

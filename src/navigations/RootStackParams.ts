@@ -11,6 +11,7 @@ export type RootStackParamList = {
     Posts: undefined;
     PostDetails: undefined;
     Search: undefined;
+    EmotionDiary: undefined;
 };
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;

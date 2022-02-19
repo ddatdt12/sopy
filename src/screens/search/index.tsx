@@ -3,7 +3,7 @@ import React from 'react';
 import Input from '@src/components/Input';
 import {SearchKeyword} from './types';
 import Stack from '@src/components/Stack';
-import Container from '@src/components/Container';
+import Box from '@src/components/Box';
 import {COLORS} from '@src/assets/const';
 import {scaleSize} from '@core/utils';
 import {useTranslation} from 'react-i18next';
@@ -39,7 +39,7 @@ const SearchScreen: React.FC<Props> = props => {
         return <Text style={styles.item}>{item.text}</Text>;
     };
     return (
-        <Container fullScreen bgColor={COLORS.gray_1} padding={scaleSize(20)}>
+        <Box container bgColor={COLORS.gray_1} padding={scaleSize(20)}>
             <Stack direction="row" space={scaleSize(10)}>
                 {/* FIXME: Change to search icon  */}
                 <Input style={{flex: 1}} icon={<Text style={{paddingHorizontal: 2}}>Icon</Text>} iconPosition="end" />
@@ -58,7 +58,7 @@ const SearchScreen: React.FC<Props> = props => {
                 keyExtractor={item => item.id}
                 style={styles.list}
             />
-        </Container>
+        </Box>
     );
 };
 

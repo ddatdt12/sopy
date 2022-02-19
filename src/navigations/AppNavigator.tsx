@@ -1,4 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import EmotionDiaryScreen from '@src/screens/emotion_diary';
 import ExploreScreen from '@src/screens/explore';
 import HomeScreen from '@src/screens/home';
 import PostScreen from '@src/screens/posts';
@@ -19,7 +20,7 @@ const AuthStack = createNativeStackNavigator<RootStackParamList>();
 
 const AuthNavigator: FC = () => {
     return (
-        <AuthStack.Navigator screenOptions={{headerShown: false}} initialRouteName={'UserLogin'}>
+        <AuthStack.Navigator screenOptions={{headerShown: false}} initialRouteName={'EmotionDiary'}>
             <AuthStack.Screen name="Intro" component={IntroScreen} />
             <AuthStack.Screen name="Home" component={HomeScreen} />
             <AuthStack.Screen name="Explore" component={ExploreScreen} />
@@ -29,6 +30,7 @@ const AuthNavigator: FC = () => {
             <AuthStack.Screen name="RoleChoose" component={RoleScreen} />
             <AuthStack.Screen name="PostDetails" component={PostDetailsScreen} />
             <AuthStack.Screen name="Search" component={SearchScreen} />
+            <AuthStack.Screen name="EmotionDiary" component={EmotionDiaryScreen} />
         </AuthStack.Navigator>
     );
 };
