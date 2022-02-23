@@ -1,4 +1,4 @@
-package com.mentalhealth;
+package com.mentalhealthgdscuit;
 
 import android.app.Application;
 import android.content.Context;

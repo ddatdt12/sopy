@@ -1,4 +1,4 @@
-package com.mentalhealth;
+package com.mentalhealthgdscuit;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;
