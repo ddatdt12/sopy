@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Header} from '@src/components';
+import Header from '@src/components/Header';
 import {DashboardEmotionDiaryScreen, EmotionDiaryScreen} from '@src/screens/emotion_diary';
 import ExpertLoginScreen from '@src/screens/login/expert';
 import UserLoginScreen from '@src/screens/login/user';
@@ -19,7 +19,7 @@ const AuthNavigator: React.FC = () => {
                 headerShadowVisible: false,
                 title: '',
             })}
-            initialRouteName={'RoleChoose'}>
+            initialRouteName={'EmotionDiary'}>
             <AuthStack.Screen name="ExpertLogin" component={ExpertLoginScreen} />
             <AuthStack.Screen name="UserLogin" component={UserLoginScreen} />
             <AuthStack.Screen name="Register" component={RegisterScreen} />

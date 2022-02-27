@@ -2,7 +2,7 @@ import {scaleSize} from '@core/utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {COLORS, FONTS} from '@src/assets/const';
-import {Stack} from '@src/components';
+import Stack from '@src/components/Stack';
 import Button from '@src/components/Button';
 import IconButton from '@src/components/IconButton';
 import Neumorph from '@src/components/Neumorph';
@@ -19,7 +19,7 @@ const ExploreHeader: React.FC<IProps> = props => {
     const {navigate} = useNavigation<ExploreScreenProps['navigation']>();
     return (
         <View style={styles.header}>
-            <Stack direction="row" space={scaleSize(10)}>
+            <Stack direction="row" space={scaleSize(10)} style={{marginTop: scaleSize(20)}}>
                 {/* FIXME: Change to Button component */}
                 <Button
                     title={'Post'}
@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.gray_1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: scaleSize(24),
     },
     titleWrapper: {
         flex: 1,

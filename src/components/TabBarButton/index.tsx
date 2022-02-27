@@ -1,7 +1,7 @@
 import {scaleSize} from '@core/utils';
 import {BottomTabBarButtonProps} from '@react-navigation/bottom-tabs';
 import {COLORS} from '@src/assets/const';
-import {LinearGradient} from 'react-native-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
