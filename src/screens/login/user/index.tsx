@@ -1,15 +1,12 @@
 import {scaleSize} from '@core/utils';
-import {GoogleSignin, statusCodes} from '@react-native-google-signin/google-signin';
 import {IMAGES} from '@src/assets';
-import {COLORS} from '@src/assets/const';
-import TextLink from '@src/components/TextLink';
-import {auth} from '@src/config/firebase';
-import {UserLoginScreenProps} from '@src/navigations/RootStackParams';
+import {COLORS, FONTS} from '@src/assets/const';
+import Text from '@src/components/Text';
+import {UserLoginScreenProps} from '@src/navigation/AuthStackParams';
 import {googleSignIn} from '@src/services/auth';
-import {GoogleAuthProvider, signInWithCredential} from 'firebase/auth';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {Alert, GestureResponderEvent, StyleSheet, Text, View} from 'react-native';
+import {Alert, GestureResponderEvent, StyleSheet, View} from 'react-native';
 import ImageBackground from '../components/ImageBackground';
 import LoginForm from '../components/LoginForm';
 import LogoButton from '../components/LogoButton';
@@ -21,7 +18,6 @@ const UserLoginScreen: React.FC<UserLoginScreenProps> = ({navigation}) => {
     };
     const handleGoogleLogin = async (event: GestureResponderEvent) => {
         //Just work only Android
-        //Ios not setup
         const {user, error} = await googleSignIn();
         if (user) {
             Alert.alert('Notice', 'Success: ' + user.email);
@@ -54,11 +50,9 @@ const UserLoginScreen: React.FC<UserLoginScreenProps> = ({navigation}) => {
                 </View>
                 <View style={styles.footer}>
                     <Text style={styles.footerText}>{t("Don't have an account?")}</Text>
-                    <TextLink
-                        text={t('Sign up')}
-                        style={styles.footerText}
-                        onPress={() => navigation.push('Register')}
-                    />
+                    <Text underline style={styles.footerText} onPress={() => navigation.push('Register')}>
+                        {t('Sign up')}
+                    </Text>
                 </View>
             </View>
         </ImageBackground>
@@ -94,14 +88,12 @@ const styles = StyleSheet.create({
         marginBottom: scaleSize(6),
     },
     title: {
-        fontSize: scaleSize(44),
-        fontWeight: 'bold',
+        ...FONTS.largeTitle,
         marginVertical: scaleSize(6),
         color: '#193566',
     },
     subtitle: {
-        fontSize: scaleSize(24),
-        fontWeight: '500',
+        ...FONTS.subtitle2,
         marginVertical: scaleSize(4),
         color: COLORS.dark_blue_1,
     },

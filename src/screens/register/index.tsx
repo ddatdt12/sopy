@@ -1,14 +1,16 @@
 import {scaleSize} from '@core/utils';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {IMAGES} from '@src/assets';
-import {COLORS} from '@src/assets/const';
-import {RegisterScreenProps} from '@src/navigations/RootStackParams';
-import {googleSignIn} from '@src/services/auth';
+import {COLORS, FONTS} from '@src/assets/const';
+import IconButton from '@src/components/IconButton';
+import {RegisterScreenProps} from '@src/navigation/AuthStackParams';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ImageBackground from '../login/components/ImageBackground';
 import LogoButton from '../login/components/LogoButton';
 import RegisterForm from './components/RegisterForm';
+import {googleSignIn} from '@src/services/auth';
 
 const RegisterScreen: React.FC<RegisterScreenProps> = ({navigation}) => {
     const {t} = useTranslation();
@@ -23,13 +25,17 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({navigation}) => {
     };
     return (
         <ImageBackground source={IMAGES.bg_intro_step_1}>
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.goBack();
-                }}>
-                {/* TODO: Change 'Back' to Icon */}
-                <Text style={styles.backIcon}>Back</Text>
-            </TouchableOpacity>
+            {/* <IconButton
+        icon={<Ionicons name='chevron-back-sharp' size={scaleSize(32)} />}
+        bgColor='transparent'
+        onPress={() => navigation.canGoBack() && navigation.goBack()}
+        style={{
+          position: 'absolute',
+          top: scaleSize(10),
+          left: scaleSize(10),
+        }}
+      /> */}
+
             <View style={styles.contentWrapper}>
                 <View style={styles.textWrapper}>
                     <Text style={styles.title}>Welcome</Text>
@@ -62,7 +68,7 @@ const styles = StyleSheet.create({
     contentWrapper: {
         flex: 1,
         paddingHorizontal: scaleSize(36),
-        marginTop: scaleSize(100),
+        marginTop: scaleSize(80),
     },
     textWrapper: {
         width: '100%',
@@ -70,14 +76,12 @@ const styles = StyleSheet.create({
         marginBottom: scaleSize(6),
     },
     title: {
-        fontSize: scaleSize(44),
-        fontWeight: 'bold',
+        ...FONTS.largeTitle,
         marginVertical: scaleSize(6),
         color: '#193566',
     },
     subtitle: {
-        fontSize: scaleSize(24),
-        fontWeight: '500',
+        ...FONTS.subtitle2,
         marginVertical: scaleSize(4),
         color: COLORS.dark_blue_1,
     },

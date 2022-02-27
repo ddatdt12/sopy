@@ -3,7 +3,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {COLORS} from '@src/assets/const';
 import Button from '@src/components/Button';
 import Input from '@src/components/Input';
-import TextLink from '@src/components/TextLink';
+import Text from '@src/components/Text';
 import {auth} from '@src/config/firebase';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import React from 'react';
@@ -87,9 +87,16 @@ const LoginForm: React.FC<LoginProps> = props => {
                 name="password"
             />
 
-            <TextLink text={t('Forgot password?')} style={styles.link} onPress={() => Alert.alert('Forgot password')} />
+            <Text style={styles.link} onPress={() => Alert.alert('Forgot password')}>
+                {t('Forgot password?')}
+            </Text>
             <View style={{alignItems: 'center', paddingTop: scaleSize(25)}}>
-                <Button title={t('Log In')} style={styles.button} onPress={handleSubmit(onSubmit)} />
+                <Button
+                    title={t('Log In')}
+                    variant="secondary"
+                    style={styles.button}
+                    onPress={handleSubmit(onSubmit)}
+                />
             </View>
         </>
     );
@@ -105,7 +112,6 @@ const styles = StyleSheet.create({
         marginVertical: scaleSize(16),
         color: COLORS.dark_blue_1,
     },
-
     button: {
         width: scaleSize(200),
     },

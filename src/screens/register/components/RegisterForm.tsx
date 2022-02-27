@@ -54,11 +54,10 @@ const RegisterForm: React.FC = props => {
         createUserWithEmailAndPassword(auth, email, password)
             .then(userCredential => {
                 const user = userCredential.user;
-                console.log(user);
                 Alert.alert('Notice', 'Success: ' + user.email);
             })
             .catch(error => {
-                console.log(error);
+                Alert.alert('Error', error);
             });
     };
     return (
@@ -118,7 +117,12 @@ const RegisterForm: React.FC = props => {
             />
 
             <View style={styles.buttonWrapper}>
-                <Button title={t('Sign up')} style={styles.button} onPress={handleSubmit(onSubmit)} />
+                <Button
+                    title={t('Sign up')}
+                    variant="secondary"
+                    style={styles.button}
+                    onPress={handleSubmit(onSubmit)}
+                />
             </View>
         </>
     );
