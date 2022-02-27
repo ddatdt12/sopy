@@ -26,11 +26,19 @@ const Input: FC<InputProps> = props => {
         <View style={style}>
             {/* FIXME: Implement inner shadow */}
             <View style={[styles.inputWrapper, iconInputStyle, inputStyle]}>
-                {icon && <View style={styles.icon}>{icon}</View>}
+                {icon && (
+                    <View
+                        style={[
+                            styles.icon,
+                            iconPosition === 'start' ? {marginRight: scaleSize(4)} : {marginLeft: scaleSize(4)},
+                        ]}>
+                        {icon}
+                    </View>
+                )}
                 <TextInput
                     style={[styles.input, textInputStyle]}
                     {...inputProps}
-                    autoComplete={'off'}
+                    autoComplete="off"
                     autoCorrect={false}
                 />
             </View>
@@ -47,6 +55,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: scaleSize(10),
+        paddingVertical: scaleSize(2),
         backgroundColor: COLORS.white_1,
         borderRadius: scaleSize(40),
         borderColor: COLORS.dark_gray_2,

@@ -1,13 +1,11 @@
 import {scaleSize} from '@core/utils';
 import {COLORS} from '@src/assets/const';
-import Box from '@src/components/Box';
 import Button from '@src/components/Button';
 import DismissKeyboardView from '@src/components/DismissKeyboardView';
-import Input from '@src/components/Input';
 import Stack from '@src/components/Stack';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {Dimensions, KeyboardAvoidingView, Modal, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Dimensions, KeyboardAvoidingView, Modal, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Feelings} from '../feeling';
 import FeelingCard from './FeelingCard';
 import Textarea from './Textarea';

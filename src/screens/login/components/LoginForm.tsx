@@ -91,7 +91,12 @@ const LoginForm: React.FC<LoginProps> = props => {
                 {t('Forgot password?')}
             </Text>
             <View style={{alignItems: 'center', paddingTop: scaleSize(25)}}>
-                <Button title={t('Log In')} style={styles.button} onPress={handleSubmit(onSubmit)} />
+                <Button
+                    title={t('Log In')}
+                    variant="secondary"
+                    style={styles.button}
+                    onPress={handleSubmit(onSubmit)}
+                />
             </View>
         </>
     );

@@ -1,8 +1,8 @@
 import {scaleSize} from '@core/utils';
 import {IMAGES} from '@src/assets';
-import {COLORS} from '@src/assets/const';
+import {COLORS, FONTS} from '@src/assets/const';
 import Text from '@src/components/Text';
-import {UserLoginScreenProps} from '@src/navigations/RootStackParams';
+import {UserLoginScreenProps} from '@src/navigation/AuthStackParams';
 import {googleSignIn} from '@src/services/auth';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
@@ -18,7 +18,6 @@ const UserLoginScreen: React.FC<UserLoginScreenProps> = ({navigation}) => {
     };
     const handleGoogleLogin = async (event: GestureResponderEvent) => {
         //Just work only Android
-        //Ios not setup
         const {user, error} = await googleSignIn();
         if (user) {
             Alert.alert('Notice', 'Success: ' + user.email);
@@ -89,14 +88,12 @@ const styles = StyleSheet.create({
         marginBottom: scaleSize(6),
     },
     title: {
-        fontSize: scaleSize(44),
-        fontWeight: 'bold',
+        ...FONTS.largeTitle,
         marginVertical: scaleSize(6),
         color: '#193566',
     },
     subtitle: {
-        fontSize: scaleSize(24),
-        fontWeight: '500',
+        ...FONTS.subtitle2,
         marginVertical: scaleSize(4),
         color: COLORS.dark_blue_1,
     },

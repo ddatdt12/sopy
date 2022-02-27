@@ -17,12 +17,12 @@ const styles = StyleSheet.create({
         borderRadius: scaleSize(12),
         shadowColor: COLORS.dark_gray_1,
         shadowOffset: {
-            width: 2,
-            height: 12,
+            width: 4,
+            height: 4,
         },
         shadowOpacity: 1,
-        shadowRadius: 16,
+        shadowRadius: 5,
 
-        elevation: 15,
+        elevation: 12,
     },
 });
