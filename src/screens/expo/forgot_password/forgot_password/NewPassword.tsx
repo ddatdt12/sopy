@@ -1,10 +1,9 @@
-import { StyleSheet, Text,
-  Alert, View, TextInput, Button, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
 import React, { Component } from "react";
-import { Header } from "react-native/Libraries/NewAppScreen";
-import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Reset3() {
+
+
+export default function NewPasswordScreen() {
   const [pass1, setpassword1] = React.useState('');
   const [pass2, setpassword2] = React.useState('');
   
@@ -14,13 +13,13 @@ export default function Reset3() {
       <View style={styles.wrapper}>
         <Text style={styles.circle}> b </Text>
         <Text style={styles.main}>Reset Password </Text>
-        <TouchableOpacity style={styles.bgsend}>
-          <Text style={styles.send}> Send </Text>
+        <TouchableOpacity >
+          <Text style={styles.save}> Save </Text>
         </TouchableOpacity> 
       </View>
 
       <View>
-        <Text style={styles.email}>New password:</Text>
+        <Text style={styles.pw1}> New password:</Text>
       </View>
 
       <View>
@@ -30,26 +29,30 @@ export default function Reset3() {
               setpassword1(text)
             }
              secureTextEntry={true}
-             ></TextInput>
+            />
       </View>
 
       <View>
-        <Text style={styles.email}>Confirm password:</Text>
-      </View>
-
-      <View>
+        <Text style={styles.pw2}> Confirm password:</Text>
+      <View  >
         <TextInput style={styles.input}
              value={pass2}
              onChangeText={(text) => setpassword2(text)}
              secureTextEntry={true}
-             ></TextInput>
+        />
+       {/* Có cái con mắt chỗ nì nì :v
+       <TouchableOpacity style={styles.icon}>
+                <FontAwesome name="eye" size={20} color="black"/>
+      </TouchableOpacity> */}
+
+      </View>
+     
       </View>
       
      {
       <View>
         <Text style={styles.note}>
-          {" "}
-          You must enter the same password twice in order to confirm it.
+        You must enter the same password twice in order to confirm it.
         </Text>
       </View>
 }
@@ -114,13 +117,14 @@ const styles = StyleSheet.create({
     
   },
 
-  email: {
+  pw1: {
     color: "#8F9BB2",
-    marginLeft: 0,
-    fontSize: 20,
+    paddingHorizontal: 4,
+    fontSize: 19,
     paddingTop: 30,
-    paddingBottom:5,
+    paddingBottom: 5,
   },
+
 
   input: {
     backgroundColor: "#E9F0F7",
@@ -136,6 +140,15 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
   },
 
+  pw2: {
+    color: "#8F9BB2",
+    paddingHorizontal: 4,
+    fontSize: 19,
+    paddingTop: 10,
+    paddingBottom: 5,
+  },
+
+
 
   note: {
     color:"#FF4906",
@@ -144,6 +157,11 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     textAlign: "left",
     fontSize: 15,
+  },
+
+  icon:{
+    position:"absolute",
+    
   },
 
 
@@ -158,11 +176,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { width: 0, height: 0 },
   },
-  send: {
+  save: {
     color: "#193566",
-    fontSize: 24,
+    fontSize: 20,
     fontStyle: "normal",
-    fontWeight: 'bold',
+    fontWeight:"bold",
     justifyContent: "center",
     textAlign: "center",
   },
