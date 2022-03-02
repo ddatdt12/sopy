@@ -40,7 +40,7 @@ export default function NewPasswordScreen() {
              onChangeText={(text) => setpassword2(text)}
              secureTextEntry={true}
         />
-       {/* Có cái con mắt chỗ nì nì :v
+       {/* 
        <TouchableOpacity style={styles.icon}>
                 <FontAwesome name="eye" size={20} color="black"/>
       </TouchableOpacity> */}
