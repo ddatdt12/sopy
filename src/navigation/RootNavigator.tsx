@@ -1,6 +1,6 @@
 import {scaleSize} from '@core/utils';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {COLORS} from '@src/assets/const';
+import {COLORS, STYLES} from '@src/assets/const';
 import TabBarButton from '@src/components/TabBarButton';
 import ChatScreen from '@src/screens/chat';
 import HomeScreen from '@src/screens/home';
@@ -29,15 +29,7 @@ const RootNavigator: React.FC = () => {
                     borderRadius: scaleSize(24),
                     marginHorizontal: scaleSize(6),
                     height: scaleSize(64),
-                    shadowColor: COLORS.dark_gray_1,
-                    shadowOffset: {
-                        width: 6,
-                        height: 6,
-                    },
-                    shadowOpacity: 0.68,
-                    shadowRadius: 10,
-
-                    elevation: 5,
+                    ...STYLES.shadow,
                 },
             }}>
             <Tab.Screen

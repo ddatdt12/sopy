@@ -45,6 +45,17 @@ export const STYLES = StyleSheet.create({
 
         elevation: 12,
     },
+    mediumShadow: {
+        shadowColor: COLORS.dark_gray_1,
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        shadowOpacity: 0.88,
+        shadowRadius: 6,
+
+        elevation: 9,
+    },
     shadow: {
         shadowColor: COLORS.dark_gray_1,
         shadowOffset: {

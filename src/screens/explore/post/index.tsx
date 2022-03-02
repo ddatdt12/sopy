@@ -3,9 +3,12 @@ import {FONTS} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
 import Stack from '@src/components/Stack';
-import React from 'react';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, ListRenderItem, StyleSheet} from 'react-native';
+import {FlatList, ListRenderItem, StyleSheet, Text, View} from 'react-native';
+import ReactNativeModal from 'react-native-modal';
+import DetailsModal from '../DetailsModal';
+import PostDetails from '../post_details';
 import PostCard from './components/PostCard';
 import Posts from './posts';
 import {Post} from './types';
@@ -13,9 +16,17 @@ interface IProps {}
 
 const PostsScreen = ({}: IProps) => {
     const {t} = useTranslation();
+    const [modalVisible, setModalVisible] = useState(false);
 
     const renderItem: ListRenderItem<Post> = ({item}) => {
-        return <PostCard title={item.title} author={item.author} image={item.image} />;
+        return (
+            <PostCard
+                title={item.title}
+                author={item.author}
+                image={item.image}
+                onPress={() => setModalVisible(true)}
+            />
+        );
     };
     return (
         <Box container>
@@ -31,7 +42,11 @@ const PostsScreen = ({}: IProps) => {
                 numColumns={2}
                 keyExtractor={item => item.id}
                 columnWrapperStyle={{justifyContent: 'space-between'}}
+                contentContainerStyle={{paddingBottom: scaleSize(76)}}
             />
+            <DetailsModal isVisible={modalVisible} onClose={() => setModalVisible(false)}>
+                <PostDetails />
+            </DetailsModal>
         </Box>
     );
 };
