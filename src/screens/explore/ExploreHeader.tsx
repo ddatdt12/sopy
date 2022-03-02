@@ -36,23 +36,9 @@ const ExploreHeader: React.FC<IProps> = props => {
                     }}
                 />
             </Stack>
-            <View
-                style={{
-                    position: 'absolute',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    right: 2,
-                }}>
-                <Neumorph
-                    style={{
-                        backgroundColor: COLORS.white_3,
-                        width: scaleSize(36),
-                        height: scaleSize(36),
-                        elevation: 6,
-                        borderRadius: scaleSize(36) / 2,
-                    }}>
+            <View style={styles.headerRight}>
+                <Neumorph circle>
                     <IconButton
-                        size={scaleSize(36)}
                         icon={<Ionicons name="search" size={24} color={COLORS.dark_gray_2} />}
                         onPress={() => navigate('Search')}
                     />
@@ -87,7 +73,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         right: scaleSize(10),
-        backgroundColor: 'red',
+        bottom: 0,
     },
 });
 export default ExploreHeader;

@@ -1,7 +1,7 @@
-import React from 'react';
 import {createNativeStackNavigator, NativeStackScreenProps} from '@react-navigation/native-stack';
-import ExploreScreen, {PostDetailsScreen} from '@src/screens/explore';
+import ExploreScreen from '@src/screens/explore';
 import SearchScreen from '@src/screens/explore/search';
+import React from 'react';
 
 const ExploreStack = createNativeStackNavigator<ExploreStackParamList>();
 
@@ -13,7 +13,6 @@ function ExploreStackScreen() {
                 headerShown: false,
             }}>
             <ExploreStack.Screen name="MainExplore" component={ExploreScreen} />
-            <ExploreStack.Screen name="PostDetails" component={PostDetailsScreen} />
             <ExploreStack.Group
                 screenOptions={{
                     presentation: 'modal',

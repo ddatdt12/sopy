@@ -1,6 +1,6 @@
 import {scaleSize} from '@core/utils';
 import {BottomTabBarButtonProps} from '@react-navigation/bottom-tabs';
-import {COLORS} from '@src/assets/const';
+import {COLORS, STYLES} from '@src/assets/const';
 import LinearGradient from 'react-native-linear-gradient';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
@@ -20,6 +20,7 @@ const TabBarButton: React.FC<BottomTabBarButtonProps> = props => {
                                 backgroundColor: COLORS.white_3,
                                 borderWidth: 1,
                                 borderColor: COLORS.dark_gray_2,
+                                shadowOpacity: 0,
                             },
                         ]}>
                         {children}
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
         height: scaleSize(42),
         borderRadius: scaleSize(40) / 2,
         marginVertical: scaleSize(11),
-        elevation: 6,
+        ...STYLES.mediumShadow,
     },
 });
 export default TabBarButton;

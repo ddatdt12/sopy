@@ -5,6 +5,7 @@ import Card from '@src/components/Card';
 import {ExploreScreenProps} from '@src/navigation/ExploreStackScreen';
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {GestureResponderEvent} from 'react-native-modal';
 
 interface IPostCard {
     title: string;
@@ -14,17 +15,15 @@ interface IPostCard {
         width?: number;
         margin?: number;
     };
+    onPress?: (event: GestureResponderEvent) => void;
 }
 const PostCard: React.FC<IPostCard> = props => {
     const navigation = useNavigation<ExploreScreenProps['navigation']>();
-    const {title, author, image, style} = props;
+    const {title, author, image, onPress, style} = props;
 
     return (
         <View>
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate('PostDetails');
-                }}>
+            <TouchableOpacity onPress={onPress}>
                 <Card style={[styles.card, {width: style?.width, margin: style?.margin}]}>
                     <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
                     <View style={styles.content}>
