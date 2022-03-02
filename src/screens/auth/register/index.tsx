@@ -1,16 +1,14 @@
 import {scaleSize} from '@core/utils';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {IMAGES} from '@src/assets';
 import {COLORS, FONTS} from '@src/assets/const';
-import IconButton from '@src/components/IconButton';
 import {RegisterScreenProps} from '@src/navigation/AuthStackParams';
+import {googleSignIn} from '@src/services/auth';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import ImageBackground from '../login/components/ImageBackground';
-import LogoButton from '../login/components/LogoButton';
-import RegisterForm from './components/RegisterForm';
-import {googleSignIn} from '@src/services/auth';
+import {Alert, ScrollView, StyleSheet, Text, View} from 'react-native';
+import ImageBackground from '../components/ImageBackground';
+import LogoButton from '../components/LogoButton';
+import RegisterForm from '../components/RegisterForm';
 
 const RegisterScreen: React.FC<RegisterScreenProps> = ({navigation}) => {
     const {t} = useTranslation();
@@ -25,39 +23,30 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({navigation}) => {
     };
     return (
         <ImageBackground source={IMAGES.bg_intro_step_1}>
-            {/* <IconButton
-        icon={<Ionicons name='chevron-back-sharp' size={scaleSize(32)} />}
-        bgColor='transparent'
-        onPress={() => navigation.canGoBack() && navigation.goBack()}
-        style={{
-          position: 'absolute',
-          top: scaleSize(10),
-          left: scaleSize(10),
-        }}
-      /> */}
+            <ScrollView contentContainerStyle={{paddingBottom: scaleSize(20)}}>
+                <View style={styles.contentWrapper}>
+                    <View style={styles.textWrapper}>
+                        <Text style={styles.title}>Welcome</Text>
+                        <Text style={styles.subtitle}>Let's get started</Text>
+                    </View>
 
-            <View style={styles.contentWrapper}>
-                <View style={styles.textWrapper}>
-                    <Text style={styles.title}>Welcome</Text>
-                    <Text style={styles.subtitle}>Let's get started</Text>
-                </View>
-
-                <RegisterForm />
-                <View style={{alignItems: 'center'}}>
-                    <Text
-                        style={{
-                            color: COLORS.black_1,
-                            fontSize: scaleSize(20),
-                            marginVertical: scaleSize(20),
-                        }}>
-                        {t('Or')}
-                    </Text>
-                    <View style={styles.logoWrapper}>
-                        <LogoButton source={IMAGES.facebook_logo} onPress={handleFacebookLogin} />
-                        <LogoButton source={IMAGES.google_logo} onPress={handleGoogleLogin} />
+                    <RegisterForm />
+                    <View style={{alignItems: 'center'}}>
+                        <Text
+                            style={{
+                                color: COLORS.black_1,
+                                fontSize: scaleSize(20),
+                                marginVertical: scaleSize(20),
+                            }}>
+                            {t('Or')}
+                        </Text>
+                        <View style={styles.logoWrapper}>
+                            <LogoButton source={IMAGES.facebook_logo} onPress={handleFacebookLogin} />
+                            <LogoButton source={IMAGES.google_logo} onPress={handleGoogleLogin} />
+                        </View>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
         </ImageBackground>
     );
 };
@@ -68,7 +57,7 @@ const styles = StyleSheet.create({
     contentWrapper: {
         flex: 1,
         paddingHorizontal: scaleSize(36),
-        marginTop: scaleSize(80),
+        marginTop: '30%',
     },
     textWrapper: {
         width: '100%',

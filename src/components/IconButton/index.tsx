@@ -1,41 +1,32 @@
-import { scaleSize } from '@core/utils';
-import { COLORS } from '@src/assets/const';
+import {COLORS, SIZES} from '@src/assets/const';
 import React from 'react';
-import {
-  ColorValue,
-  StyleProp,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedbackProps,
-  ViewStyle,
-} from 'react-native';
+import {ColorValue, StyleSheet, TouchableOpacity, TouchableOpacityProps} from 'react-native';
 
-interface IProps extends TouchableWithoutFeedbackProps {
-  icon: React.ReactNode;
-  size?: number;
-  bgColor?: ColorValue | undefined;
+interface IProps extends TouchableOpacityProps {
+    icon: React.ReactNode;
+    size?: number;
+    bgColor?: ColorValue | undefined;
 }
 
-const IconButton: React.FC<IProps> = (props) => {
-  const { icon, size, bgColor, style, ...otherProps } = props;
-  return (
-    <TouchableOpacity
-      style={[
-        {
-          width: size || scaleSize(36),
-          height: size || scaleSize(36),
-          backgroundColor: bgColor || COLORS.white_3,
-          borderRadius: (size || scaleSize(36)) / 2,
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-        style,
-      ]}
-      {...otherProps}>
-      {icon}
-    </TouchableOpacity>
-  );
+const IconButton: React.FC<IProps> = props => {
+    const {icon, size, bgColor, style, ...otherProps} = props;
+    return (
+        <TouchableOpacity
+            style={[
+                {
+                    width: size || SIZES.circleButton,
+                    height: size || SIZES.circleButton,
+                    backgroundColor: bgColor || COLORS.white_3,
+                    borderRadius: (size || SIZES.circleButton) / 2,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                },
+                style,
+            ]}
+            {...otherProps}>
+            {icon}
+        </TouchableOpacity>
+    );
 };
 
 export default IconButton;

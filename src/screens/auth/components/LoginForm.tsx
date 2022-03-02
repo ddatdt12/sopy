@@ -22,9 +22,8 @@ export type LoginData = {
     email: string;
     password: string;
 };
-interface LoginProps {}
-const LoginForm: React.FC<LoginProps> = props => {
-    const {t, i18n} = useTranslation();
+const LoginForm: React.FC = props => {
+    const {t} = useTranslation();
 
     const {
         control,
@@ -90,7 +89,7 @@ const LoginForm: React.FC<LoginProps> = props => {
             <Text style={styles.link} onPress={() => Alert.alert('Forgot password')}>
                 {t('Forgot password?')}
             </Text>
-            <View style={{alignItems: 'center', paddingTop: scaleSize(25)}}>
+            <View style={{alignItems: 'center', paddingTop: scaleSize(40)}}>
                 <Button
                     title={t('Log In')}
                     variant="secondary"
@@ -111,6 +110,7 @@ const styles = StyleSheet.create({
         fontSize: scaleSize(18),
         marginVertical: scaleSize(16),
         color: COLORS.dark_blue_1,
+        alignSelf: 'flex-start',
     },
     button: {
         width: scaleSize(200),

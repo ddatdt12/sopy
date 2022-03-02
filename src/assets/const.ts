@@ -1,5 +1,5 @@
 import {scaleSize} from '@core/utils';
-import {Dimensions} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 const {width: WindowWidth, height: WindowHeight} = Dimensions.get('window');
 
 export const BASE_URL = 'https://api.github.com';
@@ -33,6 +33,31 @@ export const COLORS = {
     error_1: '#FF4906',
 };
 
+export const STYLES = StyleSheet.create({
+    deepShadow: {
+        shadowColor: COLORS.dark_blue_1,
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        shadowOpacity: 0.68,
+        shadowRadius: 6,
+
+        elevation: 12,
+    },
+    shadow: {
+        shadowColor: COLORS.dark_gray_1,
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        shadowOpacity: 0.68,
+        shadowRadius: 6,
+
+        elevation: 6,
+    },
+});
+
 export const SIZES = {
     // global sizes
     base: 8,
@@ -52,12 +77,13 @@ export const SIZES = {
     body3: scaleSize(16),
     body4: scaleSize(14),
 
+    circleButton: scaleSize(36),
     // app dimensions
     WindowWidth,
     WindowHeight,
 };
 
-export const FONTS = {
+export const FONTS = StyleSheet.create({
     largeTitle: {fontFamily: 'Roboto-Bold', fontSize: SIZES.largeTitle, lineHeight: 55},
     h1: {fontFamily: 'Roboto-Bold', fontSize: SIZES.h1, lineHeight: 36},
     h2: {fontFamily: 'Roboto-Bold', fontSize: SIZES.h2, lineHeight: 30},
@@ -73,4 +99,4 @@ export const FONTS = {
     body2: {fontFamily: 'Roboto-Regular', fontSize: SIZES.body2, lineHeight: 30},
     body3: {fontFamily: 'Roboto-Regular', fontSize: SIZES.body3, lineHeight: 22},
     body4: {fontFamily: 'Roboto-Regular', fontSize: SIZES.body4, lineHeight: 22},
-};
+});

@@ -1,10 +1,11 @@
 import {scaleSize} from '@core/utils';
 import {IMAGES} from '@src/assets';
+import {FONTS} from '@src/assets/const';
 import Card from '@src/components/Card';
 import {RoleChooseScreenProps} from '@src/navigation/AuthStackParams';
 import React from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
-import ImageBackground from '../login/components/ImageBackground';
+import ImageBackground from '../components/ImageBackground';
 
 const RoleScreen: React.FC<RoleChooseScreenProps> = ({navigation}) => {
     return (
@@ -44,31 +45,29 @@ const styles = StyleSheet.create({
     },
     background: {
         position: 'absolute',
-        left: '-22.55%',
+        left: '-10%',
         right: '-53.54%',
-        top: '2.13%',
-        bottom: '31.58%',
+        top: '5.13%',
+        bottom: '10.58%',
         opacity: 0.8,
         transform: [{rotate: '22.27deg'}],
         flex: 1,
-        // transform: 'rotate(22.27deg)',
     },
     contentWrapper: {
         flex: 1,
-        paddingHorizontal: 30,
+        paddingHorizontal: scaleSize(30),
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: scaleSize(100),
     },
     title: {
-        fontSize: 44,
-        fontWeight: 'bold',
-        margin: 20,
+        ...FONTS.largeTitle,
+        fontSize: scaleSize(44),
+        marginBottom: scaleSize(10),
         color: '#193566',
     },
     roleCard: {
-        padding: 40,
-        minWidth: 300,
+        padding: scaleSize(40),
+        minWidth: scaleSize(280),
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5F9FD',

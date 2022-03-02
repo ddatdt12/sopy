@@ -1,45 +1,61 @@
 import React from 'react';
-import { StyleSheet, View, ViewProps } from 'react-native';
-import { scaleSize } from '@core/utils';
-import { COLORS } from '@src/assets/const';
+import {StyleSheet, View, ViewProps} from 'react-native';
+import {isAndroid, scaleSize} from '@core/utils';
+import {COLORS, SIZES} from '@src/assets/const';
 
+interface IProps extends ViewProps {
+    borderRadius?: number;
+    circle?: boolean;
+}
 //Just only on IOS
-const Neumorph: React.FC<ViewProps> = ({ children, style, ...others }) => {
-  return (
-    <View style={styles.topShadow}>
-      <View style={styles.bottomShadow}>
-        <View style={style} {...others}>
-          {children}
+const Neumorph: React.FC<IProps> = ({children, circle, borderRadius, style, ...others}) => {
+    const borderStyle = borderRadius
+        ? {borderRadius: borderRadius}
+        : {borderRadius: circle ? SIZES.circleButton / 2 : 0};
+
+    if (isAndroid) {
+        return (
+            <View style={[styles.androidShadow, borderStyle, style]} {...others}>
+                {children}
+            </View>
+        );
+    }
+    return (
+        <View style={[styles.topShadow, borderStyle]}>
+            <View style={[styles.bottomShadow, borderStyle]}>
+                <View style={style} {...others}>
+                    {children}
+                </View>
+            </View>
         </View>
-      </View>
-    </View>
-  );
+    );
 };
 
 export default Neumorph;
 
 const styles = StyleSheet.create({
-  topShadow: {
-    borderRadius: scaleSize(12),
-    shadowColor: '#FFFFFF',
-    shadowOffset: {
-      width: -3,
-      height: -3,
+    topShadow: {
+        borderRadius: scaleSize(12),
+        shadowColor: '#FFFFFF',
+        shadowOffset: {
+            width: -4,
+            height: -4,
+        },
+        shadowOpacity: 0.7,
+        shadowRadius: 10,
     },
-    shadowOpacity: 0.7,
-    shadowRadius: 10,
-    elevation: 12,
-  },
-  bottomShadow: {
-    borderRadius: scaleSize(12),
-    shadowColor: COLORS.dark_gray_1,
-    shadowOffset: {
-      width: 3,
-      height: 3,
+    bottomShadow: {
+        borderRadius: scaleSize(12),
+        shadowColor: COLORS.dark_blue_2,
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        shadowOpacity: 0.68,
+        shadowRadius: 10,
     },
-    shadowOpacity: 0.48,
-    shadowRadius: 10,
-    elevation: 12,
-
-  },
+    androidShadow: {
+        elevation: 6,
+        shadowOpacity: 0.48,
+    },
 });
