@@ -6,10 +6,10 @@ import {UserLoginScreenProps} from '@src/navigation/AuthStackParams';
 import {googleSignIn} from '@src/services/auth';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {Alert, GestureResponderEvent, StyleSheet, View} from 'react-native';
-import ImageBackground from '../components/ImageBackground';
-import LoginForm from '../components/LoginForm';
-import LogoButton from '../components/LogoButton';
+import {Alert, GestureResponderEvent, ScrollView, StyleSheet, View} from 'react-native';
+import ImageBackground from '../../components/ImageBackground';
+import LoginForm from '../../components/LoginForm';
+import LogoButton from '../../components/LogoButton';
 
 const UserLoginScreen: React.FC<UserLoginScreenProps> = ({navigation}) => {
     const {t} = useTranslation();
@@ -27,34 +27,36 @@ const UserLoginScreen: React.FC<UserLoginScreenProps> = ({navigation}) => {
     };
     return (
         <ImageBackground source={IMAGES.bg_intro_step_1}>
-            <View style={styles.contentWrapper}>
-                <View style={styles.textWrapper}>
-                    <Text style={styles.title}>{t('Welcome')}</Text>
-                    <Text style={styles.subtitle}>{t("Let's get started")}</Text>
-                </View>
-                <LoginForm />
+            <ScrollView contentContainerStyle={{paddingBottom: scaleSize(10)}}>
+                <View style={styles.contentWrapper}>
+                    <View style={styles.textWrapper}>
+                        <Text style={styles.title}>{t('Welcome')}</Text>
+                        <Text style={styles.subtitle}>{t("Let's get started")}</Text>
+                    </View>
+                    <LoginForm />
 
-                <View style={{alignItems: 'center'}}>
-                    <Text
-                        style={{
-                            color: COLORS.black_1,
-                            fontSize: scaleSize(20),
-                            marginVertical: scaleSize(20),
-                        }}>
-                        {t('Or')}
-                    </Text>
-                    <View style={styles.logoWrapper}>
-                        <LogoButton source={IMAGES.facebook_logo} onPress={handleFacebookLogin} />
-                        <LogoButton source={IMAGES.google_logo} onPress={handleGoogleLogin} />
+                    <View style={{alignItems: 'center'}}>
+                        <Text
+                            style={{
+                                color: COLORS.black_1,
+                                fontSize: scaleSize(20),
+                                marginVertical: scaleSize(20),
+                            }}>
+                            {t('Or')}
+                        </Text>
+                        <View style={styles.logoWrapper}>
+                            <LogoButton source={IMAGES.facebook_logo} onPress={handleFacebookLogin} />
+                            <LogoButton source={IMAGES.google_logo} onPress={handleGoogleLogin} />
+                        </View>
+                    </View>
+                    <View style={styles.footer}>
+                        <Text style={styles.footerText}>{t("Don't have an account?")}</Text>
+                        <Text underline style={styles.footerText} onPress={() => navigation.push('Register')}>
+                            {t('Sign up')}
+                        </Text>
                     </View>
                 </View>
-                <View style={styles.footer}>
-                    <Text style={styles.footerText}>{t("Don't have an account?")}</Text>
-                    <Text underline style={styles.footerText} onPress={() => navigation.push('Register')}>
-                        {t('Sign up')}
-                    </Text>
-                </View>
-            </View>
+            </ScrollView>
         </ImageBackground>
     );
 };
@@ -78,9 +80,7 @@ const styles = StyleSheet.create({
     contentWrapper: {
         flex: 1,
         paddingHorizontal: scaleSize(36),
-        marginTop: scaleSize(80),
-        // justifyContent: 'center',
-        // marginTo:30,
+        marginTop: '30%',
     },
     textWrapper: {
         width: '100%',
@@ -104,11 +104,9 @@ const styles = StyleSheet.create({
     footer: {
         width: scaleSize(280),
         justifyContent: 'center',
-        paddingBottom: scaleSize(50),
         flexDirection: 'row',
         alignSelf: 'center',
-        marginTop: scaleSize(40),
-        marginBottom: scaleSize(10),
+        marginTop: '12%',
     },
     footerText: {
         fontSize: scaleSize(18),

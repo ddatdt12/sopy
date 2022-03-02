@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     contentWrapper: {
         flex: 1,
         paddingHorizontal: scaleSize(36),
-        marginTop: scaleSize(125),
+        marginTop: '35%',
     },
     textWrapper: {
         width: '100%',
@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
         width: scaleSize(240),
         justifyContent: 'center',
         alignSelf: 'center',
-        marginTop: scaleSize(48),
+        marginTop: '30%',
+        marginBottom: scaleSize(40),
     },
     footerText: {
         fontSize: scaleSize(18),

@@ -4,13 +4,20 @@ import Stack from '@src/components/Stack';
 import {COLORS} from '@src/assets/const';
 import {scaleSize} from '@core/utils';
 import {useTranslation} from 'react-i18next';
+import {feelingColors} from '../data';
 
-type Props = {};
+type Props = {
+    time: Date;
+    feel: String;
+    reason: String;
+};
 
 const DiaryCard = (props: Props) => {
     const {t} = useTranslation();
+    const {time, feel, reason} = props;
+    const feelColors = feelingColors.find(f => f.label === feel)?.color;
     return (
-        <View style={styles.card}>
+        <View style={[styles.card]}>
             <View>
                 <Text style={styles.titleLabel}>
                     Time: <Text style={{color: COLORS.gray_4}}>6 PM - 18/01/2022</Text>
@@ -19,13 +26,13 @@ const DiaryCard = (props: Props) => {
             <View style={styles.lineWrapper}>
                 <Text style={styles.label}>{t('Your feeling')}:</Text>
                 <View style={styles.textWrapper}>
-                    <Text style={styles.text}>Happy</Text>
+                    <Text style={[styles.text, {color: feelColors}]}>{feel}</Text>
                 </View>
             </View>
             <View style={styles.lineWrapper}>
                 <Text style={styles.label}>{t('Why')}:</Text>
                 <View style={styles.textWrapper}>
-                    <Text> </Text>
+                    <Text>{reason}</Text>
                 </View>
             </View>
         </View>

@@ -1,5 +1,6 @@
 import {scaleSize} from '@core/utils';
 import {IMAGES} from '@src/assets';
+import {STYLES} from '@src/assets/const';
 import React from 'react';
 import {
     Alert,
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: scaleSize(36) / 2,
         marginHorizontal: scaleSize(10),
+        ...STYLES.shadow,
     },
     logo: {
         width: '60%',
