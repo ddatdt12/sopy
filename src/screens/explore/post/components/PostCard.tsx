@@ -1,6 +1,6 @@
 import {scaleSize} from '@core/utils';
 import {useNavigation} from '@react-navigation/native';
-import {COLORS, FONTS} from '@src/assets/const';
+import {COLORS, FONTS, STYLES} from '@src/assets/const';
 import Card from '@src/components/Card';
 import {ExploreScreenProps} from '@src/navigation/ExploreStackScreen';
 import React from 'react';
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
         maxWidth: width - scaleSize(24),
         marginBottom: scaleSize(20),
         marginHorizontal: scaleSize(6),
+        ...STYLES.shadow,
     },
 
     image: {

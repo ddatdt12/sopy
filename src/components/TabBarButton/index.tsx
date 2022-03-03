@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         width: scaleSize(42),
         height: scaleSize(42),
         borderRadius: scaleSize(40) / 2,
-        marginVertical: scaleSize(11),
+        // marginVertical: scaleSize(11),
         ...STYLES.mediumShadow,
     },
 });

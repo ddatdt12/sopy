@@ -11,7 +11,7 @@ import {
     View,
     ViewStyle,
 } from 'react-native';
-
+import {STYLES} from '@src/assets/const';
 interface IButtonProps extends TouchableHighlightProps {
     title: string;
     style?: StyleProp<ViewStyle>;
@@ -41,7 +41,7 @@ const Button: React.FC<IButtonProps> = props => {
 
     return (
         <TouchableHighlight
-            style={[styles.wrapper, styles.shadow, buttonStyle, style]}
+            style={[styles.wrapper, STYLES.shadow, buttonStyle, style]}
             activeOpacity={0.8}
             underlayColor={COLORS.light_blue_1}
             {...otherProps}>
@@ -60,18 +60,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: scaleSize(24),
         borderRadius: scaleSize(60),
     },
-    shadow: {
-        //shadow
-        shadowOffset: {
-            width: 6,
-            height: 6,
-        },
-        shadowOpacity: 1,
-        shadowRadius: 10,
-        shadowColor: COLORS.dark_blue_2,
-        elevation: 12,
-    },
-
     text: {
         fontSize: scaleSize(20),
         color: COLORS.dark_gray_2,

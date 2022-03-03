@@ -1,6 +1,6 @@
 import {scaleSize} from '@core/utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {COLORS, FONTS} from '@src/assets/const';
+import {COLORS, FONTS, STYLES} from '@src/assets/const';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {LayoutChangeEvent, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     },
     dropdown: {
         position: 'relative',
+        ...STYLES.shadow,
     },
     dropdownList: {
         position: 'absolute',
@@ -103,5 +104,6 @@ const styles = StyleSheet.create({
         left: 0,
         elevation: 10,
         zIndex: 1000,
+        ...STYLES.shadow,
     },
 });

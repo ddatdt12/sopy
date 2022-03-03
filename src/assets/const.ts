@@ -35,12 +35,12 @@ export const COLORS = {
 
 export const STYLES = StyleSheet.create({
     deepShadow: {
-        shadowColor: COLORS.dark_blue_1,
+        shadowColor: COLORS.dark_gray_1,
         shadowOffset: {
             width: 4,
             height: 4,
         },
-        shadowOpacity: 0.68,
+        shadowOpacity: 0.4,
         shadowRadius: 6,
 
         elevation: 12,

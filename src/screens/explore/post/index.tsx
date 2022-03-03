@@ -29,7 +29,7 @@ const PostsScreen = ({}: IProps) => {
         );
     };
     return (
-        <Box container>
+        <Box container safeArea={false}>
             <Stack direction="row" space={scaleSize(10)} style={styles.tabWrapper}>
                 <Button title={t('All')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
                 <Button title={t('Happy')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
