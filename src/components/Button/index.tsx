@@ -18,9 +18,10 @@ interface IButtonProps extends TouchableHighlightProps {
     textStyle?: StyleProp<TextStyle>;
     variant?: 'primary' | 'secondary';
     selected?: boolean;
+    disabled?: boolean;
 }
 const Button: React.FC<IButtonProps> = props => {
-    const {title, style, selected, variant = 'primary', textStyle, ...otherProps} = props;
+    const {title, style, selected, variant = 'primary', textStyle, disabled, ...otherProps} = props;
     let buttonStyle = {
         backgroundColor: COLORS.white_3,
         color: COLORS.dark_gray_2,
@@ -30,6 +31,13 @@ const Button: React.FC<IButtonProps> = props => {
             backgroundColor: COLORS.white_1,
             color: COLORS.black_1,
         };
+    }
+    if (disabled) {
+        return (
+            <View style={[styles.wrapper, style]}>
+                <Text style={[styles.text, {color: COLORS.dark_gray_2}, textStyle]}>{title}</Text>
+            </View>
+        );
     }
     if (selected) {
         return (
@@ -67,9 +75,9 @@ const styles = StyleSheet.create({
             height: 6,
         },
         shadowOpacity: 1,
-        shadowRadius: 10,
+        shadowRadius: 6,
         shadowColor: COLORS.dark_blue_2,
-        elevation: 12,
+        elevation: 6,
     },
 
     text: {

@@ -3,16 +3,17 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {COLORS, STYLES} from '@src/assets/const';
 import TabBarButton from '@src/components/TabBarButton';
 import ChatScreen from '@src/screens/chat';
-import HomeScreen from '@src/screens/home';
+import ExpertHomeScreen from '@src/screens/home/expert';
+import HomeScreen from '@src/screens/home/user';
 import ProfileScreen from '@src/screens/profile';
 import React from 'react';
 import {View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ExploreStackScreen from './ExploreStackScreen';
-import {RootNavigatorParamsList} from './RootNavigatorParams';
+import ExploreStackScreen from '../ExploreStackScreen';
+import {RootNavigatorParamsList} from '../expert/NavigatorParams';
 
 const Tab = createBottomTabNavigator<RootNavigatorParamsList>();
-const RootNavigator: React.FC = () => {
+const ExpertRootNavigator: React.FC = () => {
     return (
         <Tab.Navigator
             initialRouteName="Explore"
@@ -34,7 +35,7 @@ const RootNavigator: React.FC = () => {
             }}>
             <Tab.Screen
                 name="Home"
-                component={HomeScreen}
+                component={ExpertHomeScreen}
                 options={{
                     tabBarIcon: props => <Ionicons name="home-sharp" {...props} />,
                 }}
@@ -64,4 +65,4 @@ const RootNavigator: React.FC = () => {
     );
 };
 
-export default RootNavigator;
+export default ExpertRootNavigator;
