@@ -33,9 +33,14 @@ const Input: FC<InputProps> = props => {
             </View>
         );
     };
+    const renderError = () => {
+        if (error) {
+            return <Text style={styles.error}>{error}</Text>;
+        }
+        return <></>;
+    };
     return (
         <View style={style}>
-            {/* FIXME: Implement inner shadow */}
             <View style={[styles.inputWrapper, iconInputStyle, inputStyle]}>
                 {icon && renderIcon()}
                 <TextInput
@@ -43,9 +48,10 @@ const Input: FC<InputProps> = props => {
                     {...inputProps}
                     autoComplete="off"
                     autoCorrect={false}
+                    autoCapitalize={'none'}
                 />
             </View>
-            {error && <Text style={styles.error}>{error}</Text>}
+            {renderError()}
         </View>
     );
 };

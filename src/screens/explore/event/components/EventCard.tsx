@@ -1,5 +1,5 @@
 import {scaleSize} from '@core/utils';
-import {COLORS} from '@src/assets/const';
+import {COLORS, STYLES} from '@src/assets/const';
 import Card from '@src/components/Card';
 import Neumorph from '@src/components/Neumorph';
 import Stack from '@src/components/Stack';
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
         padding: scaleSize(16),
         marginBottom: scaleSize(20),
         marginHorizontal: scaleSize(10),
+        ...STYLES.shadow,
     },
     image: {
         width: '100%',

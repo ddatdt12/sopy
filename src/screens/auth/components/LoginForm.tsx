@@ -92,7 +92,7 @@ const LoginForm: React.FC = props => {
             <View style={{alignItems: 'center', paddingTop: scaleSize(40)}}>
                 <Button
                     title={t('Log In')}
-                    variant="secondary"
+                    color={COLORS.white_1}
                     style={styles.button}
                     onPress={handleSubmit(onSubmit)}
                 />

@@ -3,15 +3,15 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {COLORS, STYLES} from '@src/assets/const';
 import TabBarButton from '@src/components/TabBarButton';
 import ChatScreen from '@src/screens/chat';
+import ExploreScreen from '@src/screens/explore';
 import ExpertHomeScreen from '@src/screens/home/expert';
 import ProfileScreen from '@src/screens/profile';
 import React from 'react';
 import {View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ExploreStackScreen from '../ExploreStackScreen';
-import {RootNavigatorParamsList} from './NavigatorParams';
+import {TabNavigatorParamsList} from '../TabNavigatorParams';
 
-const Tab = createBottomTabNavigator<RootNavigatorParamsList>();
+const Tab = createBottomTabNavigator<TabNavigatorParamsList>();
 const ExpertRootNavigator: React.FC = () => {
     return (
         <Tab.Navigator
@@ -41,7 +41,7 @@ const ExpertRootNavigator: React.FC = () => {
             />
             <Tab.Screen
                 name="Explore"
-                component={ExploreStackScreen}
+                component={ExploreScreen}
                 options={{
                     tabBarIcon: props => <Ionicons name="search" {...props} />,
                 }}

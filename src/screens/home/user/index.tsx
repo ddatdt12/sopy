@@ -9,8 +9,8 @@ const HomeScreen = () => {
     const {t} = useTranslation();
     return (
         <BackgroundImage>
-            <View>
-                <Text>{t('Home')}</Text>
+            <View style={{flex: 1}}>
+                <Text>{t('User Home')}</Text>
             </View>
             {/* <FeelingModal /> */}
         </BackgroundImage>

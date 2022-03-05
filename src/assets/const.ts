@@ -40,7 +40,7 @@ export const STYLES = StyleSheet.create({
             width: 4,
             height: 4,
         },
-        shadowOpacity: 0.68,
+        shadowOpacity: 0.4,
         shadowRadius: 6,
 
         elevation: 12,
@@ -51,7 +51,7 @@ export const STYLES = StyleSheet.create({
             width: 4,
             height: 4,
         },
-        shadowOpacity: 0.88,
+        shadowOpacity: 0.4,
         shadowRadius: 6,
 
         elevation: 9,
@@ -62,7 +62,7 @@ export const STYLES = StyleSheet.create({
             width: 4,
             height: 4,
         },
-        shadowOpacity: 0.68,
+        shadowOpacity: 0.48,
         shadowRadius: 6,
 
         elevation: 6,

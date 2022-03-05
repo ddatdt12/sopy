@@ -1,34 +1,35 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {scaleSize} from '@core/utils';
+import {COLORS, FONTS} from '@src/assets/const';
+import Button from '@src/components/Button';
 import IconButton from '@src/components/IconButton';
 import Neumorph from '@src/components/Neumorph';
-import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {scaleSize} from '@core/utils';
-import Button from '@src/components/Button';
-import {COLORS, FONTS, STYLES} from '@src/assets/const';
-import {Background} from 'victory-native';
 
-type Props = {};
+type Props = {
+    title: string;
+    goBack: () => void;
+    submitButtonOption?: {
+        onPress: () => void;
+        disabled: boolean;
+    };
+};
 
 const Header = (props: Props) => {
+    const {submitButtonOption, goBack, title} = props;
     return (
         <View style={styles.header}>
             <View style={[styles.headerLeft]}>
                 <Neumorph circle>
                     <IconButton
                         icon={<Ionicons name="chevron-back" size={scaleSize(20)} />}
-                        // onPress={() => navigation.goBack()}
+                        onPress={() => goBack()}
                         activeOpacity={0.8}
                     />
                 </Neumorph>
             </View>
-            {/* <View
-                style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: 'red',
-                }}> */}
+
             <Text
                 style={[
                     FONTS.h3,
@@ -39,14 +40,15 @@ const Header = (props: Props) => {
                         alignSelf: 'center',
                     },
                 ]}>
-                Creating Event
+                {title}
             </Text>
             {/* </View> */}
             <Button
                 title="Done"
-                style={[styles.button, {backgroundColor: COLORS.light_blue_1}]}
-                textStyle={{color: COLORS.black_1}}
+                variant="secondary"
+                style={[styles.button]}
                 activeOpacity={0}
+                {...submitButtonOption}
             />
         </View>
     );

@@ -13,12 +13,6 @@ function ExploreStackScreen() {
                 headerShown: false,
             }}>
             <ExploreStack.Screen name="MainExplore" component={ExploreScreen} />
-            <ExploreStack.Group
-                screenOptions={{
-                    presentation: 'modal',
-                }}>
-                <ExploreStack.Screen name="Search" component={SearchScreen} />
-            </ExploreStack.Group>
         </ExploreStack.Navigator>
     );
 }

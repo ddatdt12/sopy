@@ -2,6 +2,7 @@ import {scaleSize} from '@core/utils';
 import {COLORS} from '@src/assets/const';
 import React from 'react';
 import {
+    ColorValue,
     StyleProp,
     StyleSheet,
     Text,
@@ -11,49 +12,52 @@ import {
     View,
     ViewStyle,
 } from 'react-native';
-
+import {STYLES} from '@src/assets/const';
 interface IButtonProps extends TouchableHighlightProps {
     title: string;
     style?: StyleProp<ViewStyle>;
     textStyle?: StyleProp<TextStyle>;
     variant?: 'primary' | 'secondary';
+    color?: ColorValue;
     selected?: boolean;
     disabled?: boolean;
 }
 const Button: React.FC<IButtonProps> = props => {
-    const {title, style, selected, variant = 'primary', textStyle, disabled, ...otherProps} = props;
-    let buttonStyle = {
+    const {title, style, selected, variant = 'primary', textStyle, color, disabled, ...otherProps} = props;
+    let buttonStyle: {backgroundColor: ColorValue} = {
         backgroundColor: COLORS.white_3,
-        color: COLORS.dark_gray_2,
     };
     if (variant === 'secondary') {
         buttonStyle = {
-            backgroundColor: COLORS.white_1,
-            color: COLORS.black_1,
+            backgroundColor: COLORS.light_blue_1,
+        };
+    } else if (color) {
+        buttonStyle = {
+            backgroundColor: color,
         };
     }
     if (disabled) {
         return (
-            <View style={[styles.wrapper, style]}>
-                <Text style={[styles.text, {color: COLORS.dark_gray_2}, textStyle]}>{title}</Text>
+            <View style={[styles.wrapper, style, {backgroundColor: 'transparent'}]}>
+                <Text style={[styles.text, {color: COLORS.dark_gray_1}, textStyle]}>{title}</Text>
             </View>
         );
     }
     if (selected) {
         return (
             <View style={[styles.wrapper, {borderColor: COLORS.dark_gray_2, borderWidth: 1}, style]}>
-                <Text style={[styles.text, {color: COLORS.black_1}, textStyle]}>{title}</Text>
+                <Text style={[styles.text, styles.secondary, textStyle]}>{title}</Text>
             </View>
         );
     }
 
     return (
         <TouchableHighlight
-            style={[styles.wrapper, styles.shadow, buttonStyle, style]}
+            style={[styles.wrapper, STYLES.deepShadow, buttonStyle, style]}
             activeOpacity={0.8}
             underlayColor={COLORS.light_blue_1}
             {...otherProps}>
-            <Text style={[styles.text, textStyle]}>{title}</Text>
+            <Text style={[styles.text, styles[variant], textStyle]}>{title}</Text>
         </TouchableHighlight>
     );
 };
@@ -67,22 +71,17 @@ const styles = StyleSheet.create({
         paddingVertical: scaleSize(4),
         paddingHorizontal: scaleSize(24),
         borderRadius: scaleSize(60),
+        backgroundColor: COLORS.white_3,
     },
-    shadow: {
-        //shadow
-        shadowOffset: {
-            width: 6,
-            height: 6,
-        },
-        shadowOpacity: 1,
-        shadowRadius: 6,
-        shadowColor: COLORS.dark_blue_2,
-        elevation: 6,
-    },
-
     text: {
         fontSize: scaleSize(20),
         color: COLORS.dark_gray_2,
         fontWeight: 'bold',
+    },
+    primary: {
+        color: COLORS.dark_gray_2,
+    },
+    secondary: {
+        color: COLORS.black_1,
     },
 });

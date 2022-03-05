@@ -38,21 +38,21 @@ const styles = StyleSheet.create({
         borderRadius: scaleSize(12),
         shadowColor: '#FFFFFF',
         shadowOffset: {
-            width: -4,
-            height: -4,
+            width: -3,
+            height: -3,
         },
-        shadowOpacity: 0.7,
+        shadowOpacity: 0.4,
         shadowRadius: 10,
     },
     bottomShadow: {
         borderRadius: scaleSize(12),
         shadowColor: COLORS.dark_blue_2,
         shadowOffset: {
-            width: 4,
-            height: 4,
+            width: 3,
+            height: 3,
         },
-        shadowOpacity: 0.68,
-        shadowRadius: 10,
+        shadowOpacity: 0.4,
+        shadowRadius: 6,
     },
     androidShadow: {
         elevation: 6,
