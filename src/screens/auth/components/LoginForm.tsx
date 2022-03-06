@@ -1,15 +1,21 @@
 import {scaleSize} from '@core/utils';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {COLORS} from '@src/assets/const';
+import {unwrapResult} from '@reduxjs/toolkit';
+import {COLORS, STYLES} from '@src/assets/const';
 import Button from '@src/components/Button';
 import Input from '@src/components/Input';
 import Text from '@src/components/Text';
 import {auth} from '@src/config/firebase';
-import {signInWithEmailAndPassword} from 'firebase/auth';
+import {emailPasswordLogin} from '@src/services/auth';
+import {useAppDispatch, useAppSelector} from '@src/store';
+import {authActions} from '@src/store/authSlice';
+import {FirebaseError} from 'firebase/app';
+import {signInWithEmailAndPassword, User} from 'firebase/auth';
 import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
 import {Alert, StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
 import * as yup from 'yup';
 
 const schema = yup
@@ -22,9 +28,12 @@ export type LoginData = {
     email: string;
     password: string;
 };
-const LoginForm: React.FC = props => {
-    const {t} = useTranslation();
 
+type LoginFormProps = {};
+const LoginForm: React.FC<LoginFormProps> = ({}) => {
+    const {t} = useTranslation();
+    const {loading, error: authError, token} = useAppSelector(state => state.auth);
+    const dispatch = useAppDispatch();
     const {
         control,
         handleSubmit,
@@ -36,20 +45,22 @@ const LoginForm: React.FC = props => {
         },
         resolver: yupResolver(schema),
     });
+    const onSubmit = async ({email, password}: LoginData) => {
+        try {
+            dispatch(authActions.loading());
+            const user = await emailPasswordLogin({email, password});
+            console.log('firebase user:', user);
+            const actionResult = await dispatch(authActions.login(user));
+            const res = unwrapResult(actionResult);
 
-    const onSubmit = ({email, password}: LoginData) => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then(userCredential => {
-                // Signed in
-                const user = userCredential.user;
-                Alert.alert('Notice', 'Success: ' + user.email);
-                console.log('Success: ', user.email);
-            })
-            .catch(error => {
-                const errorMessage = error.message;
-                Alert.alert('Notice', errorMessage);
-                console.log(error);
-            });
+            console.log('Mic check: ', res);
+        } catch (error: any) {
+            dispatch(authActions.stopLoading());
+            if (error instanceof FirebaseError) {
+                error.code === 'auth/wrong-password' && Alert.alert('Error', 'Wrong Email or password');
+            }
+            console.log('try catch: ', error.message);
+        }
     };
     return (
         <>
@@ -86,6 +97,7 @@ const LoginForm: React.FC = props => {
                 name="password"
             />
 
+            {!!authError && <Text style={STYLES.error}>{authError}</Text>}
             <Text style={styles.link} onPress={() => Alert.alert('Forgot password')}>
                 {t('Forgot password?')}
             </Text>
@@ -95,6 +107,7 @@ const LoginForm: React.FC = props => {
                     color={COLORS.white_1}
                     style={styles.button}
                     onPress={handleSubmit(onSubmit)}
+                    loading={loading}
                 />
             </View>
         </>

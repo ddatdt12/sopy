@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator<TabNavigatorParamsList>();
 const ExpertRootNavigator: React.FC = () => {
     return (
         <Tab.Navigator
-            initialRouteName="Explore"
+            initialRouteName="Home"
             screenOptions={{
                 headerShown: false,
                 tabBarShowLabel: false,

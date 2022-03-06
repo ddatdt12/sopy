@@ -2,6 +2,7 @@ import {scaleSize} from '@core/utils';
 import {COLORS} from '@src/assets/const';
 import React from 'react';
 import {
+    ActivityIndicator,
     ColorValue,
     StyleProp,
     StyleSheet,
@@ -13,6 +14,7 @@ import {
     ViewStyle,
 } from 'react-native';
 import {STYLES} from '@src/assets/const';
+import LinearStroke from '../LinearStroke';
 interface IButtonProps extends TouchableHighlightProps {
     title: string;
     style?: StyleProp<ViewStyle>;
@@ -21,20 +23,36 @@ interface IButtonProps extends TouchableHighlightProps {
     color?: ColorValue;
     selected?: boolean;
     disabled?: boolean;
+    loading?: boolean;
 }
 const Button: React.FC<IButtonProps> = props => {
-    const {title, style, selected, variant = 'primary', textStyle, color, disabled, ...otherProps} = props;
-    let buttonStyle: {backgroundColor: ColorValue} = {
+    const {title, style, selected, variant = 'primary', textStyle, color, loading, disabled, ...otherProps} = props;
+    let bgColorStyle: {backgroundColor: ColorValue} = {
         backgroundColor: COLORS.white_3,
     };
     if (variant === 'secondary') {
-        buttonStyle = {
+        bgColorStyle = {
             backgroundColor: COLORS.light_blue_1,
         };
     } else if (color) {
-        buttonStyle = {
+        bgColorStyle = {
             backgroundColor: color,
         };
+    }
+    if (loading) {
+        return (
+            <View style={[styles.wrapper, styles.border, style]}>
+                {/* <Text style={[styles.text, styles.secondary, textStyle]}>{title}</Text> */}
+                <View
+                    style={{
+                        width: '100%',
+                        ...bgColorStyle,
+                        backgroundColor: 'transparent',
+                    }}>
+                    <ActivityIndicator size="small" color={COLORS.dark_blue_1} />
+                </View>
+            </View>
+        );
     }
     if (disabled) {
         return (
@@ -45,7 +63,7 @@ const Button: React.FC<IButtonProps> = props => {
     }
     if (selected) {
         return (
-            <View style={[styles.wrapper, {borderColor: COLORS.dark_gray_2, borderWidth: 1}, style]}>
+            <View style={[styles.wrapper, styles.border, style]}>
                 <Text style={[styles.text, styles.secondary, textStyle]}>{title}</Text>
             </View>
         );
@@ -53,7 +71,7 @@ const Button: React.FC<IButtonProps> = props => {
 
     return (
         <TouchableHighlight
-            style={[styles.wrapper, STYLES.deepShadow, buttonStyle, style]}
+            style={[styles.wrapper, STYLES.deepShadow, bgColorStyle, style]}
             activeOpacity={0.8}
             underlayColor={COLORS.light_blue_1}
             {...otherProps}>
@@ -84,4 +102,5 @@ const styles = StyleSheet.create({
     secondary: {
         color: COLORS.black_1,
     },
+    border: {borderColor: COLORS.dark_gray_2, borderWidth: 1},
 });

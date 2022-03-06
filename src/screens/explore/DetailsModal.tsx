@@ -1,9 +1,7 @@
 import {scaleSize} from '@core/utils';
 import {COLORS} from '@src/assets/const';
-import Box from '@src/components/Box';
 import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import PostDetailsHeader from './post_details/PostDetailsHeader';
 

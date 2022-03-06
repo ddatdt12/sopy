@@ -33,42 +33,6 @@ export const COLORS = {
     error_1: '#FF4906',
 };
 
-export const STYLES = StyleSheet.create({
-    deepShadow: {
-        shadowColor: COLORS.dark_blue_1,
-        shadowOffset: {
-            width: 4,
-            height: 4,
-        },
-        shadowOpacity: 0.4,
-        shadowRadius: 6,
-
-        elevation: 12,
-    },
-    mediumShadow: {
-        shadowColor: COLORS.dark_gray_1,
-        shadowOffset: {
-            width: 4,
-            height: 4,
-        },
-        shadowOpacity: 0.4,
-        shadowRadius: 6,
-
-        elevation: 9,
-    },
-    shadow: {
-        shadowColor: COLORS.dark_gray_1,
-        shadowOffset: {
-            width: 4,
-            height: 4,
-        },
-        shadowOpacity: 0.48,
-        shadowRadius: 6,
-
-        elevation: 6,
-    },
-});
-
 export const SIZES = {
     // global sizes
     base: 8,
@@ -110,4 +74,51 @@ export const FONTS = StyleSheet.create({
     body2: {fontFamily: 'Roboto-Regular', color: COLORS.black_2, fontSize: SIZES.body2, lineHeight: 30},
     body3: {fontFamily: 'Roboto-Regular', color: COLORS.black_2, fontSize: SIZES.body3, lineHeight: 22},
     body4: {fontFamily: 'Roboto-Regular', color: COLORS.black_2, fontSize: SIZES.body4, lineHeight: 22},
+});
+
+export const STYLES = StyleSheet.create({
+    deepShadow: {
+        shadowColor: COLORS.dark_gray_2,
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: 6,
+
+        elevation: 12,
+    },
+    mediumShadow: {
+        shadowColor: COLORS.dark_gray_1,
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: 6,
+
+        elevation: 9,
+    },
+    shadow: {
+        shadowColor: COLORS.dark_gray_1,
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        shadowOpacity: 0.48,
+        shadowRadius: 6,
+
+        elevation: 6,
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    error: {
+        ...FONTS.body4,
+        color: COLORS.error_1,
+        fontSize: scaleSize(16),
+        marginTop: scaleSize(4),
+        marginLeft: scaleSize(8),
+    },
 });

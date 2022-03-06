@@ -3,74 +3,68 @@ import {COLORS} from '@src/assets/const';
 import Button from '@src/components/Button';
 import DismissKeyboardView from '@src/components/DismissKeyboardView';
 import Stack from '@src/components/Stack';
-import React from 'react';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Dimensions, KeyboardAvoidingView, Modal, ScrollView, StyleSheet, Text, View} from 'react-native';
+import ReactNativeModal from 'react-native-modal';
 import {Feelings} from '../feeling';
 import FeelingCard from './FeelingCard';
 import Textarea from './Textarea';
 
 interface IFeelingModal {
     modalVisible?: boolean;
-    setModalVisible?: (_: boolean) => void;
+    setModalVisible: (_: boolean) => void;
 }
 const width = Dimensions.get('screen').width / 3 - scaleSize(20);
 
 const FeelingModal: React.FC<IFeelingModal> = ({modalVisible, setModalVisible}) => {
     const {t} = useTranslation();
     return (
-        <Modal
-            animationType="slide"
-            transparent={true}
-            visible={true}
-            onRequestClose={() => {
-                // setModalVisible(!modalVisible);
-            }}>
+        <ReactNativeModal
+            isVisible={modalVisible}
+            onBackdropPress={() => setModalVisible(false)}
+            onSwipeComplete={() => {
+                setModalVisible(false);
+            }}
+            swipeDirection={'down'}
+            style={{margin: 0, justifyContent: 'flex-end'}}
+            backdropOpacity={0.4}>
             <DismissKeyboardView>
-                <View style={styles.backdrop}>
-                    <View style={styles.container}>
-                        <KeyboardAvoidingView behavior="padding">
-                            <View style={styles.header}>
-                                <Text style={styles.title}>{t('How are you feeling')}</Text>
-                            </View>
-                            <ScrollView>
-                                <Stack direction="row" style={styles.feelingWrapper}>
-                                    {Feelings.map((feel, index) => {
-                                        if (index !== Feelings.length - 1) {
-                                            return (
-                                                <FeelingCard
-                                                    key={feel.name}
-                                                    feeling={feel}
-                                                    size={width - scaleSize(2)}
-                                                />
-                                            );
-                                        } else {
-                                            const inputSize = 2 * (width - scaleSize(2));
-                                            return (
-                                                // <View key={feel.name} style={{flexDirection: 'row'}}>
-                                                <Stack key={feel.name} direction="row">
-                                                    <FeelingCard feeling={feel} size={width - scaleSize(2)} />
-                                                    <Textarea
-                                                        inputSize={inputSize}
-                                                        placeholder={t("What's going on!")}
-                                                    />
-                                                </Stack>
-                                                // </View>
-                                            );
-                                        }
-                                    })}
-                                </Stack>
-                            </ScrollView>
+                <View style={styles.container}>
+                    <KeyboardAvoidingView behavior="padding">
+                        <View style={styles.header}>
+                            <Text style={styles.title}>{t('How are you feeling')}</Text>
+                        </View>
+                        <ScrollView>
+                            <Stack direction="row" style={styles.feelingWrapper}>
+                                {Feelings.map((feel, index) => {
+                                    if (index !== Feelings.length - 1) {
+                                        return (
+                                            <FeelingCard key={feel.name} feeling={feel} size={width - scaleSize(2)} />
+                                        );
+                                    } else {
+                                        const inputSize = 2 * (width - scaleSize(2));
+                                        return (
+                                            // <View key={feel.name} style={{flexDirection: 'row'}}>
+                                            <Stack key={feel.name} direction="row">
+                                                <FeelingCard feeling={feel} size={width - scaleSize(2)} />
+                                                <Textarea inputSize={inputSize} placeholder={t("What's going on!")} />
+                                            </Stack>
+                                            // </View>
+                                        );
+                                    }
+                                })}
+                            </Stack>
+                        </ScrollView>
 
-                            {/* FIXME: Migrate into styled button component  */}
-                            <View style={styles.buttonWrapper}>
-                                <Button title={t('Save')} style={styles.button} />
-                            </View>
-                        </KeyboardAvoidingView>
-                    </View>
+                        {/* FIXME: Migrate into styled button component  */}
+                        <View style={styles.buttonWrapper}>
+                            <Button title={t('Save')} style={styles.button} />
+                        </View>
+                    </KeyboardAvoidingView>
                 </View>
             </DismissKeyboardView>
-        </Modal>
+        </ReactNativeModal>
     );
 };
 

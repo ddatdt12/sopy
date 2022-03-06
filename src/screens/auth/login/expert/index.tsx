@@ -1,29 +1,13 @@
 import {IMAGES} from '@src/assets';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {Alert, Keyboard, ScrollView, Text, View} from 'react-native';
+import {Alert, ScrollView, Text, View} from 'react-native';
 import ImageBackground from '../../components/ImageBackground';
 import LoginForm from '../../components/LoginForm';
 import styles from './styles';
 
 const ExpertLoginScreen = () => {
     const {t} = useTranslation();
-
-    const [keyboardStatus, setKeyboardStatus] = useState(false);
-
-    useEffect(() => {
-        const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
-            setKeyboardStatus(true);
-        });
-        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-            setKeyboardStatus(false);
-        });
-
-        return () => {
-            showSubscription.remove();
-            hideSubscription.remove();
-        };
-    }, []);
     return (
         <ImageBackground source={IMAGES.bg_intro_step_1}>
             <ScrollView>

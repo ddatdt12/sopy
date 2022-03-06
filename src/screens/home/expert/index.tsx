@@ -1,5 +1,8 @@
 import Button from '@src/components/Button';
 import {ExpertHomeScreenNavigationProps} from '@src/navigation/expert/type';
+import {firebaseLogout} from '@src/services/auth';
+import {useAppDispatch} from '@src/store';
+import {authActions} from '@src/store/authSlice';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Text, View} from 'react-native';
@@ -7,7 +10,7 @@ import BackgroundImage from '../user/components/BackgroundImage';
 
 const ExpertHomeScreen: React.FC<ExpertHomeScreenNavigationProps> = ({navigation}) => {
     const {t} = useTranslation();
-
+    const dispatch = useAppDispatch();
     return (
         <BackgroundImage>
             <View style={{flex: 1}}>
@@ -15,7 +18,13 @@ const ExpertHomeScreen: React.FC<ExpertHomeScreenNavigationProps> = ({navigation
                 <Button title="Create Post" onPress={() => navigation.navigate('CreatePost')} />
                 <Button title="Create Event" onPress={() => navigation.navigate('CreateEvent')} />
                 <View style={{flexGrow: 1, justifyContent: 'center', alignItems: 'center'}}>
-                    <Button title="Open modal" onPress={() => navigation.navigate('CreateEvent')} />
+                    <Button
+                        title="Open modal"
+                        onPress={() => {
+                            firebaseLogout();
+                            dispatch(authActions.logout());
+                        }}
+                    />
                 </View>
             </View>
         </BackgroundImage>

@@ -4,7 +4,7 @@ import {COLORS, SIZES, STYLES} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
 import IconButton from '@src/components/IconButton';
-import {EmotionDiaryScreenProps} from '@src/navigation/AuthStackParams';
+import {EmotionDiaryScreenProps} from '@src/navigation/user/type';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
@@ -12,14 +12,12 @@ import {Calendar, DateData} from 'react-native-calendars';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Arrow from './components/Arrow';
 import DiaryCard from './components/DiaryCard';
-import ListDiary from './components/ListDiary';
 import {diaryList} from './data';
 
 type Props = {};
 
-const EmotionDiaryScreen: React.FC<Props> = props => {
+const EmotionDiaryScreen: React.FC<EmotionDiaryScreenProps> = ({navigation}) => {
     const {t} = useTranslation();
-    const navigation = useNavigation<EmotionDiaryScreenProps['navigation']>();
 
     const [selectedDate, setSelectedDate] = useState<DateData | null>(null);
 

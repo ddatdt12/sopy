@@ -41,6 +41,7 @@
         "react-redux": "^7.2.6",
         "react-use": "^17.3.2",
         "redux": "^4.1.2",
+        "redux-persist": "^6.0.0",
         "victory-native": "^36.3.0",
         "yup": "^0.32.11"
     },

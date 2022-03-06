@@ -1,18 +1,40 @@
 import {scaleSize} from '@core/utils';
-import {COLORS} from '@src/assets/const';
-import React from 'react';
+import {COLORS, FONTS} from '@src/assets/const';
+import Button from '@src/components/Button';
+import {UserHomeScreenProps} from '@src/navigation/user/type';
+import {useAppDispatch} from '@src/store';
+import {authActions} from '@src/store/authSlice';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {StyleSheet, Text, View} from 'react-native';
 import BackgroundImage from './components/BackgroundImage';
+import FeelingModal from './components/FeelingModal';
 
-const HomeScreen = () => {
+const HomeScreen: React.FC<UserHomeScreenProps> = ({navigation}) => {
     const {t} = useTranslation();
+    const [modalVisible, setModalVisible] = useState(false);
+    const dispatch = useAppDispatch();
     return (
         <BackgroundImage>
             <View style={{flex: 1}}>
-                <Text>{t('User Home')}</Text>
+                <Text style={[FONTS.h1, {alignSelf: 'center'}]}>{t('User Home')}</Text>
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <Button
+                        title="Open modal"
+                        onPress={() => {
+                            setModalVisible(true);
+                        }}
+                    />
+                    <Button
+                        title="Log out"
+                        onPress={() => {
+                            dispatch(authActions.logout());
+                        }}
+                        style={{marginTop: 100}}
+                    />
+                </View>
             </View>
-            {/* <FeelingModal /> */}
+            <FeelingModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </BackgroundImage>
     );
 };

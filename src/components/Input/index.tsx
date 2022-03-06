@@ -1,7 +1,7 @@
 // import {Shadow} from 'react-native-neomorph-shadows';
 // import Text from '../Text';
-import {scaleSize, isAndroid} from '@core/utils/DeviceUtils';
-import {COLORS} from '@src/assets/const';
+import {scaleSize} from '@core/utils/DeviceUtils';
+import {COLORS, STYLES} from '@src/assets/const';
 import React, {FC} from 'react';
 import {StyleProp, StyleSheet, Text, TextInput, TextInputProps, TextStyle, View, ViewStyle} from 'react-native';
 interface InputProps extends TextInputProps {
@@ -35,7 +35,7 @@ const Input: FC<InputProps> = props => {
     };
     const renderError = () => {
         if (error) {
-            return <Text style={styles.error}>{error}</Text>;
+            return <Text style={STYLES.error}>{error}</Text>;
         }
         return <></>;
     };
@@ -74,12 +74,7 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
     },
-    error: {
-        color: COLORS.error_1,
-        fontSize: scaleSize(16),
-        marginTop: scaleSize(4),
-        marginLeft: scaleSize(8),
-    },
+
     icon: {
         justifyContent: 'center',
         alignItems: 'center',

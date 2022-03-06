@@ -2,7 +2,7 @@ import {scaleSize} from '@core/utils';
 import {IMAGES} from '@src/assets';
 import {FONTS} from '@src/assets/const';
 import Card from '@src/components/Card';
-import {RoleChooseScreenProps} from '@src/navigation/AuthStackParams';
+import {RoleChooseScreenProps} from '@src/navigation/AppStackParams';
 import React from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import ImageBackground from '../components/ImageBackground';

@@ -1,7 +1,7 @@
 import {scaleSize} from '@core/utils';
 import {IMAGES} from '@src/assets';
 import {COLORS, FONTS} from '@src/assets/const';
-import {RegisterScreenProps} from '@src/navigation/AuthStackParams';
+import {RegisterScreenProps} from '@src/navigation/AppStackParams';
 import {googleSignIn} from '@src/services/auth';
 import React from 'react';
 import {useTranslation} from 'react-i18next';

@@ -2,6 +2,7 @@ import {scaleSize} from '@core/utils';
 import {FONTS} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
+import Neumorph from '@src/components/Neumorph';
 import Stack from '@src/components/Stack';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
@@ -31,10 +32,18 @@ const PostsScreen = ({}: IProps) => {
     return (
         <Box container safeArea={false}>
             <Stack direction="row" space={scaleSize(10)} style={styles.tabWrapper}>
-                <Button title={t('All')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
-                <Button title={t('Happy')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
-                <Button title={t('Sad')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
-                <Button title={t('Scared')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
+                <Neumorph borderRadius={scaleSize(60)}>
+                    <Button title={t('All')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
+                </Neumorph>
+                <Neumorph borderRadius={scaleSize(60)}>
+                    <Button title={t('Happy')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
+                </Neumorph>
+                <Neumorph borderRadius={scaleSize(60)}>
+                    <Button title={t('Sad')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
+                </Neumorph>
+                <Neumorph borderRadius={scaleSize(60)}>
+                    <Button title={t('Scared')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
+                </Neumorph>
             </Stack>
             <FlatList
                 data={Posts}
@@ -57,6 +66,7 @@ const styles = StyleSheet.create({
     tabWrapper: {
         flexWrap: 'wrap',
         marginVertical: scaleSize(16),
+        paddingVertical: scaleSize(4),
     },
     button: {
         paddingHorizontal: scaleSize(12),
