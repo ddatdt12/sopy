@@ -16,6 +16,7 @@ export const COLORS = {
 
     black_1: '#193566',
     black_2: '#1D325E',
+    black_3: '#728AB7',
 
     gray_1: '#EBF3FA', // background
     gray_2: '#B6BAC1',
@@ -97,7 +98,7 @@ export const STYLES = StyleSheet.create({
         shadowOpacity: 0.4,
         shadowRadius: 6,
 
-        elevation: 9,
+        elevation: 8,
     },
     shadow: {
         shadowColor: COLORS.dark_gray_1,
@@ -108,7 +109,7 @@ export const STYLES = StyleSheet.create({
         shadowOpacity: 0.48,
         shadowRadius: 6,
 
-        elevation: 6,
+        elevation: 5,
     },
     center: {
         justifyContent: 'center',

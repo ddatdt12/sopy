@@ -71,7 +71,7 @@ const Button: React.FC<IButtonProps> = props => {
 
     return (
         <TouchableHighlight
-            style={[styles.wrapper, STYLES.deepShadow, bgColorStyle, style]}
+            style={[styles.wrapper, STYLES.mediumShadow, bgColorStyle, style]}
             activeOpacity={0.8}
             underlayColor={COLORS.light_blue_1}
             {...otherProps}>

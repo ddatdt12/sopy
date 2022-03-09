@@ -3,6 +3,7 @@ import ExpertLoginScreen from '@src/screens/auth/login/expert';
 import UserLoginScreen from '@src/screens/auth/login/user';
 import RegisterScreen from '@src/screens/auth/register';
 import RoleScreen from '@src/screens/auth/role';
+import IntroScreen from '@src/screens/intro';
 import {useAppSelector} from '@src/store';
 import React from 'react';
 import {AppStackParamList} from './AppStackParams';
@@ -29,9 +30,10 @@ const AppNavigator: React.FC = () => {
                 headerShadowVisible: false,
                 title: '',
             }}
-            initialRouteName={'RoleChoose'}>
+            initialRouteName={'Intro'}>
             {!auth.token ? (
                 <>
+                    <AppStack.Screen name="Intro" component={IntroScreen} />
                     <AppStack.Screen name="ExpertLogin" component={ExpertLoginScreen} />
                     <AppStack.Screen name="UserLogin" component={UserLoginScreen} />
                     <AppStack.Screen name="Register" component={RegisterScreen} />
