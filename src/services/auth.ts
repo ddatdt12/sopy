@@ -1,6 +1,6 @@
 import {GoogleSignin, statusCodes} from '@react-native-google-signin/google-signin';
 import {auth} from '@src/config/firebase';
-import {GoogleAuthProvider, signInWithCredential} from 'firebase/auth';
+import {getAuth, GoogleAuthProvider, signInWithCredential, signInWithEmailAndPassword, signOut} from 'firebase/auth';
 
 const googleSignIn = async () => {
     try {
@@ -28,4 +28,17 @@ const googleSignIn = async () => {
     }
 };
 
-export {googleSignIn};
+const emailPasswordLogin = async ({email, password}: any) => {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
+};
+
+const firebaseLogout = async () => {
+    try {
+        await signOut(auth);
+        console.log('Success logout');
+    } catch (error) {
+        console.log('Error', error);
+    }
+};
+export {googleSignIn, emailPasswordLogin, firebaseLogout};

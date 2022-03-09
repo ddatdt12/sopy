@@ -1,14 +1,14 @@
 import {scaleSize} from '@core/utils';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {COLORS, FONTS} from '@src/assets/const';
-import Stack from '@src/components/Stack';
 import Button from '@src/components/Button';
 import IconButton from '@src/components/IconButton';
 import Neumorph from '@src/components/Neumorph';
-import {ExploreScreenProps} from '@src/navigation/ExploreStackScreen';
+import Stack from '@src/components/Stack';
+import {ExploreScreenNavigationProps} from '@src/navigation/expert/type';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 interface IProps {
     route: 'Post' | 'Event';
@@ -16,7 +16,7 @@ interface IProps {
 }
 const ExploreHeader: React.FC<IProps> = props => {
     const {route, navigate: redirect} = props;
-    const {navigate} = useNavigation<ExploreScreenProps['navigation']>();
+    const {navigate} = useNavigation<ExploreScreenNavigationProps['navigation']>();
     return (
         <View style={styles.header}>
             <Stack direction="row" space={scaleSize(10)} style={{marginTop: scaleSize(20)}}>
@@ -36,23 +36,9 @@ const ExploreHeader: React.FC<IProps> = props => {
                     }}
                 />
             </Stack>
-            <View
-                style={{
-                    position: 'absolute',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    right: 2,
-                }}>
-                <Neumorph
-                    style={{
-                        backgroundColor: COLORS.white_3,
-                        width: scaleSize(36),
-                        height: scaleSize(36),
-                        elevation: 6,
-                        borderRadius: scaleSize(36) / 2,
-                    }}>
+            <View style={styles.headerRight}>
+                <Neumorph circle>
                     <IconButton
-                        size={scaleSize(36)}
                         icon={<Ionicons name="search" size={24} color={COLORS.dark_gray_2} />}
                         onPress={() => navigate('Search')}
                     />
@@ -87,7 +73,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         right: scaleSize(10),
-        backgroundColor: 'red',
+        bottom: 0,
     },
 });
 export default ExploreHeader;

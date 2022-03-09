@@ -1,10 +1,11 @@
 import {scaleSize} from '@core/utils';
 import {useNavigation} from '@react-navigation/native';
-import {COLORS, FONTS} from '@src/assets/const';
+import {COLORS, FONTS, STYLES} from '@src/assets/const';
 import Card from '@src/components/Card';
 import {ExploreScreenProps} from '@src/navigation/ExploreStackScreen';
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {GestureResponderEvent} from 'react-native-modal';
 
 interface IPostCard {
     title: string;
@@ -14,17 +15,15 @@ interface IPostCard {
         width?: number;
         margin?: number;
     };
+    onPress?: (event: GestureResponderEvent) => void;
 }
 const PostCard: React.FC<IPostCard> = props => {
     const navigation = useNavigation<ExploreScreenProps['navigation']>();
-    const {title, author, image, style} = props;
+    const {title, author, image, onPress, style} = props;
 
     return (
         <View>
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate('PostDetails');
-                }}>
+            <TouchableOpacity onPress={onPress}>
                 <Card style={[styles.card, {width: style?.width, margin: style?.margin}]}>
                     <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
                     <View style={styles.content}>
@@ -52,6 +51,7 @@ const styles = StyleSheet.create({
         maxWidth: width - scaleSize(24),
         marginBottom: scaleSize(20),
         marginHorizontal: scaleSize(6),
+        ...STYLES.shadow,
     },
 
     image: {

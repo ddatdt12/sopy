@@ -1,31 +1,35 @@
 import {scaleSize} from '@core/utils';
 import {useNavigation} from '@react-navigation/native';
-import {COLORS, SIZES} from '@src/assets/const';
+import {COLORS, SIZES, STYLES} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
-import {EmotionDiaryScreenProps} from '@src/navigation/AuthStackParams';
+import IconButton from '@src/components/IconButton';
+import {EmotionDiaryScreenProps} from '@src/navigation/user/type';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Calendar, DateData} from 'react-native-calendars';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Arrow from './components/Arrow';
 import DiaryCard from './components/DiaryCard';
+import {diaryList} from './data';
 
 type Props = {};
 
-const EmotionDiaryScreen: React.FC<Props> = props => {
+const EmotionDiaryScreen: React.FC<EmotionDiaryScreenProps> = ({navigation}) => {
     const {t} = useTranslation();
-    const navigation = useNavigation<EmotionDiaryScreenProps['navigation']>();
 
     const [selectedDate, setSelectedDate] = useState<DateData | null>(null);
 
+    const renderArrow = (direction: 'left' | 'right') => <Arrow variant={direction} />;
+
     return (
-        <Box bgColor={COLORS.gray_1} container safeArea={false} marginHorizontal={scaleSize(20)}>
-            <View>
+        <Box bgColor={COLORS.gray_1} container safeArea={false}>
+            <ScrollView style={{paddingHorizontal: scaleSize(10)}} contentContainerStyle={{justifyContent: 'center'}}>
                 <View style={{flexDirection: 'row-reverse', marginTop: scaleSize(12)}}>
                     <Button
                         title={t('Dashboard')}
                         onPress={() => navigation.push('DashboardEmotionDiary')}
-                        style={{elevation: 30}}
                         textStyle={{color: COLORS.black_1}}
                     />
                 </View>
@@ -46,8 +50,7 @@ const EmotionDiaryScreen: React.FC<Props> = props => {
                     monthFormat={'MMMM yyyy'}
                     firstDay={1}
                     enableSwipeMonths={true}
-                    // FIXME: change to icon
-                    renderArrow={direction => (direction === 'left' ? <Text>Left</Text> : <Text>Right</Text>)}
+                    renderArrow={renderArrow}
                     markingType={'custom'}
                     markedDates={
                         selectedDate
@@ -68,15 +71,11 @@ const EmotionDiaryScreen: React.FC<Props> = props => {
                     // displayLoadingIndicator={true}
                     style={styles.calendar}
                 />
-
-                <ScrollView>
-                    <DiaryCard />
-                    <DiaryCard />
-                    <DiaryCard />
-                    <DiaryCard />
-                    <DiaryCard />
-                </ScrollView>
-            </View>
+                {/* <ListDiary data={diaryList} /> */}
+                {diaryList.map(diary => (
+                    <DiaryCard key={diary.id} {...diary} />
+                ))}
+            </ScrollView>
         </Box>
     );
 };
@@ -85,15 +84,11 @@ export default EmotionDiaryScreen;
 
 const styles = StyleSheet.create({
     calendar: {
-        marginVertical: scaleSize(20),
+        marginBottom: scaleSize(10),
+        marginTop: scaleSize(20),
         borderRadius: scaleSize(12),
-        shadowColor: COLORS.dark_gray_1,
-        shadowOffset: {
-            width: 4,
-            height: 12,
-        },
-        shadowOpacity: 1,
-        shadowRadius: 16,
-        elevation: 20,
+        width: '97.5%',
+        alignSelf: 'center',
+        ...STYLES.shadow,
     },
 });

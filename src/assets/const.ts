@@ -1,5 +1,5 @@
 import {scaleSize} from '@core/utils';
-import {Dimensions} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 const {width: WindowWidth, height: WindowHeight} = Dimensions.get('window');
 
 export const BASE_URL = 'https://api.github.com';
@@ -16,6 +16,7 @@ export const COLORS = {
 
     black_1: '#193566',
     black_2: '#1D325E',
+    black_3: '#728AB7',
 
     gray_1: '#EBF3FA', // background
     gray_2: '#B6BAC1',
@@ -45,32 +46,80 @@ export const SIZES = {
     largeTitle: scaleSize(50),
     h1: scaleSize(32),
     h2: scaleSize(24),
-    h3: scaleSize(16),
+    h3: scaleSize(18),
     h4: scaleSize(14),
     body1: scaleSize(32),
     body2: scaleSize(24),
-    body3: scaleSize(16),
+    body3: scaleSize(18),
     body4: scaleSize(14),
 
+    circleButton: scaleSize(36),
     // app dimensions
     WindowWidth,
     WindowHeight,
 };
 
-export const FONTS = {
-    largeTitle: {fontFamily: 'Roboto-Bold', fontSize: SIZES.largeTitle, lineHeight: 55},
-    h1: {fontFamily: 'Roboto-Bold', fontSize: SIZES.h1, lineHeight: 36},
-    h2: {fontFamily: 'Roboto-Bold', fontSize: SIZES.h2, lineHeight: 30},
-    h3: {fontFamily: 'Roboto-Bold', fontSize: SIZES.h3, lineHeight: 22},
-    h4: {fontFamily: 'Roboto-Bold', fontSize: SIZES.h4, lineHeight: 22},
+export const FONTS = StyleSheet.create({
+    largeTitle: {fontFamily: 'Roboto-Bold', color: COLORS.black_2, fontSize: SIZES.largeTitle, lineHeight: 55},
+    h1: {fontFamily: 'Roboto-Bold', color: COLORS.black_2, fontSize: SIZES.h1, lineHeight: 36},
+    h2: {fontFamily: 'Roboto-Bold', color: COLORS.black_2, fontSize: SIZES.h2, lineHeight: 30},
+    h3: {fontFamily: 'Roboto-Bold', color: COLORS.black_2, fontSize: SIZES.h3, lineHeight: 22},
+    h4: {fontFamily: 'Roboto-Bold', color: COLORS.black_2, fontSize: SIZES.h4, lineHeight: 22},
 
-    subtitle1: {fontFamily: 'Roboto-Medium', fontSize: SIZES.body1, lineHeight: 36},
-    subtitle2: {fontFamily: 'Roboto-Medium', fontSize: SIZES.body2, lineHeight: 30},
-    subtitle3: {fontFamily: 'Roboto-Medium', fontSize: SIZES.body3, lineHeight: 22},
-    subtitle4: {fontFamily: 'Roboto-Medium', fontSize: SIZES.body4, lineHeight: 22},
+    subtitle1: {fontFamily: 'Roboto-Medium', color: COLORS.black_2, fontSize: SIZES.body1, lineHeight: 36},
+    subtitle2: {fontFamily: 'Roboto-Medium', color: COLORS.black_2, fontSize: SIZES.body2, lineHeight: 30},
+    subtitle3: {fontFamily: 'Roboto-Medium', color: COLORS.black_2, fontSize: SIZES.body3, lineHeight: 22},
+    subtitle4: {fontFamily: 'Roboto-Medium', color: COLORS.black_2, fontSize: SIZES.body4, lineHeight: 22},
 
-    body1: {fontFamily: 'Roboto-Regular', fontSize: SIZES.body1, lineHeight: 36},
-    body2: {fontFamily: 'Roboto-Regular', fontSize: SIZES.body2, lineHeight: 30},
-    body3: {fontFamily: 'Roboto-Regular', fontSize: SIZES.body3, lineHeight: 22},
-    body4: {fontFamily: 'Roboto-Regular', fontSize: SIZES.body4, lineHeight: 22},
-};
+    body1: {fontFamily: 'Roboto-Regular', color: COLORS.black_2, fontSize: SIZES.body1, lineHeight: 36},
+    body2: {fontFamily: 'Roboto-Regular', color: COLORS.black_2, fontSize: SIZES.body2, lineHeight: 30},
+    body3: {fontFamily: 'Roboto-Regular', color: COLORS.black_2, fontSize: SIZES.body3, lineHeight: 22},
+    body4: {fontFamily: 'Roboto-Regular', color: COLORS.black_2, fontSize: SIZES.body4, lineHeight: 22},
+});
+
+export const STYLES = StyleSheet.create({
+    deepShadow: {
+        shadowColor: COLORS.dark_gray_2,
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: 6,
+
+        elevation: 12,
+    },
+    mediumShadow: {
+        shadowColor: COLORS.dark_gray_1,
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: 6,
+
+        elevation: 8,
+    },
+    shadow: {
+        shadowColor: COLORS.dark_gray_1,
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        shadowOpacity: 0.48,
+        shadowRadius: 6,
+
+        elevation: 5,
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    error: {
+        ...FONTS.body4,
+        color: COLORS.error_1,
+        fontSize: scaleSize(16),
+        marginTop: scaleSize(4),
+        marginLeft: scaleSize(8),
+    },
+});

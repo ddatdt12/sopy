@@ -1,30 +1,38 @@
 import {scaleSize} from '@core/utils';
-import {COLORS, FONTS, SIZES} from '@src/assets/const';
+import {COLORS, FONTS, SIZES, STYLES} from '@src/assets/const';
 import Box from '@src/components/Box';
-import Stack from '@src/components/Stack';
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import {VictoryContainer, VictoryLabel, VictoryPie} from 'victory-native';
-import data, {Feeling} from './components/data';
-import Marker from './components/Marker';
+import {VictoryPie} from 'victory-native';
+import DiaryCard from './components/DiaryCard';
+import MarkerList from './components/MarkerList';
 import TimeRangeDropdown from './components/TimeRangeDropdown';
+import {Diary, diaryList as listDiary, Feeling, feelingStatistics as data} from './data';
 type Props = {};
 
 const size = scaleSize(SIZES.WindowWidth) - 100;
 const DashboardEmotionScreen: React.FC<Props> = props => {
     const {t} = useTranslation();
     const [feelingStatistic, setFeelingStatistic] = useState<Feeling[]>([]);
-    const [selectedTimeRange, setSelectedTimeRange] = useState<string | null>(null);
+    // const [selectedTimeRange, setSelectedTimeRange] = useState<string | null>(null);
+    const [selectedFeel, setSelectedFeel] = useState<Feeling | null>(null);
+    const [diaryList, setDiaryList] = useState<Diary[]>([]);
 
     useEffect(() => {
         setFeelingStatistic(calculatePercent(data));
+        setDiaryList(listDiary);
     }, []);
+
+    useEffect(() => {
+        setSelectedFeel(prev => feelingStatistic.find(f => f.name === prev?.name) || null);
+    }, [feelingStatistic]);
 
     const calculatePercent = (statistics: Feeling[]): Feeling[] => {
         const total = statistics.reduce((a, b) => a + (b.value || 0), 0);
         return statistics.map(feel => {
-            return {...feel, y: feel.value !== 0 ? feel.value / total : 0};
+            const percentage = feel.value / total;
+            return {...feel, y: feel.value !== 0 ? percentage : 0, percentage: `${Math.round(percentage * 100)}%`};
         });
     };
     const handleChange = (value: string) => {
@@ -40,76 +48,104 @@ const DashboardEmotionScreen: React.FC<Props> = props => {
         <Box bgColor={COLORS.gray_1} safeArea={false} container>
             <ScrollView style={{paddingHorizontal: scaleSize(20)}}>
                 <TimeRangeDropdown onChanged={handleChange} />
-                <View
-                    style={{
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginVertical: scaleSize(20),
-                        backgroundColor: 'white',
-                        borderRadius: size / 2,
-                        width: size,
-                        height: size,
-                        alignSelf: 'center',
-                        position: 'relative',
-                    }}>
+                <View style={styles.bigCircle}>
                     <VictoryPie
                         cornerRadius={scaleSize(8)}
                         innerRadius={size / 4.5}
                         colorScale={feelingStatistic.map(feel => feel.color)}
-                        padAngle={scaleSize(2)}
+                        padAngle={({datum}) => (selectedFeel && datum.name === selectedFeel?.name ? 0 : scaleSize(2))}
                         data={feelingStatistic}
-                        labels={({datum}) => `${(datum.y * 100).toFixed(2)}%`}
-                        // radius={100}
+                        labels={({datum}) =>
+                            false && datum.y > 0.04 && selectedFeel && datum.name === selectedFeel?.name
+                                ? datum.percentage
+                                : null
+                        }
+                        radius={({datum}) =>
+                            selectedFeel && datum.name === selectedFeel.name ? size * 0.5 : size * 0.44
+                        }
                         width={size + scaleSize(60)}
                         height={size + scaleSize(60)}
-                        containerComponent={
-                            <VictoryContainer
-                                style={{
-                                    backgroundColor: 'transparent',
-                                    width: size + scaleSize(100),
-                                    height: size + scaleSize(100),
-                                }}
-                            />
-                        }
+                        // containerComponent={
+                        //     <VictoryContainer
+                        //         style={{
+                        //             backgroundColor: 'transparent',
+                        //             width: size + scaleSize(100),
+                        //             height: size + scaleSize(100),
+                        //         }}
+                        //     />
+                        // }
                         origin={{
                             x: size / 2 + scaleSize(30),
                             y: size / 2 + scaleSize(30),
                         }}
-                        // labelRadius={100}
+                        style={{
+                            labels: {
+                                fill: 'white',
+                                ...FONTS.h4,
+                            },
+                            parent: {
+                                border: '3px solid blue',
+                                backgroundColor: 'transparent',
+                                width: size + scaleSize(100),
+                                height: size + scaleSize(100),
+                            },
+                        }}
+                        labelRadius={size * 0.35}
                         labelPosition={'centroid'}
                         labelPlacement="perpendicular"
-                        labelComponent={<VictoryLabel verticalAnchor="middle" style={{zIndex: 1000, ...FONTS.h4}} />}
+                        // labelComponent={
+                        //     <VictoryLabel verticalAnchor="middle" style={{zIndex: 1000, ...FONTS.h4, color: 'white'}} />
+                        // }
+                        // dataComponent={<Slice />}
                         animate={{
-                            duration: 500,
                             easing: 'exp',
+                            // animationWhitelist: ['data'],
+                            onLoad: undefined,
+                            onEnter: undefined,
+                            onExit: {
+                                duration: 100,
+                                before: () => ({
+                                    _y: 0,
+                                    fill: 'orange',
+                                    label: 'BYE',
+                                }),
+                            },
                         }}
+                        events={[
+                            {
+                                target: 'data',
+                                eventHandlers: {
+                                    onPress: () => {
+                                        return [
+                                            {
+                                                target: 'labels',
+                                                mutation: mutationProps => {
+                                                    const feel = feelingStatistic[mutationProps.index];
+                                                    setSelectedFeel(prev => (prev?.name === feel.name ? null : feel));
+                                                },
+                                            },
+                                        ];
+                                    },
+                                },
+                            },
+                        ]}
                     />
-                    <Text style={styles.text}>Dashboard</Text>
+                    <View style={styles.centerCircle}>
+                        {!selectedFeel ? (
+                            <Text style={[styles.text]}>Dashboard</Text>
+                        ) : (
+                            <>
+                                <Text style={[styles.text, {color: selectedFeel?.color}]}>{selectedFeel?.name}</Text>
+                                <Text style={{...FONTS.h3}}>{selectedFeel?.percentage}</Text>
+                            </>
+                        )}
+                    </View>
                 </View>
-
-                <Stack direction="row" justifyContent="center" style={{marginTop: scaleSize(20)}}>
-                    <View style={styles.column}>
-                        <View
-                            style={{
-                                alignItems: 'flex-start',
-                            }}>
-                            {feelingStatistic.slice(0, 4).map(feel => (
-                                <Marker key={feel.name} text={t(feel.name)} color={feel.color} />
-                            ))}
-                        </View>
-                    </View>
-
-                    <View style={styles.column}>
-                        <View
-                            style={{
-                                alignItems: 'flex-start',
-                            }}>
-                            {feelingStatistic.slice(4, feelingStatistic.length).map(feel => (
-                                <Marker key={feel.name} text={t(feel.name)} color={feel.color} />
-                            ))}
-                        </View>
-                    </View>
-                </Stack>
+                {!selectedFeel && <MarkerList />}
+                {selectedFeel &&
+                    listDiary
+                        .filter(diary => diary.feel === selectedFeel.name)
+                        .map(diary => <DiaryCard key={diary.id} {...diary} />)}
             </ScrollView>
         </Box>
     );
@@ -118,10 +154,30 @@ const DashboardEmotionScreen: React.FC<Props> = props => {
 export default DashboardEmotionScreen;
 
 const styles = StyleSheet.create({
-    column: {flex: 1, alignItems: 'center', justifyContent: 'center'},
     text: {
-        ...FONTS.h2,
+        ...FONTS.h3,
         color: COLORS.black_1,
+    },
+    bigCircle: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: scaleSize(20),
+        backgroundColor: 'white',
+        borderRadius: size / 2,
+        width: size,
+        height: size,
+        alignSelf: 'center',
+        position: 'relative',
+        ...STYLES.shadow,
+    },
+    centerCircle: {
         position: 'absolute',
+        backgroundColor: '#F5F9FD',
+        height: size / 2.5,
+        width: size / 2.5,
+        borderRadius: size / 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        ...STYLES.deepShadow,
     },
 });

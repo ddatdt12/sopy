@@ -1,6 +1,8 @@
 import {scaleSize} from '@core/utils';
-import React from 'react';
-import {FlatList, ListRenderItem, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {FlatList, ListRenderItem, StyleSheet, View} from 'react-native';
+import DetailsModal from '../DetailsModal';
+import PostDetails from '../post_details';
 import EventCard from './components/EventCard';
 import Events from './events';
 import {Event} from './types';
@@ -8,16 +10,24 @@ import {Event} from './types';
 type Props = {};
 
 const EventScreen = (props: Props) => {
+    const [modalVisible, setModalVisible] = useState(false);
+
     const renderItem: ListRenderItem<Event> = ({item}) => {
-        return <EventCard event={item} />;
+        return <EventCard event={item} onPress={() => setModalVisible(true)} />;
     };
     return (
-        <FlatList
-            data={Events}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-            style={{marginTop: scaleSize(40)}}
-        />
+        <View>
+            <FlatList
+                data={Events}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+                style={{marginTop: scaleSize(40)}}
+                contentContainerStyle={{paddingBottom: scaleSize(76)}}
+            />
+            <DetailsModal isVisible={modalVisible} onClose={() => setModalVisible(false)}>
+                <PostDetails />
+            </DetailsModal>
+        </View>
     );
 };
 

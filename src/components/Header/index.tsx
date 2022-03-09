@@ -29,10 +29,11 @@ const Header: FC<NativeStackHeaderProps> = props => {
             <View style={styles.header}>
                 {navigation.canGoBack() && (
                     <View style={[styles.headerLeft]}>
-                        <Neumorph>
+                        <Neumorph circle>
                             <IconButton
                                 icon={<Ionicons name="chevron-back" size={scaleSize(20)} />}
                                 onPress={() => navigation.goBack()}
+                                activeOpacity={0.8}
                             />
                         </Neumorph>
                     </View>
