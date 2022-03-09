@@ -1,9 +1,8 @@
 import {scaleSize} from '@core/utils';
 import {COLORS, FONTS, SIZES} from '@src/assets/const';
-import Box from '@src/components/Box';
 import {IntroScreenProps} from '@src/navigation/AppStackParams';
 import React from 'react';
-import {Image, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {StatusBar, StyleSheet, View} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Contents from './components/Contents';
 import DoneButton from './components/DoneButton';
@@ -23,7 +22,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
                 data={Contents}
                 keyExtractor={keyExtractor}
                 renderItem={renderItemF}
-                renderDoneButton={() => <DoneButton onPress={() => navigation.navigate('RoleChoose')} />}
+                renderDoneButton={() => <DoneButton onPress={() => navigation.replace('RoleChoose')} />}
                 renderNextButton={() => <NextButton />}
                 renderPrevButton={() => <PrevButton />}
                 showPrevButton
