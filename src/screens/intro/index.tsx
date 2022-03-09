@@ -3,7 +3,7 @@ import {COLORS, FONTS, SIZES} from '@src/assets/const';
 import Box from '@src/components/Box';
 import {IntroScreenProps} from '@src/navigation/AppStackParams';
 import React from 'react';
-import {StatusBar, StyleSheet} from 'react-native';
+import {Image, StatusBar, StyleSheet, Text, View} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Contents from './components/Contents';
 import DoneButton from './components/DoneButton';
@@ -13,24 +13,23 @@ import PrevButton from './components/PrevButton';
 
 const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
     const keyExtractor = (item: any) => item.id;
-    const renderItem = ({item, index}: any) => {
+    const renderItemF = ({item, index}: any) => {
         return <Intro {...item} />;
     };
     return (
-        <Box container {...styles.container}>
+        <View style={{flex: 1}}>
             <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
             <AppIntroSlider
                 data={Contents}
                 keyExtractor={keyExtractor}
-                renderItem={renderItem}
-                renderDoneButton={() => <DoneButton onPress={() => navigation.replace('RoleChoose')} />}
+                renderItem={renderItemF}
+                renderDoneButton={() => <DoneButton onPress={() => navigation.navigate('RoleChoose')} />}
                 renderNextButton={() => <NextButton />}
                 renderPrevButton={() => <PrevButton />}
                 showPrevButton
-                // bottomButton
                 activeDotStyle={styles.activeDotStyle}
             />
-        </Box>
+        </View>
     );
 };
 
