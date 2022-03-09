@@ -34,7 +34,7 @@ const AppNavigator: React.FC = () => {
                 headerShadowVisible: false,
                 title: '',
             }}
-            initialRouteName={'RoleChoose'}>
+            initialRouteName={'Intro'}>
             {!auth.token ? (
                 <>
                     <AppStack.Screen name="Intro" component={IntroScreen} />

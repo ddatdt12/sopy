@@ -12,7 +12,7 @@ type DoneButtonProps = {
 };
 const DoneButton: React.FC<DoneButtonProps> = ({onPress}) => {
     return (
-        <Neumorph circle style={{bottom: scaleSize(4)}}>
+        <Neumorph circle style={{bottom: scaleSize(2), right: scaleSize(200)}}>
             <IconButton
                 onPress={onPress}
                 icon={<Ionicons name="checkmark" size={scaleSize(25)} />}
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     buttonWrapper: {
         justifyContent: 'center',
         alignItems: 'center',
-        // width: sca,
         height: 45,
         borderRadius: 50,
         backgroundColor: COLORS.white_3,
