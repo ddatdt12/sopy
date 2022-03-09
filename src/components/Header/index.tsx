@@ -76,9 +76,6 @@ const styles = StyleSheet.create({
     },
     headerRight: {
         position: 'absolute',
-        alignItems: 'center',
-        justifyContent: 'center',
         right: scaleSize(10),
-        backgroundColor: 'red',
     },
 });

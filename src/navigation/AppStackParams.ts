@@ -11,7 +11,10 @@ export type AppStackParamList = {
     RoleChoose: undefined;
     ExpertLogin: undefined;
     UserLogin: undefined;
-    ResetPassword: undefined;
+    //ResetPassword;
+    SendEmail: undefined;
+    VerificationCode: undefined;
+    NewPassword: undefined;
 
     //Expert
     Expert: NavigatorScreenParams<ExpertStackParamList>;
@@ -27,6 +30,11 @@ type RoleChooseScreenProps = NativeStackScreenProps<AppStackParamList, 'RoleChoo
 type ExpertProps = NativeStackScreenProps<AppStackParamList, 'Expert'>;
 type UserProps = NativeStackScreenProps<AppStackParamList, 'User'>;
 
+//Forgot password
+type SendEmailProps = NativeStackScreenProps<AppStackParamList, 'SendEmail'>;
+type VerificationCodeProps = NativeStackScreenProps<AppStackParamList, 'VerificationCode'>;
+type NewPasswordProps = NativeStackScreenProps<AppStackParamList, 'NewPassword'>;
+
 type ExpertNavigationProp = CompositeScreenProps<ExpertProps, NativeStackScreenProps<ExpertStackParamList>>;
 type UserNavigationProp = CompositeScreenProps<UserProps, NativeStackScreenProps<UserStackParamList>>;
 
@@ -36,4 +44,7 @@ export type {
     UserLoginScreenProps,
     RegisterScreenProps,
     RoleChooseScreenProps,
+    SendEmailProps,
+    VerificationCodeProps,
+    NewPasswordProps,
 };

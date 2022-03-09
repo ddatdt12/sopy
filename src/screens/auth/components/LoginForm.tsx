@@ -97,7 +97,7 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
             />
 
             {!!authError && <Text style={STYLES.error}>{authError}</Text>}
-            <Text style={styles.link} onPress={() => navigate('ResetPassword')}>
+            <Text style={styles.link} onPress={() => navigate('SendEmail')}>
                 {t('Forgot password?')}
             </Text>
             <View style={{alignItems: 'center', paddingTop: scaleSize(40)}}>

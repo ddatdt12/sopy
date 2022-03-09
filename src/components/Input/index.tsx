@@ -49,6 +49,7 @@ const Input: FC<InputProps> = props => {
                     autoComplete="off"
                     autoCorrect={false}
                     autoCapitalize={'none'}
+                    underlineColorAndroid={'transparent'}
                 />
             </View>
             {renderError()}

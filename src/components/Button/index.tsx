@@ -10,6 +10,7 @@ import {
     TextStyle,
     TouchableHighlight,
     TouchableHighlightProps,
+    TouchableOpacity,
     View,
     ViewStyle,
 } from 'react-native';
@@ -42,7 +43,6 @@ const Button: React.FC<IButtonProps> = props => {
     if (loading) {
         return (
             <View style={[styles.wrapper, styles.border, style]}>
-                {/* <Text style={[styles.text, styles.secondary, textStyle]}>{title}</Text> */}
                 <View
                     style={{
                         width: '100%',
@@ -70,13 +70,12 @@ const Button: React.FC<IButtonProps> = props => {
     }
 
     return (
-        <TouchableHighlight
+        <TouchableOpacity
             style={[styles.wrapper, STYLES.mediumShadow, bgColorStyle, style]}
             activeOpacity={0.8}
-            underlayColor={COLORS.light_blue_1}
             {...otherProps}>
             <Text style={[styles.text, styles[variant], textStyle]}>{title}</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
     );
 };
 

@@ -25,7 +25,7 @@ const RoleScreen: React.FC<RoleChooseScreenProps> = ({navigation}) => {
                     style={styles.touchableHighlight}
                     activeOpacity={0.6}
                     underlayColor="#B4D1FC"
-                    onPress={() => navigation.push('Intro')}>
+                    onPress={() => navigation.push('ExpertLogin')}>
                     <Card style={styles.roleCard}>
                         <Text style={styles.text}>An Expert</Text>
                     </Card>

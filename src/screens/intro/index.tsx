@@ -13,7 +13,7 @@ import PrevButton from './components/PrevButton';
 
 const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
     const keyExtractor = (item: any) => item.id;
-    const renderItemF = ({item}: any) => {
+    const renderItem = ({item, index}: any) => {
         console.log(item);
         return <Intro {...item} />;
     };
@@ -23,7 +23,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
             <AppIntroSlider
                 data={Contents}
                 keyExtractor={keyExtractor}
-                renderItem={renderItemF}
+                renderItem={renderItem}
                 renderDoneButton={() => <DoneButton onPress={() => navigation.navigate('RoleChoose')} />}
                 renderNextButton={() => <NextButton />}
                 renderPrevButton={() => <PrevButton />}

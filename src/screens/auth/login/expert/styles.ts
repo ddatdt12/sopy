@@ -5,7 +5,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
     contentWrapper: {
         flex: 1,
-        paddingHorizontal: scaleSize(36),
+        paddingHorizontal: scaleSize(30),
         marginTop: '35%',
     },
     textWrapper: {
