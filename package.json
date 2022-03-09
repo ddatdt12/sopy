@@ -29,6 +29,7 @@
         "react-hook-form": "^7.26.1",
         "react-i18next": "^11.15.4",
         "react-native": "0.66.4",
+        "react-native-app-intro-slider": "^4.0.4",
         "react-native-calendars": "^1.1278.0",
         "react-native-eject": "^0.1.2",
         "react-native-linear-gradient": "^2.5.6",

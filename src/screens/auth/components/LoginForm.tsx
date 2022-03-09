@@ -49,11 +49,7 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
         try {
             dispatch(authActions.loading());
             const user = await emailPasswordLogin({email, password});
-            console.log('firebase user:', user);
-            const actionResult = await dispatch(authActions.login(user));
-            const res = unwrapResult(actionResult);
-
-            console.log('Mic check: ', res);
+            await dispatch(authActions.login(user));
         } catch (error: any) {
             dispatch(authActions.stopLoading());
             if (error instanceof FirebaseError) {

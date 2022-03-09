@@ -6,6 +6,7 @@ import {UserStackParamList} from './user/type';
 
 export type AppStackParamList = {
     //Auth
+    Intro: undefined;
     Register: undefined;
     RoleChoose: undefined;
     ExpertLogin: undefined;
@@ -17,6 +18,7 @@ export type AppStackParamList = {
 };
 
 //Authentication
+type IntroScreenProps = NativeStackScreenProps<AppStackParamList, 'Intro'>;
 type ExpertLoginScreenProps = NativeStackScreenProps<AppStackParamList, 'ExpertLogin'>;
 type UserLoginScreenProps = NativeStackScreenProps<AppStackParamList, 'UserLogin'>;
 type RegisterScreenProps = NativeStackScreenProps<AppStackParamList, 'Register'>;
@@ -27,4 +29,10 @@ type UserProps = NativeStackScreenProps<AppStackParamList, 'User'>;
 type ExpertNavigationProp = CompositeScreenProps<ExpertProps, NativeStackScreenProps<ExpertStackParamList>>;
 type UserNavigationProp = CompositeScreenProps<UserProps, NativeStackScreenProps<UserStackParamList>>;
 
-export type {ExpertLoginScreenProps, UserLoginScreenProps, RegisterScreenProps, RoleChooseScreenProps};
+export type {
+    IntroScreenProps,
+    ExpertLoginScreenProps,
+    UserLoginScreenProps,
+    RegisterScreenProps,
+    RoleChooseScreenProps,
+};
