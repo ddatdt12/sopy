@@ -14,12 +14,13 @@ const Intro: React.FC<IIntroProps> = ({text, bgImage, image}) => {
             <Image
                 source={bgImage}
                 style={{
-                    // position: 'absolute',
+                    position: 'absolute',
                     // bottom: 0.48 * SIZES.WindowHeight,
-                    // left: 0,
-                    flex: 1,
+                    left: 0,
                     width: '100%',
+                    height: '100%',
                 }}
+                resizeMode="cover"
             />
             <Image
                 source={image}
