@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MentalHealth</string>
+    <string name="facebook_app_id">1121431335379953</string>
+    <string name="facebook_client_token">c7c84a717f65d53510bc762b75f2e121</string>
 </resources>

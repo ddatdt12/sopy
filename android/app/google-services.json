@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1029761536101",
+    "firebase_url": "https://mental-heath-gdsc-uit-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "mental-heath-gdsc-uit",
+    "storage_bucket": "mental-heath-gdsc-uit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029761536101:android:2a19dc4d95ea7e9888f68c",
+        "android_client_info": {
+          "package_name": "com.mentalhealthgdscuit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029761536101-9ud1vu9c6m6k2l7lofmd5nluaa155aq0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mentalhealthgdscuit",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1029761536101-5mn92qjl1n19i97k4o1ialphq1h64htv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMezLlj51ByNxh7xK_FNGeF0NA9EuJkBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029761536101-5mn92qjl1n19i97k4o1ialphq1h64htv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

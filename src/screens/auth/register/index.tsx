@@ -2,7 +2,9 @@ import {scaleSize} from '@core/utils';
 import {IMAGES} from '@src/assets';
 import {COLORS, FONTS} from '@src/assets/const';
 import {RegisterScreenProps} from '@src/navigation/AppStackParams';
-import {googleSignIn} from '@src/services/auth';
+import {facebookLogin, googleSignIn} from '@src/services/auth';
+import {useAppDispatch} from '@src/store';
+import {authActions} from '@src/store/authSlice';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Alert, ScrollView, StyleSheet, Text, View} from 'react-native';
@@ -12,7 +14,16 @@ import RegisterForm from '../components/RegisterForm';
 
 const RegisterScreen: React.FC<RegisterScreenProps> = ({navigation}) => {
     const {t} = useTranslation();
-    const handleFacebookLogin = () => {};
+    const dispatch = useAppDispatch();
+
+    const handleFacebookLogin = async () => {
+        try {
+            const user = await facebookLogin();
+            dispatch(authActions.login(user));
+        } catch (error) {
+            console.log(error);
+        }
+    };
     const handleGoogleLogin = async () => {
         const {user, error} = await googleSignIn();
         if (user) {

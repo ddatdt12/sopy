@@ -3,7 +3,7 @@ import {IMAGES} from '@src/assets';
 import {COLORS, FONTS} from '@src/assets/const';
 import Text from '@src/components/Text';
 import {UserLoginScreenProps} from '@src/navigation/AppStackParams';
-import {googleSignIn} from '@src/services/auth';
+import {facebookLogin, googleSignIn} from '@src/services/auth';
 import {useAppDispatch} from '@src/store';
 import {authActions} from '@src/store/authSlice';
 import React from 'react';
@@ -15,7 +15,14 @@ import LogoButton from '../../components/LogoButton';
 const UserLoginScreen: React.FC<UserLoginScreenProps> = ({navigation}) => {
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
-    const handleFacebookLogin = () => {
+
+    const handleFacebookLogin = async () => {
+        try {
+            const user = await facebookLogin();
+            dispatch(authActions.login(user));
+        } catch (error) {
+            console.log(error);
+        }
         // TODO: handle Facebook login
     };
     const handleGoogleLogin = async (event: GestureResponderEvent) => {

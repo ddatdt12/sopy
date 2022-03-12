@@ -1,9 +1,11 @@
 import {scaleSize} from '@core/utils';
 import {yupResolver} from '@hookform/resolvers/yup';
+import {COLORS} from '@src/assets/const';
 import Button from '@src/components/Button';
 import Input from '@src/components/Input';
-import {auth} from '@src/config/firebase';
-import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {emailPasswordRegister} from '@src/services/auth';
+import {useAppDispatch, useAppSelector} from '@src/store';
+import {authActions} from '@src/store/authSlice';
 import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
@@ -25,7 +27,8 @@ export type RegisterData = {
 
 const RegisterForm: React.FC = props => {
     const {t} = useTranslation();
-
+    const {loading} = useAppSelector(state => state.auth);
+    const dispatch = useAppDispatch();
     const {
         control,
         handleSubmit,
@@ -40,7 +43,7 @@ const RegisterForm: React.FC = props => {
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (data: RegisterData) => {
+    const onSubmit = async (data: RegisterData) => {
         if (data.confirmPassword !== data.password) {
             setError('confirmPassword', {
                 type: 'manual',
@@ -51,14 +54,19 @@ const RegisterForm: React.FC = props => {
 
         const {email, password} = data;
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(userCredential => {
-                const user = userCredential.user;
-                Alert.alert('Notice', 'Success: ' + user.email);
-            })
-            .catch(error => {
-                Alert.alert('Error', error);
-            });
+        dispatch(authActions.loading());
+        const {user, error} = await emailPasswordRegister({
+            email,
+            password,
+        });
+
+        if (!error) {
+            dispatch(authActions.login(user));
+        } else {
+            Alert.alert(error);
+        }
+        dispatch(authActions.stopLoading());
+        console.log({user, error});
     };
     return (
         <>
@@ -117,12 +125,7 @@ const RegisterForm: React.FC = props => {
             />
 
             <View style={styles.buttonWrapper}>
-                <Button
-                    title={t('Sign up')}
-                    variant="secondary"
-                    style={styles.button}
-                    onPress={handleSubmit(onSubmit)}
-                />
+                <Button title={t('Sign up')} loading={loading} style={styles.button} onPress={handleSubmit(onSubmit)} />
             </View>
         </>
     );
@@ -134,5 +137,6 @@ const styles = StyleSheet.create({
     buttonWrapper: {alignItems: 'center', paddingTop: scaleSize(48)},
     button: {
         width: scaleSize(200),
+        backgroundColor: COLORS.white_1,
     },
 });
