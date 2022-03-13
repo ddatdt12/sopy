@@ -13,6 +13,20 @@
     "Notice wrong password or email": "Email hoặc mật khẩu bạn đã nhập không chính xác. Vui lòng thử lại hoặc nhấn nút “Quên mật khẩu”",
     "Sign up": "Đăng ký",
     "Event": "Sự kiện",
-    "Post": "Bài viết"
+    "Post": "Bài viết",
+    "Edit Profile": "Chỉnh sửa thông tin",
+    "Done": "Xong",
+    "CHANGE AVATAR": "Đổi ảnh đại diện",
+    "Name": "Tên",
+    "About": "Giới thiệu",
+    "About me": "Thông tin cá nhân",
+    "Email": "Email",
+    "Activities": "Hoạt động",
+    "Emotion Diary": "Nhật ký cảm xúc",
+    "Interested Posts and Events": "Các bài viết và sự kiện yêu thích",
+    "Take Photo": "Chụp ảnh",
+    "Choose From Library": "Chọn ảnh từ thư viện",
+    "Cancel": "Hủy",
+    "Edit profile": "Chỉnh sửa thông tin"
   }
 }

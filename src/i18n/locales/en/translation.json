@@ -13,6 +13,16 @@
     "Notice wrong password or email": "Your email or password was incorrect. Please try again or tap “Forgot password” to reset it",
     "Sign up": "Sign up",
     "Event": "Event",
-    "Post": "Post"
+    "Post": "Post",
+    "Edit Profile": "Edit Profile",
+    "Done": "Done",
+    "CHANGE AVATAR": "CHANGE AVATAR",
+    "Name": "Name",
+    "About": "About",
+    "About me": "About me",
+    "Email": "Email",
+    "Activities": "Activities",
+    "Emotion Diary": "Emotion Diary",
+    "Interested Posts and Events": "Interested Posts and Events"
   }
 }

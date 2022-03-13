@@ -1,7 +1,7 @@
 // import {Shadow} from 'react-native-neomorph-shadows';
 // import Text from '../Text';
 import {scaleSize} from '@core/utils/DeviceUtils';
-import {COLORS, STYLES} from '@src/assets/const';
+import {COLORS, FONTS, STYLES} from '@src/assets/const';
 import React, {FC} from 'react';
 import {StyleProp, StyleSheet, Text, TextInput, TextInputProps, TextStyle, View, ViewStyle} from 'react-native';
 interface InputProps extends TextInputProps {
@@ -74,6 +74,9 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 1,
+        ...FONTS.body4,
+        color: '#193566',
+        fontSize: scaleSize(16),
     },
 
     icon: {

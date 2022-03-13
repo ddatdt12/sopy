@@ -11,6 +11,7 @@ const authApi = {
                         name: 'name',
                         email: 'email',
                         role: 'user',
+                        avatar: 'https://picsum.photos/200',
                     },
                 });
             }, 1000);

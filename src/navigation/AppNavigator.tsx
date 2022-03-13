@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Header from '@src/components/Header';
+import NavHeader from '@src/components/NavHeader';
 import ExpertLoginScreen from '@src/screens/auth/login/expert';
 import UserLoginScreen from '@src/screens/auth/login/user';
 import RegisterScreen from '@src/screens/auth/register';
@@ -29,26 +29,32 @@ const AppNavigator: React.FC = () => {
     return (
         <AppStack.Navigator
             screenOptions={{
-                headerShown: true,
-                headerTransparent: true,
-                headerShadowVisible: false,
-                title: '',
+                headerShown: false,
             }}
             initialRouteName={'Intro'}>
             {!auth.token ? (
                 <>
-                    <AppStack.Screen name="Intro" component={IntroScreen} />
-                    <AppStack.Screen name="RoleChoose" component={RoleScreen} />
-                    <AppStack.Screen name="ExpertLogin" component={ExpertLoginScreen} />
-                    <AppStack.Screen name="UserLogin" component={UserLoginScreen} />
-                    <AppStack.Screen name="Register" component={RegisterScreen} />
+                    <AppStack.Group
+                        screenOptions={{
+                            headerShown: true,
+                            headerShadowVisible: false,
+                            title: '',
+                            headerTransparent: true,
+                            // header: props => <NavHeader {...props} />,
+                        }}>
+                        <AppStack.Screen name="Intro" component={IntroScreen} />
+                        <AppStack.Screen name="RoleChoose" component={RoleScreen} />
+                        <AppStack.Screen name="ExpertLogin" component={ExpertLoginScreen} />
+                        <AppStack.Screen name="UserLogin" component={UserLoginScreen} />
+                        <AppStack.Screen name="Register" component={RegisterScreen} />
+                    </AppStack.Group>
 
                     <AppStack.Group
                         screenOptions={{
                             headerShown: true,
                             headerShadowVisible: false,
                             title: 'Reset password',
-                            header: props => <Header {...props} />,
+                            header: props => <NavHeader {...props} />,
                         }}>
                         <AppStack.Screen name="SendEmail" component={SendEmail} />
                         <AppStack.Screen name="VerificationCode" component={VerificationCode} />
@@ -58,16 +64,6 @@ const AppNavigator: React.FC = () => {
             ) : (
                 <>{renderRoot()}</>
             )}
-            {/* <AppStack.Group
-                screenOptions={{
-                    title: 'Emotion Diary',
-                    headerShadowVisible: false,
-                    headerShown: true,
-                    header: props => <Header {...props} />,
-                }}>
-                <AppStack.Screen name="EmotionDiary" component={EmotionDiaryScreen} />
-                <AppStack.Screen name="DashboardEmotionDiary" component={DashboardEmotionDiaryScreen} />
-            </AppStack.Group> */}
         </AppStack.Navigator>
     );
 };

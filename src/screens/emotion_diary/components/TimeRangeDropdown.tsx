@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 32,
         left: 0,
-        elevation: 10,
         zIndex: 1000,
         ...STYLES.shadow,
+        elevation: 12,
     },
 });

@@ -65,15 +65,6 @@ const DashboardEmotionScreen: React.FC<Props> = props => {
                         }
                         width={size + scaleSize(60)}
                         height={size + scaleSize(60)}
-                        // containerComponent={
-                        //     <VictoryContainer
-                        //         style={{
-                        //             backgroundColor: 'transparent',
-                        //             width: size + scaleSize(100),
-                        //             height: size + scaleSize(100),
-                        //         }}
-                        //     />
-                        // }
                         origin={{
                             x: size / 2 + scaleSize(30),
                             y: size / 2 + scaleSize(30),

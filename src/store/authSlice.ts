@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {authApi} from '@src/api';
-import {PURGE} from 'redux-persist';
 
 export type AuthState = Partial<{
     token: string;
@@ -11,7 +10,7 @@ export type AuthState = Partial<{
     error: string;
 }>;
 
-const login = createAsyncThunk('auth/login', async (data: any, {signal}) => {
+const login = createAsyncThunk('auth/login', async (data: any) => {
     const response = await authApi.login(data);
     return response;
 });

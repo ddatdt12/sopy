@@ -1,6 +1,4 @@
 import {scaleSize} from '@core/utils';
-import {NativeStackHeaderProps} from '@react-navigation/native-stack';
-import {HeaderButtonProps} from '@react-navigation/native-stack/lib/typescript/src/types';
 import {COLORS, FONTS} from '@src/assets/const';
 import React, {FC} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
@@ -9,40 +7,35 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import IconButton from '../IconButton';
 import Neumorph from '../Neumorph';
 
-const Header: FC<NativeStackHeaderProps> = props => {
+type Props = {
+    canGoBack?: boolean;
+    goBack?: () => void;
+    headerRight?: () => React.ReactNode;
+    headerLeft?: () => React.ReactNode;
+    title?: string;
+};
+const Header: FC<Props> = props => {
     const insets = useSafeAreaInsets();
-    const {
-        navigation,
-        options: {headerRight, headerTintColor, title},
-    } = props;
-    const headerRightProps: HeaderButtonProps = {
-        canGoBack: navigation.canGoBack(),
-        tintColor: headerTintColor,
-    };
-
+    const {canGoBack, goBack, headerLeft, headerRight, title} = props;
     return (
-        <View
-            style={{
-                paddingTop: insets.top,
-                backgroundColor: COLORS.gray_1,
-            }}>
-            <View style={styles.header}>
-                {navigation.canGoBack() && (
-                    <View style={[styles.headerLeft]}>
-                        <Neumorph circle>
-                            <IconButton
-                                icon={<Ionicons name="chevron-back" size={scaleSize(20)} />}
-                                onPress={() => navigation.goBack()}
-                                activeOpacity={0.8}
-                            />
-                        </Neumorph>
-                    </View>
-                )}
-                <View style={styles.titleWrapper}>
-                    <Text style={styles.title}>{title}</Text>
+        <View style={styles.header}>
+            {canGoBack ? (
+                <View style={[styles.headerLeft]}>
+                    <Neumorph circle>
+                        <IconButton
+                            icon={<Ionicons name="chevron-back" size={scaleSize(20)} />}
+                            onPress={() => goBack && goBack()}
+                            activeOpacity={0.8}
+                        />
+                    </Neumorph>
                 </View>
-                {headerRight && <View style={styles.headerRight}>{headerRight(headerRightProps)}</View>}
+            ) : (
+                headerLeft && <View style={[styles.headerLeft]}>{headerLeft()}</View>
+            )}
+            <View style={styles.titleWrapper}>
+                <Text style={styles.title}>{title}</Text>
             </View>
+            {headerRight && <View style={styles.headerRight}>{headerRight()}</View>}
         </View>
     );
 };
@@ -58,7 +51,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingHorizontal: scaleSize(20),
         paddingVertical: scaleSize(14),
-        // paddingVertical: scaleSize(18),
     },
     titleWrapper: {
         flex: 1,

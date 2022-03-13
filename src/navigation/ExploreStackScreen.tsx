@@ -1,6 +1,5 @@
 import {createNativeStackNavigator, NativeStackScreenProps} from '@react-navigation/native-stack';
 import ExploreScreen from '@src/screens/explore';
-import SearchScreen from '@src/screens/explore/search';
 import React from 'react';
 
 const ExploreStack = createNativeStackNavigator<ExploreStackParamList>();

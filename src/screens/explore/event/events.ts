@@ -7,6 +7,7 @@ const Events: Event[] = [
         description:
             'We’re used to hearing about how too much of the sun’s warm rays can be harmful to your skin. Some text are added',
         image: 'https://picsum.photos/200',
+        createdAt: new Date(),
     },
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abkzxcz',
@@ -14,6 +15,7 @@ const Events: Event[] = [
         description:
             'We’re used to hearing about how too much of the sun’s warm rays can be harmful to your skin. Some text are added',
         image: 'https://picsum.photos/200',
+        createdAt: new Date(),
     },
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb2156',
@@ -21,6 +23,7 @@ const Events: Event[] = [
         description:
             'We’re used to hearing about how too much of the sun’s warm rays can be harmful to your skin. Some text are added',
         image: 'https://picsum.photos/200',
+        createdAt: new Date(),
     },
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb356',
@@ -28,6 +31,7 @@ const Events: Event[] = [
         description:
             'We’re used to hearing about how too much of the sun’s warm rays can be harmful to your skin. Some text are added',
         image: 'https://picsum.photos/200',
+        createdAt: new Date(),
     },
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb123',
@@ -35,6 +39,7 @@ const Events: Event[] = [
         description:
             'We’re used to hearing about how too much of the sun’s warm rays can be harmful to your skin. Some text are added',
         image: 'https://picsum.photos/200',
+        createdAt: new Date(),
     },
 ];
 
