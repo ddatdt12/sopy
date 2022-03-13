@@ -17,19 +17,19 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({navigation}) => {
     const dispatch = useAppDispatch();
 
     const handleFacebookLogin = async () => {
-        try {
-            const user = await facebookLogin();
-            dispatch(authActions.login(user));
-        } catch (error) {
-            console.log(error);
+        const {user, error} = await facebookLogin();
+        if (user) {
+            await dispatch(authActions.login(user));
+        } else if (error) {
+            Alert.alert('error', error);
         }
     };
     const handleGoogleLogin = async () => {
         const {user, error} = await googleSignIn();
         if (user) {
-            Alert.alert('Notice', 'Success: ' + user.email);
-        } else {
-            Alert.alert('Error', error ?? 'Something went wrong!');
+            await dispatch(authActions.login(user));
+        } else if (error) {
+            Alert.alert('Error', error);
         }
     };
     return (

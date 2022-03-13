@@ -8,7 +8,7 @@ import {useAppDispatch} from '@src/store';
 import {authActions} from '@src/store/authSlice';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {Alert, GestureResponderEvent, ScrollView, StyleSheet, View} from 'react-native';
+import {Alert, ScrollView, StyleSheet, View} from 'react-native';
 import ImageBackground from '../../components/ImageBackground';
 import LoginForm from '../../components/LoginForm';
 import LogoButton from '../../components/LogoButton';
@@ -17,22 +17,20 @@ const UserLoginScreen: React.FC<UserLoginScreenProps> = ({navigation}) => {
     const dispatch = useAppDispatch();
 
     const handleFacebookLogin = async () => {
-        try {
-            const user = await facebookLogin();
-            dispatch(authActions.login(user));
-        } catch (error) {
-            console.log(error);
+        const {user, error} = await facebookLogin();
+        if (user) {
+            await dispatch(authActions.login(user));
+        } else if (error) {
+            Alert.alert('Error', error);
         }
-        // TODO: handle Facebook login
     };
-    const handleGoogleLogin = async (event: GestureResponderEvent) => {
+    const handleGoogleLogin = async () => {
         //Just work only Android
         const {user, error} = await googleSignIn();
         if (user) {
             await dispatch(authActions.login(user));
-            Alert.alert('Notice', 'Success: ' + user.email);
-        } else {
-            Alert.alert('Error', error ?? 'Something went wrong!');
+        } else if (error) {
+            Alert.alert('Error', error);
         }
     };
     return (
