@@ -1,9 +1,11 @@
 import React, {FC} from 'react';
-import {View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import {IBoxProps} from './types';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {COLORS} from '@src/assets/const';
+import SplashScreen from '@src/screens/splash';
 const Box: FC<IBoxProps> = props => {
-    const {children, container, bgColor, sx, safeArea = false, ...other} = props;
+    const {children, container, bgColor, sx, loading, safeArea = false, ...other} = props;
     const containerStyle = [
         {
             backgroundColor: bgColor,
@@ -14,6 +16,9 @@ const Box: FC<IBoxProps> = props => {
         {...other},
         sx,
     ];
+    if (loading) {
+        return <SplashScreen />;
+    }
     if (safeArea) {
         return <SafeAreaView style={containerStyle}>{children}</SafeAreaView>;
     }

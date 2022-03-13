@@ -6,7 +6,7 @@ import ChatScreen from '@src/screens/chat';
 import ExploreScreen from '@src/screens/explore';
 import ExpertHomeScreen from '@src/screens/home/expert';
 //Profile
-import ExpertProfileScreen from '@src/screens/profile/Expert/index';
+import ExpertProfileScreen from '@src/screens/profile/expert/index';
 import React from 'react';
 import {View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';

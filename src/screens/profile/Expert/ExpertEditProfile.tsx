@@ -3,27 +3,36 @@ import {COLORS, FONTS, STYLES} from '@src/assets/const';
 import {Box, Header} from '@src/components';
 import Button from '@src/components/Button';
 import Input from '@src/components/Input';
+import Neumorph from '@src/components/Neumorph';
 import {EditProfileScreenProps} from '@src/navigation/expert/type';
 import {firebaseLogout} from '@src/services/auth';
-import {useAppDispatch, useAppSelector} from '@src/store';
+import {uploadImage} from '@src/services/firebaseStorage';
+import {useAppDispatch} from '@src/store';
 import {authActions} from '@src/store/authSlice';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import EditProfile from '../components/EditProfile';
 
 const ExpertEditProfileScreen: React.FC<EditProfileScreenProps> = ({navigation}) => {
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
-    const [profile, setProfile] = useState({name: '', avatar: 'https://picsum.photos/id/237/200/300', about: ''});
+    const [profile, setProfile] = useState({
+        name: 'Đạt ĐT',
+        avatar: 'https://picsum.photos/id/237/200/300',
+        about: 'Mic check 1234',
+        uri: 'https://picsum.photos/200',
+    });
+    const [isImageChange, setIsImageChange] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [isDirty, setIsDirty] = useState(false);
 
     function alertLogout() {
         Alert.alert('Notice', 'Are you sure want to log out', [
             {
                 text: 'OK',
-                onPress: () => async () => {
+                onPress: async () => {
+                    console.log('check');
                     await firebaseLogout();
                     dispatch(authActions.logout());
                 },
@@ -31,13 +40,34 @@ const ExpertEditProfileScreen: React.FC<EditProfileScreenProps> = ({navigation})
             {text: 'Cancel', onPress: () => console.log('Cancel Pressed')},
         ]);
     }
-
+    console.log(profile);
     const onChangeData = (name: string, value: any) => {
+        if (name === 'uri' && value) {
+            setIsImageChange(true);
+        }
         setProfile(prev => ({...prev, [name]: value}));
         setIsDirty(true);
     };
+    const handleSubmit = async () => {
+        setLoading(true);
+        console.log(profile);
+        if (isImageChange && profile.uri) {
+            const {url, error} = await uploadImage(profile.uri);
+
+            if (!error && url) {
+                setProfile(prev => ({...prev, avatar: url}));
+
+                setIsImageChange(false);
+                setIsDirty(false);
+                Alert.alert('', 'Update profile successfully');
+            } else {
+                Alert.alert('Error', error);
+            }
+        }
+        setLoading(false);
+    };
     return (
-        <Box container safeArea bgColor={COLORS.gray_1}>
+        <Box container safeArea bgColor={COLORS.gray_1} loading={loading}>
             <Header
                 title="Edit Profile"
                 canGoBack={navigation.canGoBack()}
@@ -45,10 +75,8 @@ const ExpertEditProfileScreen: React.FC<EditProfileScreenProps> = ({navigation})
                 headerRight={() => (
                     <Button
                         title="Done"
-                        onPress={() => {
-                            console.log(profile);
-                        }}
-                        disabled={!isDirty || !(profile?.avatar || profile?.name)}
+                        onPress={handleSubmit}
+                        disabled={!isDirty || !(profile?.uri || profile?.name)}
                         variant="secondary"
                         style={{paddingHorizontal: scaleSize(12)}}
                     />
@@ -58,14 +86,21 @@ const ExpertEditProfileScreen: React.FC<EditProfileScreenProps> = ({navigation})
                 style={{
                     paddingHorizontal: scaleSize(10),
                 }}>
-                <EditProfile name="Tan Mot Cu" image="" onChangeData={onChangeData} />
+                <EditProfile name={profile.name} image={profile.uri} onChangeData={onChangeData} />
                 <View style={styles.textInputContainer}>
                     <Text style={styles.aboutLabel}>About</Text>
-                    <Input onChangeText={text => onChangeData('about', text)} />
+                    <Input defaultValue={profile.about} onChangeText={text => onChangeData('about', text)} />
                 </View>
-                <TouchableOpacity style={styles.logoutButton} onPress={alertLogout}>
-                    <Text style={styles.logoutText}>Log Out</Text>
-                </TouchableOpacity>
+                <View style={styles.buttonWrapper}>
+                    <Neumorph borderRadius={scaleSize(60)}>
+                        <Button
+                            title="Log out"
+                            style={{paddingHorizontal: scaleSize(40)}}
+                            textStyle={{color: COLORS.black_1}}
+                            onPress={() => alertLogout()}
+                        />
+                    </Neumorph>
+                </View>
             </View>
         </Box>
     );
@@ -101,9 +136,9 @@ const styles = StyleSheet.create({
 
         ...STYLES.deepShadow,
     },
-    logoutText: {
-        ...FONTS.h2,
-        fontSize: scaleSize(20),
-        color: '#193566',
+    buttonWrapper: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: scaleSize(30),
     },
 });

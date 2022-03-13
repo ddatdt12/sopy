@@ -1,26 +1,11 @@
-import {scaleSize} from '../../../../core/utils';
-import {COLORS, FONTS, STYLES} from '../../../assets/const';
-import {IMAGES} from '../../../assets';
-import React, {useEffect, useState} from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useTranslation} from 'react-i18next';
-import {CameraOptions, launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {
-    TouchableOpacity,
-    View,
-    Image,
-    StyleSheet,
-    Text,
-    TextInput,
-    Alert,
-    Modal,
-    Pressable,
-    PermissionsAndroid,
-} from 'react-native';
-import BottomModal from './BottomModal';
 import Input from '@src/components/Input';
-import {ProfileData} from '../types';
-import {useNavigation} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {Alert, Image, PermissionsAndroid, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {CameraOptions, launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {scaleSize} from '../../../../core/utils';
+import {FONTS, STYLES} from '../../../assets/const';
+import BottomModal from './BottomModal';
 
 type EditProfileProps = {
     name: string;
@@ -29,11 +14,11 @@ type EditProfileProps = {
 };
 
 const EditProfile = (props: EditProfileProps) => {
-    const {name: defaultName, image, onChangeData} = props;
+    const {name, image, onChangeData} = props;
     const {t} = useTranslation();
-    const [profileImage, setProfileImage] = useState<string | undefined>('https://picsum.photos/200');
+    // const [profileImage, setProfileImage] = useState<string | undefined>(image);
+    // const [name, setName] = useState(defaultName);
     const [changeAvatarModalVisible, setChangeAvatarModalVisible] = useState(false);
-    const [name, setName] = useState(defaultName);
     const openCamera = async () => {
         const option: CameraOptions = {
             mediaType: 'photo',
@@ -47,9 +32,7 @@ const EditProfile = (props: EditProfileProps) => {
                 console.log(res.errorMessage);
             } else {
                 const data = res && res.assets && res.assets[0];
-                setProfileImage(data?.uri);
-                console.log(data);
-                onChangeData('avatar', data?.uri);
+                onChangeData('uri', data?.uri);
                 setChangeAvatarModalVisible(false);
             }
         });
@@ -68,8 +51,6 @@ const EditProfile = (props: EditProfileProps) => {
                 console.log(res.errorMessage);
             } else {
                 const data = res && res.assets && res.assets[0];
-                setProfileImage(data?.uri);
-                console.log(data);
                 setChangeAvatarModalVisible(false);
                 onChangeData('avatar', data?.uri);
             }
@@ -104,7 +85,7 @@ const EditProfile = (props: EditProfileProps) => {
         <View>
             <View style={{marginTop: scaleSize(28), alignItems: 'center'}}>
                 <View style={styles.avatarShadow}>
-                    {!!profileImage && <Image source={{uri: profileImage}} style={styles.profileImage} />}
+                    {!!image && <Image source={{uri: image}} style={styles.profileImage} />}
                 </View>
 
                 <TouchableOpacity style={styles.changeAvatarButton} onPress={() => setChangeAvatarModalVisible(true)}>
