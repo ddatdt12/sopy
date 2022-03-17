@@ -3,13 +3,15 @@ import {COLORS} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
 import Input from '@src/components/Input';
-import {SendEmailProps} from '@src/navigation/AppStackParams';
+import {AppStackProps} from '@src/navigation/AppStackParams';
 import React from 'react';
 import {Text, View} from 'react-native';
 import styles from './styles';
 
-const SendEmail: React.FC<SendEmailProps> = ({navigation}) => {
+const SendResetPassEmail: React.FC<AppStackProps<'SendResetPassEmail'>> = ({navigation}) => {
     const [email, setEmail] = React.useState('');
+
+    const sendEmail = () => {};
 
     return (
         <Box container bgColor={COLORS.gray_1} paddingHorizontal={scaleSize(10)}>
@@ -30,13 +32,9 @@ const SendEmail: React.FC<SendEmailProps> = ({navigation}) => {
             </View>
 
             <View style={{alignItems: 'flex-end', marginRight: scaleSize(10)}}>
-                <Button
-                    title="Send"
-                    textStyle={{color: COLORS.black_1}}
-                    onPress={() => navigation.navigate('VerificationCode')}
-                />
+                <Button title="Send" textStyle={{color: COLORS.black_1}} onPress={sendEmail} />
             </View>
         </Box>
     );
 };
-export default SendEmail;
+export default SendResetPassEmail;

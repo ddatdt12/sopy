@@ -3,22 +3,20 @@ import {useNavigation} from '@react-navigation/native';
 import {COLORS, SIZES, STYLES} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
-import IconButton from '@src/components/IconButton';
-import {EmotionDiaryScreenProps} from '@src/navigation/user/type';
+import {UserProfileStackProps} from '@src/navigation/user/type';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {Calendar, DateData} from 'react-native-calendars';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import Arrow from './components/Arrow';
 import DiaryCard from './components/DiaryCard';
 import {diaryList} from './data';
 
 type Props = {};
 
-const EmotionDiaryScreen: React.FC<EmotionDiaryScreenProps> = ({navigation}) => {
+const EmotionDiaryScreen: React.FC = () => {
     const {t} = useTranslation();
-
+    const navigation = useNavigation<UserProfileStackProps<'EmotionDiary'>['navigation']>();
     const [selectedDate, setSelectedDate] = useState<DateData | null>(null);
 
     const renderArrow = (direction: 'left' | 'right') => <Arrow variant={direction} />;
@@ -29,7 +27,7 @@ const EmotionDiaryScreen: React.FC<EmotionDiaryScreenProps> = ({navigation}) => 
                 <View style={{flexDirection: 'row-reverse', marginTop: scaleSize(12)}}>
                     <Button
                         title={t('Dashboard')}
-                        onPress={() => navigation.push('DashboardEmotionDiary')}
+                        onPress={() => navigation.navigate('DashboardEmotionDiary')}
                         textStyle={{color: COLORS.black_1}}
                     />
                 </View>

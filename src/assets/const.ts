@@ -1,4 +1,4 @@
-import {scaleSize} from '@core/utils';
+import {isIOS, scaleSize} from '@core/utils';
 import {Dimensions, StyleSheet} from 'react-native';
 const {width: WindowWidth, height: WindowHeight} = Dimensions.get('window');
 
@@ -8,6 +8,7 @@ export const STORE_KEY = {
     REFRESH_TOKEN: 'refreshToken',
     USER_ID: 'userId',
 };
+export const RANDOM_IMAGE = 'https://picsum.photos/200/300';
 
 export const COLORS = {
     white_1: '#F5F9FD',
@@ -33,7 +34,8 @@ export const COLORS = {
     dark_blue_2: '#334C78',
     error_1: '#FF4906',
 };
-
+const bottomBarHeight = scaleSize(64);
+const tabBarBottom = isIOS ? scaleSize(22) : scaleSize(14);
 export const SIZES = {
     // global sizes
     base: 8,
@@ -53,7 +55,10 @@ export const SIZES = {
     body3: scaleSize(18),
     body4: scaleSize(14),
 
-    circleButton: scaleSize(36),
+    circleButton: scaleSize(42),
+    bottomBarHeight,
+    tabBarBottom,
+    bottomPadding: bottomBarHeight + tabBarBottom,
     // app dimensions
     WindowWidth,
     WindowHeight,

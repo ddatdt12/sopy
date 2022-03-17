@@ -3,7 +3,7 @@ import {COLORS} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Input from '@src/components/Input';
 import Stack from '@src/components/Stack';
-import {SearchScreenProps} from '@src/navigation/ExploreStackScreen';
+import {CommonStackProps} from '@src/navigation/AppStackParams';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, ListRenderItem, StyleSheet, Text} from 'react-native';
@@ -33,19 +33,18 @@ const DATA: SearchKeyword[] = [
     },
 ];
 
-const SearchScreen: React.FC<SearchScreenProps> = ({navigation}) => {
+const SearchScreen: React.FC<CommonStackProps<'ExploreSearch'>> = ({navigation}) => {
     const {t} = useTranslation();
 
     const renderItem: ListRenderItem<SearchKeyword> = ({item}) => {
         return <Text style={styles.item}>{item.text}</Text>;
     };
     return (
-        <Box container bgColor={COLORS.gray_1} padding={scaleSize(20)}>
+        <Box container bgColor={COLORS.gray_1} padding={scaleSize(20)} safeArea>
             <Stack direction="row" space={scaleSize(10)}>
                 {/* FIXME: Change to search icon  */}
                 <Input
                     style={{flex: 1}}
-                    inputStyle={{paddingVertical: scaleSize(10)}}
                     icon={<Ionicons name="search" size={scaleSize(20)} color={COLORS.dark_gray_2} />}
                     iconPosition="start"
                 />

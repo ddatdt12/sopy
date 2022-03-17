@@ -4,10 +4,9 @@ import ExpertLoginScreen from '@src/screens/auth/login/expert';
 import UserLoginScreen from '@src/screens/auth/login/user';
 import RegisterScreen from '@src/screens/auth/register';
 import RoleScreen from '@src/screens/auth/role';
+import {SearchScreen} from '@src/screens/explore';
 import IntroScreen from '@src/screens/intro';
-import NewPassword from '@src/screens/reset_password/NewPassword';
-import SendEmail from '@src/screens/reset_password/SendEmail';
-import VerificationCode from '@src/screens/reset_password/VerificationCode';
+import SendEmail from '@src/screens/reset_password';
 import {useAppSelector} from '@src/store';
 import React from 'react';
 import {AppStackParamList} from './AppStackParams';
@@ -49,20 +48,23 @@ const AppNavigator: React.FC = () => {
                         <AppStack.Screen name="Register" component={RegisterScreen} />
                     </AppStack.Group>
 
-                    <AppStack.Group
-                        screenOptions={{
+                    <AppStack.Screen
+                        name="SendResetPassEmail"
+                        options={{
                             headerShown: true,
                             headerShadowVisible: false,
                             title: 'Reset password',
                             header: props => <NavHeader {...props} />,
-                        }}>
-                        <AppStack.Screen name="SendEmail" component={SendEmail} />
-                        <AppStack.Screen name="VerificationCode" component={VerificationCode} />
-                        <AppStack.Screen name="NewPassword" component={NewPassword} />
-                    </AppStack.Group>
+                        }}
+                        component={SendEmail}
+                    />
                 </>
             ) : (
-                <>{renderRoot()}</>
+                <AppStack.Group screenOptions={{headerShown: false}}>
+                    {renderRoot()}
+
+                    <AppStack.Screen name="ExploreSearch" component={SearchScreen} />
+                </AppStack.Group>
             )}
         </AppStack.Navigator>
     );

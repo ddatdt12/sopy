@@ -1,4 +1,4 @@
-import {scaleSize} from '@core/utils';
+import {isIOS, scaleSize} from '@core/utils';
 import {COLORS} from '@src/assets/const';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -37,6 +37,7 @@ const DetailsModal: React.FC<Props> = props => {
                         height: '100%',
                         borderTopEndRadius: 0,
                         borderTopStartRadius: 0,
+                        paddingTop: isIOS ? scaleSize(30) : 0,
                     },
                 ]}
                 onTouchStart={e => setTouchY(e.nativeEvent.pageY)}

@@ -10,6 +10,19 @@ export default {
     bg_login_1: require('./bg_login_1.png'),
     facebook_logo: require('./facebook_logo.png'),
     google_logo: require('./google_logo.png'),
+    back: require('./back.png'),
+    heart: require('./heart.png'),
+    options: require('./options.png'),
+    picture: require('./picture.png'),
+    profile: require('./profile.png'),
+    send: require('./send.png'),
+    user_chat: require('./user_chat.png'),
+    search: require('./search.png'),
+    line: require('./line.png'),
+    plus: require('./plus.png'),
+    expert_img: require('./expert_img.png'),
+    edit: require('./edit.png'),
+
     modalLine: require('./modalLine.png'),
     optionsLine: require('./optionsLine.png'),
     feelings: {
@@ -21,4 +34,6 @@ export default {
         worry: require('./feelings/worry.png'),
         angry: require('./feelings/angry.png'),
     },
+    line: require('./line.png'),
+    user_avatar: require('./user_avatar.png'),
 };

@@ -1,4 +1,4 @@
-import {scaleSize} from '@core/utils';
+import {isIOS, scaleSize} from '@core/utils';
 import {BottomTabBarButtonProps} from '@react-navigation/bottom-tabs';
 import {COLORS, STYLES} from '@src/assets/const';
 import LinearGradient from 'react-native-linear-gradient';
@@ -9,8 +9,8 @@ const TabBarButton: React.FC<BottomTabBarButtonProps> = props => {
     const {style, children, ...otherProps} = props;
     const selected = props.accessibilityState?.selected;
     return (
-        <View style={[style, {justifyContent: 'center'}]}>
-            <TouchableOpacity {...otherProps} activeOpacity={0.9}>
+        <View style={[style, {justifyContent: 'center', bottom: isIOS ? scaleSize(-13) : 0, height: '100%'}]}>
+            <TouchableOpacity {...otherProps} style={STYLES.deepShadow} activeOpacity={0.9}>
                 {selected ? (
                     <View
                         style={[
@@ -53,8 +53,9 @@ const styles = StyleSheet.create({
         width: scaleSize(42),
         height: scaleSize(42),
         borderRadius: scaleSize(40) / 2,
-        // bottom: scaleSize(11),
+        // bottom: scaleSize(-15),
         ...STYLES.deepShadow,
+        zIndex: 1000,
     },
 });
 export default TabBarButton;

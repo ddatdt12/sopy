@@ -22,7 +22,7 @@ const PostCard: React.FC<IPostCard> = props => {
     const {title, author, image, onPress, style} = props;
 
     return (
-        <View>
+        <View style={STYLES.shadow}>
             <TouchableOpacity onPress={onPress}>
                 <Card style={[styles.card, {width: style?.width, margin: style?.margin}]}>
                     <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
         maxWidth: width - scaleSize(24),
         marginBottom: scaleSize(20),
         marginHorizontal: scaleSize(6),
-        ...STYLES.shadow,
     },
 
     image: {

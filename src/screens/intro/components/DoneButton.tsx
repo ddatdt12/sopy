@@ -12,7 +12,7 @@ type DoneButtonProps = {
 };
 const DoneButton: React.FC<DoneButtonProps> = ({onPress}) => {
     return (
-        <Neumorph circle style={{bottom: scaleSize(2), right: scaleSize(200)}}>
+        <Neumorph circle>
             <IconButton
                 onPress={onPress}
                 icon={<Ionicons name="checkmark" size={scaleSize(25)} />}

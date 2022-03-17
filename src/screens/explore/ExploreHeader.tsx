@@ -5,7 +5,7 @@ import Button from '@src/components/Button';
 import IconButton from '@src/components/IconButton';
 import Neumorph from '@src/components/Neumorph';
 import Stack from '@src/components/Stack';
-import {ExploreScreenNavigationProps} from '@src/navigation/expert/type';
+import {MainTabCompositeProps} from '@src/navigation/AppStackParams';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -16,11 +16,10 @@ interface IProps {
 }
 const ExploreHeader: React.FC<IProps> = props => {
     const {route, navigate: redirect} = props;
-    const {navigate} = useNavigation<ExploreScreenNavigationProps['navigation']>();
+    const {navigate} = useNavigation<MainTabCompositeProps<'Explore'>['navigation']>();
     return (
         <View style={styles.header}>
             <Stack direction="row" space={scaleSize(10)} style={{marginTop: scaleSize(20)}}>
-                {/* FIXME: Change to Button component */}
                 <Button
                     title={'Post'}
                     selected={route === 'Post'}
@@ -40,7 +39,7 @@ const ExploreHeader: React.FC<IProps> = props => {
                 <Neumorph circle>
                     <IconButton
                         icon={<Ionicons name="search" size={24} color={COLORS.dark_gray_2} />}
-                        onPress={() => navigate('Search')}
+                        onPress={() => navigate('ExploreSearch')}
                     />
                 </Neumorph>
             </View>

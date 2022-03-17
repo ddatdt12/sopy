@@ -3,8 +3,8 @@ import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Alert, Image, PermissionsAndroid, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {CameraOptions, launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {scaleSize} from '../../../../core/utils';
-import {FONTS, STYLES} from '../../../assets/const';
+import {scaleSize, IsAndroid} from '@core/utils';
+import {FONTS, STYLES} from '@src/assets/const';
 import BottomModal from './BottomModal';
 
 type EditProfileProps = {
@@ -16,16 +16,17 @@ type EditProfileProps = {
 const EditProfile = (props: EditProfileProps) => {
     const {name, image, onChangeData} = props;
     const {t} = useTranslation();
-    // const [profileImage, setProfileImage] = useState<string | undefined>(image);
-    // const [name, setName] = useState(defaultName);
     const [changeAvatarModalVisible, setChangeAvatarModalVisible] = useState(false);
     const openCamera = async () => {
         const option: CameraOptions = {
             mediaType: 'photo',
             quality: 1,
         };
-        await requestCameraPermission();
+        if (IsAndroid) {
+            await requestCameraPermission();
+        }
         launchCamera(option, res => {
+            console.log(res);
             if (res.didCancel) {
                 console.log('User Cancelled image picker');
             } else if (res.errorCode) {

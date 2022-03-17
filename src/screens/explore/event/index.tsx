@@ -1,4 +1,5 @@
 import {scaleSize} from '@core/utils';
+import {SIZES} from '@src/assets/const';
 import React, {useState} from 'react';
 import {FlatList, ListRenderItem, StyleSheet, View} from 'react-native';
 import DetailsModal from '../DetailsModal';
@@ -22,7 +23,7 @@ const EventScreen = (props: Props) => {
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 style={{marginTop: scaleSize(40)}}
-                contentContainerStyle={{paddingBottom: scaleSize(76)}}
+                contentContainerStyle={{paddingBottom: SIZES.bottomBarHeight + scaleSize(50)}}
             />
             <DetailsModal isVisible={modalVisible} onClose={() => setModalVisible(false)}>
                 <PostDetails />

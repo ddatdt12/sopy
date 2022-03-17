@@ -1,7 +1,7 @@
 import {scaleSize} from '@core/utils';
 import {COLORS, FONTS} from '@src/assets/const';
 import Button from '@src/components/Button';
-import {UserHomeScreenProps} from '@src/navigation/user/type';
+import {UserMainTabProps} from '@src/navigation/user/type';
 import {useAppDispatch} from '@src/store';
 import {authActions} from '@src/store/authSlice';
 import React, {useState} from 'react';
@@ -10,7 +10,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import BackgroundImage from './components/BackgroundImage';
 import FeelingModal from './components/FeelingModal';
 
-const HomeScreen: React.FC<UserHomeScreenProps> = ({navigation}) => {
+const HomeScreen: React.FC<UserMainTabProps<'Home'>> = ({navigation}) => {
     const {t} = useTranslation();
     const [modalVisible, setModalVisible] = useState(false);
     const dispatch = useAppDispatch();

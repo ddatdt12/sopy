@@ -1,5 +1,5 @@
 import {scaleSize} from '@core/utils';
-import {COLORS} from '@src/assets/const';
+import {COLORS, STYLES} from '@src/assets/const';
 import React from 'react';
 import {
     ActivityIndicator,
@@ -14,8 +14,6 @@ import {
     View,
     ViewStyle,
 } from 'react-native';
-import {STYLES} from '@src/assets/const';
-import LinearStroke from '../LinearStroke';
 interface IButtonProps extends TouchableHighlightProps {
     title: string;
     style?: StyleProp<ViewStyle>;

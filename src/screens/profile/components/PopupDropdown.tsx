@@ -2,7 +2,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {scaleSize} from '@core/utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {STYLES} from '@src/assets/const';
+import {STYLES, COLORS} from '@src/assets/const';
 import IconButton from '@src/components/IconButton';
 import Neumorph from '@src/components/Neumorph';
 
@@ -30,7 +30,7 @@ const PopupDropdown: React.FC<Props> = props => {
                 <IconButton
                     onPress={visibleToggle}
                     style={[STYLES.deepShadow]}
-                    icon={<Ionicons name="ellipsis-horizontal" size={30} />}
+                    icon={<Ionicons name="ellipsis-horizontal" size={30} color={COLORS.dark_gray_2} />}
                     activeOpacity={0.8}
                 />
             </Neumorph>

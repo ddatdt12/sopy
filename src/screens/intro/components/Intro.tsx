@@ -3,7 +3,6 @@ import {useNavigation} from '@react-navigation/native';
 import {COLORS, FONTS, SIZES} from '@src/assets/const';
 import Button from '@src/components/Button';
 import Neumorph from '@src/components/Neumorph';
-import {IntroScreenProps} from '@src/navigation/AppStackParams';
 import React from 'react';
 import {StyleSheet, View, Text, Image, ImageSourcePropType} from 'react-native';
 
@@ -15,7 +14,6 @@ interface IIntroProps {
 }
 
 const Intro: React.FC<IIntroProps> = ({text, bgImage, image, last}) => {
-    const navigation = useNavigation<IntroScreenProps['navigation']>();
     return (
         <View style={styles.container}>
             <Image
@@ -41,22 +39,6 @@ const Intro: React.FC<IIntroProps> = ({text, bgImage, image, last}) => {
             <View style={styles.descriptionContainer}>
                 <Text style={styles.descriptionText}>{text}</Text>
             </View>
-            {last && (
-                <Neumorph
-                    shadowContainerStyle={{
-                        position: 'absolute',
-                        bottom: scaleSize(24),
-                        borderRadius: scaleSize(60),
-                    }}>
-                    <Button
-                        title="GO!"
-                        style={{
-                            paddingHorizontal: scaleSize(40),
-                        }}
-                        onPress={() => navigation.replace('RoleChoose')}
-                    />
-                </Neumorph>
-            )}
         </View>
     );
 };

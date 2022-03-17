@@ -1,9 +1,7 @@
-import React from 'react';
 import {scaleSize} from '@core/utils';
 import {COLORS} from '@src/assets/const';
 import Box from '@src/components/Box';
-import {ExploreScreenProps} from '@src/navigation/ExploreStackScreen';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {StyleSheet} from 'react-native';
 import EventScreen from './event';
@@ -12,11 +10,11 @@ import PostsScreen from './post';
 import PostDetailsScreen from './post_details';
 import SearchScreen from './search';
 
-const ExploreScreen: React.FC<ExploreScreenProps> = ({navigation}) => {
+const ExploreScreen: React.FC = () => {
     const {t} = useTranslation();
-    const [route, setRoute] = useState<'Post' | 'Event'>('Event');
+    const [route, setRoute] = useState<'Post' | 'Event'>('Post');
     return (
-        <Box bgColor={COLORS.gray_1} container paddingHorizontal={scaleSize(10)}>
+        <Box bgColor={COLORS.gray_1} container paddingHorizontal={scaleSize(10)} safeArea={true}>
             <ExploreHeader route={route} navigate={tab => setRoute(tab)} />
 
             {route === 'Post' && <PostsScreen />}

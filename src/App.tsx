@@ -6,6 +6,10 @@ import {setupInterceptors} from './api/instance';
 import AppNavigator from './navigation/AppNavigator';
 import SplashScreen from './screens/splash';
 import {persistor, store} from './store';
+import {LogBox} from 'react-native';
+//because of chat library
+LogBox.ignoreLogs(['EventEmitter.removeListener']);
+LogBox.ignoreLogs(['Attempted to remove more']);
 const App: FC = () => {
     return (
         <Suspense fallback="Loading...">

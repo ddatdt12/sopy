@@ -4,7 +4,6 @@ import Box from '@src/components/Box';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
-import PostDetailsHeader from './PostDetailsHeader';
 
 type Props = {};
 

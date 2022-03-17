@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         left: scaleSize(10),
+        zIndex: 10,
     },
     headerRight: {
         position: 'absolute',

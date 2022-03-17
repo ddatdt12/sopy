@@ -40,7 +40,7 @@ const CreateEventScreen: React.FC<CreateEventScreenProps> = ({navigation}) => {
             <DismissKeyboardView>
                 <ScrollView contentContainerStyle={{flexGrow: 1, paddingBottom: scaleSize(20)}}>
                     <Header
-                        title="Create Post"
+                        title="Create Event"
                         submitButtonOption={{
                             onPress: handleSubmit(onSubmit),
                             disabled: !isValid || !image,

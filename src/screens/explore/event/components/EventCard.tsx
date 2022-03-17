@@ -23,7 +23,7 @@ const EventCard: React.FC<IEventCardProps> = props => {
     } = props;
 
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={onPress} style={STYLES.shadow}>
             <Card style={styles.card}>
                 <Stack direction="row" justifyContent="flex-start" alignItems="flex-start">
                     <View style={styles.content}>

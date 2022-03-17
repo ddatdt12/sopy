@@ -1,5 +1,5 @@
-import {FONTS, STYLES} from '@src/assets/const';
 import {scaleSize} from '@core/utils/DeviceUtils';
+import {FONTS, STYLES} from '@src/assets/const';
 import React from 'react';
 import {Image, StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native';
 

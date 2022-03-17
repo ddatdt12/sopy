@@ -1,32 +1,40 @@
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {CompositeScreenProps, NavigatorScreenParams} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {ExploreTabProps, HomeTabProps, ProfileTabProps, TabNavigatorParamsList} from '../TabNavigatorParams';
+import {MainTabParamsList} from '../TabNavigatorParams';
 
-//Expert Home Prop
-type ExpertHomeCompositeProps = CompositeScreenProps<HomeTabProps, ExpertRootScreenProps>;
-type ExpertExploreCompositeProps = CompositeScreenProps<ExploreTabProps, SearchScreenProps>;
-type ExpertProfileCompositeProps = CompositeScreenProps<ProfileTabProps, ExpertRootScreenProps>;
+export type ExpertMainTabProps<T extends keyof MainTabParamsList> = CompositeScreenProps<
+    BottomTabScreenProps<MainTabParamsList, T>,
+    ExpertStackProps<keyof ExpertStackParamList>
+>;
 
 //App Stack Navigator
 export type ExpertStackParamList = {
-    ExpertRoot: NavigatorScreenParams<TabNavigatorParamsList>;
+    ExpertRoot: NavigatorScreenParams<MainTabParamsList>;
     CreatePost: undefined;
     CreateEvent: undefined;
-    Search: undefined;
     EditProfile: undefined;
+
+    ExpertChatStack: NavigatorScreenParams<ExpertChatStackParamList>;
 };
 type ExpertRootScreenProps = NativeStackScreenProps<ExpertStackParamList, 'ExpertRoot'>;
 type CreatePostScreenProps = NativeStackScreenProps<ExpertStackParamList, 'CreatePost'>;
 type CreateEventScreenProps = NativeStackScreenProps<ExpertStackParamList, 'CreateEvent'>;
-type SearchScreenProps = NativeStackScreenProps<ExpertStackParamList, 'Search'>;
 type EditProfileScreenProps = NativeStackScreenProps<ExpertStackParamList, 'EditProfile'>;
 
-export type {
-    ExpertHomeCompositeProps,
-    ExpertExploreCompositeProps,
-    ExpertProfileCompositeProps,
-    ExpertRootScreenProps,
-    CreatePostScreenProps,
-    CreateEventScreenProps,
-    EditProfileScreenProps,
+export type ExpertStackProps<T extends keyof ExpertStackParamList> = NativeStackScreenProps<ExpertStackParamList, T>;
+
+export type {ExpertRootScreenProps, EditProfileScreenProps, CreatePostScreenProps, CreateEventScreenProps};
+
+export type ExpertChatStackParamList = {
+    // Expert
+    WithUserChat: {user: Object};
+    UserProfileChat: undefined;
+    DashboardEmotionDiary: undefined;
+    ExpertSearchChat: undefined;
 };
+
+export type ExpertChatStackProps<T extends keyof ExpertChatStackParamList> = NativeStackScreenProps<
+    ExpertChatStackParamList,
+    T
+>;

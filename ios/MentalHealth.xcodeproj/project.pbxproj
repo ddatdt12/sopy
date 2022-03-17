@@ -8,17 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* MentalHealthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MentalHealthTests.m */; };
+		0885B29751FF42671FA83C3F /* libPods-MentalHealth-MentalHealthTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF1B0DE09E97527FC708632 /* libPods-MentalHealth-MentalHealthTests.a */; };
 		0FE084EB24354B5B8F02DEE7 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0719E36FDD2A4F4AA48AE7A6 /* Roboto-Thin.ttf */; };
 		109D24EF81AA4DCEB7783558 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A25AC17FED74D0092B55F2E /* SimpleLineIcons.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1AD11F58795DC48AA70CBA74 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		1CFC6142E2A94AD08D2165D8 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0611903948D4F75A5AAF24A /* Roboto-BlackItalic.ttf */; };
 		246BE758E52A45178A107891 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D64EB73B3B364069B032E7E5 /* Roboto-MediumItalic.ttf */; };
 		3FAF077F571A42B7BDEF2F37 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E247DAA78E9C42B8A6B14223 /* Octicons.ttf */; };
 		4DFC13DA77004000B6786A33 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 71E3F1CBA4A346FD9B3193EE /* Feather.ttf */; };
 		5184EC6572F043788E70977B /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6CD31BA84AD34D2BA362D214 /* Roboto-Light.ttf */; };
-		54908BB11624AE7051FF96C3 /* libPods-MentalHealth-MentalHealthTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96C2F4B07CF5B30A72D90A52 /* libPods-MentalHealth-MentalHealthTests.a */; };
 		5AE65713C9924834B1517FB6 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37526F59253646F3A0DF63CF /* Roboto-ThinItalic.ttf */; };
 		65E0D126DF7A4C04839391D7 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8EAAB0A2A334A468E2DFE11 /* Roboto-Black.ttf */; };
 		678467C22DE14CC99227B6FF /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF37BD4D228A4D269723CAC1 /* FontAwesome.ttf */; };
@@ -26,7 +27,6 @@
 		6B38A41D6BBD456CADF20FDD /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3183446B200A4C57BEE5178B /* MaterialCommunityIcons.ttf */; };
 		6C5CCAE96A34421B9C7FF6BA /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 913D09AC068A474EB0D437B1 /* AntDesign.ttf */; };
 		701782053EF74A5E9F8F65D8 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28E517671D76455CB2185AC5 /* FontAwesome5_Regular.ttf */; };
-		750E3EFC6B7E3E95DE1A0D6E /* libPods-MentalHealth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4373F58E5417FDB43CA565AB /* libPods-MentalHealth.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9009E5E68715480C92C31002 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 284DF942931E4CECAF8BFBF2 /* Foundation.ttf */; };
 		92EBDDF138A2484AAD2939C9 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A535BDB6F83D42CA85B640B7 /* Ionicons.ttf */; };
@@ -40,8 +40,10 @@
 		C87F2DF68B2349A685ACBF49 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 562E62AD9B0B43898AD4BD43 /* MaterialIcons.ttf */; };
 		D935AF59D8A3428ABF202378 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B610AC28660042F7952E429D /* Roboto-LightItalic.ttf */; };
 		E4A2B588604C428290EA364D /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52BD0334B11046CDAE3F28D2 /* Roboto-Bold.ttf */; };
+		E52EDD3973A18C104AC7C49B /* libPods-MentalHealth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC667898E636E0A4DEF0998 /* libPods-MentalHealth.a */; };
 		E5CB11F14B2748FC9203D151 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 528FBDA1855F4E03AE8F2B31 /* Roboto-Italic.ttf */; };
 		F74CF168E3874292BDC5AD01 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFFF074189C7408CA4982322 /* Roboto-BoldItalic.ttf */; };
+		F9F26A2F0B5C0087E159F98A /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,19 +62,20 @@
 		00E356F21AD99517003FC87E /* MentalHealthTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MentalHealthTests.m; sourceTree = "<group>"; };
 		0719E36FDD2A4F4AA48AE7A6 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../src/assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		0D01F1DE610A4A7BA3322F6E /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../src/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		0DA6C50D45AC4A5C1104DECD /* Pods-MentalHealth-MentalHealthTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalHealth-MentalHealthTests.release.xcconfig"; path = "Target Support Files/Pods-MentalHealth-MentalHealthTests/Pods-MentalHealth-MentalHealthTests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* MentalHealth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MentalHealth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = MentalHealth/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = MentalHealth/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MentalHealth/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MentalHealth/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MentalHealth/main.m; sourceTree = "<group>"; };
+		19967BF7B0C41240F32EF109 /* Pods-MentalHealth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalHealth.release.xcconfig"; path = "Target Support Files/Pods-MentalHealth/Pods-MentalHealth.release.xcconfig"; sourceTree = "<group>"; };
+		22ED9C83BDEEB6820AFA0767 /* Pods-MentalHealth-MentalHealthTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalHealth-MentalHealthTests.debug.xcconfig"; path = "Target Support Files/Pods-MentalHealth-MentalHealthTests/Pods-MentalHealth-MentalHealthTests.debug.xcconfig"; sourceTree = "<group>"; };
 		284DF942931E4CECAF8BFBF2 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		28E517671D76455CB2185AC5 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		2A25AC17FED74D0092B55F2E /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		3183446B200A4C57BEE5178B /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		37526F59253646F3A0DF63CF /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-ThinItalic.ttf"; path = "../src/assets/fonts/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
-		4373F58E5417FDB43CA565AB /* libPods-MentalHealth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MentalHealth.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DC667898E636E0A4DEF0998 /* libPods-MentalHealth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MentalHealth.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		528FBDA1855F4E03AE8F2B31 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../src/assets/fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		52BD0334B11046CDAE3F28D2 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		54F22738B7594D8492EE56E6 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -80,13 +83,14 @@
 		57CC55B1B8DE4D7F94BEE961 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../src/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		58628273D9484ABDB29E9F18 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		5BB5756338C049BBAA0E55D3 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
-		6C409B0078AA7FF842B08F16 /* Pods-MentalHealth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalHealth.release.xcconfig"; path = "Target Support Files/Pods-MentalHealth/Pods-MentalHealth.release.xcconfig"; sourceTree = "<group>"; };
+		5DF1B0DE09E97527FC708632 /* libPods-MentalHealth-MentalHealthTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MentalHealth-MentalHealthTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CD31BA84AD34D2BA362D214 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
 		71E3F1CBA4A346FD9B3193EE /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MentalHealth/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		913D09AC068A474EB0D437B1 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
-		96C2F4B07CF5B30A72D90A52 /* libPods-MentalHealth-MentalHealthTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MentalHealth-MentalHealthTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1C989EDC0B7FFB683EEEFE4 /* Pods-MentalHealth-MentalHealthTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalHealth-MentalHealthTests.release.xcconfig"; path = "Target Support Files/Pods-MentalHealth-MentalHealthTests/Pods-MentalHealth-MentalHealthTests.release.xcconfig"; sourceTree = "<group>"; };
 		A535BDB6F83D42CA85B640B7 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		A774CC71AB901F30EFEFDCAB /* Pods-MentalHealth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalHealth.debug.xcconfig"; path = "Target Support Files/Pods-MentalHealth/Pods-MentalHealth.debug.xcconfig"; sourceTree = "<group>"; };
 		B610AC28660042F7952E429D /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-LightItalic.ttf"; path = "../src/assets/fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		BF37BD4D228A4D269723CAC1 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		C8EAAB0A2A334A468E2DFE11 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../src/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
@@ -96,10 +100,9 @@
 		D64EB73B3B364069B032E7E5 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-MediumItalic.ttf"; path = "../src/assets/fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
 		E0611903948D4F75A5AAF24A /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BlackItalic.ttf"; path = "../src/assets/fonts/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		E247DAA78E9C42B8A6B14223 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
-		E4E6D26F70580F9DE33935D1 /* Pods-MentalHealth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalHealth.debug.xcconfig"; path = "Target Support Files/Pods-MentalHealth/Pods-MentalHealth.debug.xcconfig"; sourceTree = "<group>"; };
 		E63BA35360D744939442E965 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
-		EBB67AA617647220964170D5 /* Pods-MentalHealth-MentalHealthTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalHealth-MentalHealthTests.debug.xcconfig"; path = "Target Support Files/Pods-MentalHealth-MentalHealthTests/Pods-MentalHealth-MentalHealthTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F4AF311D57FF78228641B7A1 /* Pods-MentalHealth-MentalHealthTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalHealth-MentalHealthTests.debug.xcconfig"; path = "Target Support Files/Pods-MentalHealth-MentalHealthTests/Pods-MentalHealth-MentalHealthTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +110,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54908BB11624AE7051FF96C3 /* libPods-MentalHealth-MentalHealthTests.a in Frameworks */,
+				F9F26A2F0B5C0087E159F98A /* (null) in Frameworks */,
+				0885B29751FF42671FA83C3F /* libPods-MentalHealth-MentalHealthTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +119,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				750E3EFC6B7E3E95DE1A0D6E /* libPods-MentalHealth.a in Frameworks */,
+				1AD11F58795DC48AA70CBA74 /* (null) in Frameworks */,
+				E52EDD3973A18C104AC7C49B /* libPods-MentalHealth.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,25 +157,24 @@
 			name = MentalHealth;
 			sourceTree = "<group>";
 		};
-		207A14F4DBE117F4CC08F358 /* Pods */ = {
+		2D16E6871FA4F8E400B85C8A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E4E6D26F70580F9DE33935D1 /* Pods-MentalHealth.debug.xcconfig */,
-				6C409B0078AA7FF842B08F16 /* Pods-MentalHealth.release.xcconfig */,
-				EBB67AA617647220964170D5 /* Pods-MentalHealth-MentalHealthTests.debug.xcconfig */,
-				0DA6C50D45AC4A5C1104DECD /* Pods-MentalHealth-MentalHealthTests.release.xcconfig */,
+				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				A774CC71AB901F30EFEFDCAB /* Pods-MentalHealth.debug.xcconfig */,
+				19967BF7B0C41240F32EF109 /* Pods-MentalHealth.release.xcconfig */,
+				F4AF311D57FF78228641B7A1 /* Pods-MentalHealth-MentalHealthTests.debug.xcconfig */,
+				A1C989EDC0B7FFB683EEEFE4 /* Pods-MentalHealth-MentalHealthTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
+		6AA6ECCA696DAB36BD2EC767 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				4373F58E5417FDB43CA565AB /* libPods-MentalHealth.a */,
-				96C2F4B07CF5B30A72D90A52 /* libPods-MentalHealth-MentalHealthTests.a */,
+				22ED9C83BDEEB6820AFA0767 /* Pods-MentalHealth-MentalHealthTests.debug.xcconfig */,
 			);
-			name = Frameworks;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -187,9 +191,10 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MentalHealthTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
-				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				207A14F4DBE117F4CC08F358 /* Pods */,
+				2D16E6871FA4F8E400B85C8A /* Pods */,
 				ECCB6150C87D4651B5C18B56 /* Resources */,
+				6AA6ECCA696DAB36BD2EC767 /* Pods */,
+				A9DAB4FBC01B33F8BB7B2997 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -203,6 +208,15 @@
 				00E356EE1AD99517003FC87E /* MentalHealthTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A9DAB4FBC01B33F8BB7B2997 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3DC667898E636E0A4DEF0998 /* libPods-MentalHealth.a */,
+				5DF1B0DE09E97527FC708632 /* libPods-MentalHealth-MentalHealthTests.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		ECCB6150C87D4651B5C18B56 /* Resources */ = {
@@ -247,12 +261,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "MentalHealthTests" */;
 			buildPhases = (
-				EA683DD4EABD7DE4CE73B640 /* [CP] Check Pods Manifest.lock */,
+				DFFBA90A226A289DB4871F14 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				A5A88E6C67674D701682E079 /* [CP] Embed Pods Frameworks */,
-				84F10D796B9C639B77B9FB9E /* [CP] Copy Pods Resources */,
+				C6120F66C13532C36D758D0F /* [CP] Embed Pods Frameworks */,
+				0A4A3D0F463BC413FAED0A3B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -268,14 +282,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "MentalHealth" */;
 			buildPhases = (
-				162B87CD5DD4B5DFF1D88A88 /* [CP] Check Pods Manifest.lock */,
+				688ED7269933F4CCA103E8B0 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				76317EEFD1465A52CCD0B8BF /* [CP] Embed Pods Frameworks */,
-				85D170B5B663409C23D02C71 /* [CP] Copy Pods Resources */,
+				43F1ED37708D4F46ECBA6F1A /* [CP] Embed Pods Frameworks */,
+				11A5033BB2F32D4BE82813FD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -292,7 +306,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -384,7 +398,56 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		162B87CD5DD4B5DFF1D88A88 /* [CP] Check Pods Manifest.lock */ = {
+		0A4A3D0F463BC413FAED0A3B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MentalHealth-MentalHealthTests/Pods-MentalHealth-MentalHealthTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MentalHealth-MentalHealthTests/Pods-MentalHealth-MentalHealthTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MentalHealth-MentalHealthTests/Pods-MentalHealth-MentalHealthTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		11A5033BB2F32D4BE82813FD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MentalHealth/Pods-MentalHealth-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		43F1ED37708D4F46ECBA6F1A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MentalHealth/Pods-MentalHealth-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MentalHealth/Pods-MentalHealth-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MentalHealth/Pods-MentalHealth-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		688ED7269933F4CCA103E8B0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -406,56 +469,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		76317EEFD1465A52CCD0B8BF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MentalHealth/Pods-MentalHealth-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MentalHealth/Pods-MentalHealth-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MentalHealth/Pods-MentalHealth-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		84F10D796B9C639B77B9FB9E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MentalHealth-MentalHealthTests/Pods-MentalHealth-MentalHealthTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MentalHealth-MentalHealthTests/Pods-MentalHealth-MentalHealthTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MentalHealth-MentalHealthTests/Pods-MentalHealth-MentalHealthTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		85D170B5B663409C23D02C71 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MentalHealth/Pods-MentalHealth-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A5A88E6C67674D701682E079 /* [CP] Embed Pods Frameworks */ = {
+		C6120F66C13532C36D758D0F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -472,7 +486,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MentalHealth-MentalHealthTests/Pods-MentalHealth-MentalHealthTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EA683DD4EABD7DE4CE73B640 /* [CP] Check Pods Manifest.lock */ = {
+		DFFBA90A226A289DB4871F14 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -546,15 +560,16 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBB67AA617647220964170D5 /* Pods-MentalHealth-MentalHealthTests.debug.xcconfig */;
+			baseConfigurationReference = 22ED9C83BDEEB6820AFA0767 /* Pods-MentalHealth-MentalHealthTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = MentalHealthTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -573,12 +588,13 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0DA6C50D45AC4A5C1104DECD /* Pods-MentalHealth-MentalHealthTests.release.xcconfig */;
+			baseConfigurationReference = A1C989EDC0B7FFB683EEEFE4 /* Pods-MentalHealth-MentalHealthTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = MentalHealthTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -597,7 +613,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4E6D26F70580F9DE33935D1 /* Pods-MentalHealth.debug.xcconfig */;
+			baseConfigurationReference = A774CC71AB901F30EFEFDCAB /* Pods-MentalHealth.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -623,7 +639,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C409B0078AA7FF842B08F16 /* Pods-MentalHealth.release.xcconfig */;
+			baseConfigurationReference = 19967BF7B0C41240F32EF109 /* Pods-MentalHealth.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -694,7 +710,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -753,7 +769,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",

@@ -1,8 +1,8 @@
-import {ExpertStackParamList} from './expert/type';
-import {User} from 'firebase/auth';
-import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {CompositeScreenProps, NavigatorScreenParams} from '@react-navigation/native';
-import {UserStackParamList} from './user/type';
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {ExpertMainTabProps, ExpertStackParamList} from './expert/type';
+import {MainTabParamsList} from './TabNavigatorParams';
+import {UserMainTabProps, UserStackParamList} from './user/type';
 
 export type AppStackParamList = {
     //Auth
@@ -12,39 +12,22 @@ export type AppStackParamList = {
     ExpertLogin: undefined;
     UserLogin: undefined;
     //ResetPassword;
-    SendEmail: undefined;
-    VerificationCode: undefined;
-    NewPassword: undefined;
+    SendResetPassEmail: undefined;
 
     //Expert
     Expert: NavigatorScreenParams<ExpertStackParamList>;
     User: NavigatorScreenParams<UserStackParamList>;
+} & CommonStackParamList;
+export type AppStackProps<T extends keyof AppStackParamList> = NativeStackScreenProps<AppStackParamList, T>;
+
+export type CommonStackParamList = {
+    ExploreSearch: undefined;
 };
 
-//Authentication
-type IntroScreenProps = NativeStackScreenProps<AppStackParamList, 'Intro'>;
-type ExpertLoginScreenProps = NativeStackScreenProps<AppStackParamList, 'ExpertLogin'>;
-type UserLoginScreenProps = NativeStackScreenProps<AppStackParamList, 'UserLogin'>;
-type RegisterScreenProps = NativeStackScreenProps<AppStackParamList, 'Register'>;
-type RoleChooseScreenProps = NativeStackScreenProps<AppStackParamList, 'RoleChoose'>;
-type ExpertProps = NativeStackScreenProps<AppStackParamList, 'Expert'>;
-type UserProps = NativeStackScreenProps<AppStackParamList, 'User'>;
+export type CommonStackProps<T extends keyof CommonStackParamList> = NativeStackScreenProps<CommonStackParamList, T>;
 
-//Forgot password
-type SendEmailProps = NativeStackScreenProps<AppStackParamList, 'SendEmail'>;
-type VerificationCodeProps = NativeStackScreenProps<AppStackParamList, 'VerificationCode'>;
-type NewPasswordProps = NativeStackScreenProps<AppStackParamList, 'NewPassword'>;
-
-type ExpertNavigationProp = CompositeScreenProps<ExpertProps, NativeStackScreenProps<ExpertStackParamList>>;
-type UserNavigationProp = CompositeScreenProps<UserProps, NativeStackScreenProps<UserStackParamList>>;
-
-export type {
-    IntroScreenProps,
-    ExpertLoginScreenProps,
-    UserLoginScreenProps,
-    RegisterScreenProps,
-    RoleChooseScreenProps,
-    SendEmailProps,
-    VerificationCodeProps,
-    NewPasswordProps,
-};
+//global
+export type MainTabCompositeProps<T extends keyof MainTabParamsList> = CompositeScreenProps<
+    UserMainTabProps<T> & ExpertMainTabProps<T>,
+    NativeStackScreenProps<CommonStackParamList>
+>;

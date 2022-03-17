@@ -70,13 +70,13 @@ const styles = StyleSheet.create({
         borderRadius: scaleSize(40),
         borderColor: COLORS.dark_gray_2,
         borderWidth: 1,
-        height: scaleSize(46),
+        minHeight: scaleSize(46),
     },
     input: {
         flex: 1,
         ...FONTS.body4,
         color: '#193566',
-        fontSize: scaleSize(16),
+        fontSize: scaleSize(18),
     },
 
     icon: {

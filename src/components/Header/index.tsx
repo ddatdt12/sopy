@@ -6,6 +6,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import IconButton from '../IconButton';
 import Neumorph from '../Neumorph';
+import Button from '../Button';
 
 type Props = {
     canGoBack?: boolean;
@@ -20,16 +21,17 @@ const Header: FC<Props> = props => {
     return (
         <View style={styles.header}>
             {canGoBack ? (
-                <View style={[styles.headerLeft]}>
+                <View style={[styles.headerLeft]} accessible={false}>
                     <Neumorph circle>
                         <IconButton
-                            icon={<Ionicons name="chevron-back" size={scaleSize(20)} />}
+                            icon={<Ionicons name="chevron-back" size={scaleSize(25)} color={COLORS.dark_gray_2} />}
                             onPress={() => goBack && goBack()}
                             activeOpacity={0.8}
                         />
                     </Neumorph>
                 </View>
             ) : (
+                // <Button />
                 headerLeft && <View style={[styles.headerLeft]}>{headerLeft()}</View>
             )}
             <View style={styles.titleWrapper}>
@@ -65,6 +67,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         left: scaleSize(10),
+        zIndex: 10,
     },
     headerRight: {
         position: 'absolute',

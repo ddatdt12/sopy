@@ -16,7 +16,7 @@ const EventCard = (props: EventCardProps) => {
 
     return (
         <TouchableOpacity style={styles.container}>
-            <Text style={styles.time}>{createdAt.toUTCString()}</Text>
+            <Text style={styles.time}>{createdAt?.toUTCString()}</Text>
             <Text style={styles.content}>{title}</Text>
         </TouchableOpacity>
     );
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         padding: scaleSize(16),
         marginVertical: scaleSize(10),
         minHeight: scaleSize(96),
-        ...STYLES.mediumShadow
+        ...STYLES.mediumShadow,
     },
     time: {
         fontSize: scaleSize(16),
