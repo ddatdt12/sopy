@@ -49,6 +49,7 @@ export const authSlice = createSlice({
             return {...state, loading: false, ...action.payload};
         });
         builder.addCase(login.rejected, (state, {error}) => {
+            console.log(error);
             return initialState;
         });
     },
