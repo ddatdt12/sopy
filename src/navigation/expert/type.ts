@@ -17,14 +17,7 @@ export type ExpertStackParamList = {
 
     ExpertChatStack: NavigatorScreenParams<ExpertChatStackParamList>;
 };
-type ExpertRootScreenProps = NativeStackScreenProps<ExpertStackParamList, 'ExpertRoot'>;
-type CreatePostScreenProps = NativeStackScreenProps<ExpertStackParamList, 'CreatePost'>;
-type CreateEventScreenProps = NativeStackScreenProps<ExpertStackParamList, 'CreateEvent'>;
-type EditProfileScreenProps = NativeStackScreenProps<ExpertStackParamList, 'EditProfile'>;
-
 export type ExpertStackProps<T extends keyof ExpertStackParamList> = NativeStackScreenProps<ExpertStackParamList, T>;
-
-export type {ExpertRootScreenProps, EditProfileScreenProps, CreatePostScreenProps, CreateEventScreenProps};
 
 export type ExpertChatStackParamList = {
     // Expert

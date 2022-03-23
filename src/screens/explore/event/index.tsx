@@ -1,34 +1,53 @@
 import {scaleSize} from '@core/utils';
-import {SIZES} from '@src/assets/const';
+import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
+import {useNavigation} from '@react-navigation/native';
+import {RANDOM_IMAGE, SIZES} from '@src/assets/const';
+import {Box} from '@src/components';
+import Loading from '@src/components/Loading';
+import {MainTabCompositeProps} from '@src/navigation/AppStackParams';
 import React, {useState} from 'react';
 import {FlatList, ListRenderItem, StyleSheet, View} from 'react-native';
-import DetailsModal from '../DetailsModal';
 import PostDetails from '../post_details';
 import EventCard from './components/EventCard';
-import Events from './events';
-import {Event} from './types';
 
-type Props = {};
+type Props = {
+    eventList: Post[];
+    loading?: boolean;
+    forceRefresh?: () => void;
+};
 
-const EventScreen = (props: Props) => {
-    const [modalVisible, setModalVisible] = useState(false);
-
-    const renderItem: ListRenderItem<Event> = ({item}) => {
-        return <EventCard event={item} onPress={() => setModalVisible(true)} />;
+const EventScreen: React.FC<Props> = props => {
+    const {eventList, loading} = props;
+    const [post, setPost] = useState<Post>();
+    const navigation = useNavigation<MainTabCompositeProps<'Explore'>['navigation']>();
+    const renderItem: ListRenderItem<Post> = ({item}) => {
+        return (
+            <EventCard
+                title={item.title}
+                description={item.detail}
+                image={RANDOM_IMAGE}
+                onPress={() => {
+                    setPost(item);
+                }}
+            />
+        );
     };
     return (
-        <View>
-            <FlatList
-                data={Events}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-                style={{marginTop: scaleSize(40)}}
-                contentContainerStyle={{paddingBottom: SIZES.bottomBarHeight + scaleSize(50)}}
-            />
-            <DetailsModal isVisible={modalVisible} onClose={() => setModalVisible(false)}>
-                <PostDetails />
-            </DetailsModal>
-        </View>
+        <Box>
+            <View style={{marginTop: scaleSize(40)}}>
+                {loading ? (
+                    <Loading />
+                ) : (
+                    <FlatList
+                        data={eventList}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                        contentContainerStyle={{paddingBottom: SIZES.bottomBarHeight + scaleSize(50)}}
+                    />
+                )}
+            </View>
+            {post && <PostDetails post={post} modalVisible={!!post} setModalVisible={() => setPost(undefined)} />}
+        </Box>
     );
 };
 

@@ -6,10 +6,12 @@ import {StyleSheet} from 'react-native';
 interface Props {
     inputSize: number;
     placeholder?: string;
+    value?: string;
+    onChangeText?: (value: string) => void;
 }
 
 const Textarea: React.FC<Props> = props => {
-    const {inputSize, placeholder} = props;
+    const {inputSize, placeholder, value, onChangeText} = props;
     return (
         <Input
             style={{
@@ -30,6 +32,8 @@ const Textarea: React.FC<Props> = props => {
             textAlignVertical="top"
             underlineColorAndroid="transparent"
             autoCorrect={false}
+            value={value}
+            onChangeText={text => onChangeText?.(text)}
         />
     );
 };

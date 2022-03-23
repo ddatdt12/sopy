@@ -1,10 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
+import UserChatStackNavigator from './ChatStackNavigator';
 import UserProfileStackNavigator from './ProfileStackNavigator';
 import {UserStackParamList} from './type';
-import FeelingModal from '@src/screens/home/user/components/FeelingModal';
-import {SearchScreen} from '@src/screens/explore';
-import UserChatStackNavigator from './ChatStackNavigator';
 import UserRootNavigator from './UserRootNavigator';
 const UserStack = createNativeStackNavigator<UserStackParamList>();
 

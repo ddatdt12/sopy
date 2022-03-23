@@ -8,7 +8,7 @@ const uploadImage = async (uri: string) => {
     try {
         await imageRef.putFile(uploadUri, {});
         const url = await imageRef.getDownloadURL();
-        return {url, error: undefined};
+        return {url};
     } catch (e: any) {
         console.error(e);
         return {error: e?.message};

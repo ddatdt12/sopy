@@ -5,7 +5,7 @@ export type AuthState = Partial<{
     token: string;
     refreshToken: string;
     userId: string;
-    user: any;
+    user: User;
     loading: boolean;
     error: string;
 }>;
@@ -51,9 +51,6 @@ export const authSlice = createSlice({
         builder.addCase(login.rejected, (state, {error}) => {
             return initialState;
         });
-        // builder.addCase(PURGE, state => {
-        //     customEntityAdapter.removeAll(state);
-        // });
     },
 });
 

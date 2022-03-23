@@ -1,5 +1,7 @@
+import {FirebaseAuthTypes} from '@react-native-firebase/auth';
+
 const authApi = {
-    login: (data: any) => {
+    login: (data: FirebaseAuthTypes.User) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve({
@@ -7,9 +9,11 @@ const authApi = {
                     refreshToken: 'refreshToken',
                     user: {
                         id: 'userId',
-                        name: 'name',
-                        email: 'email',
-                        role: 'expert',
+                        name: 'Đạt Đỗ',
+                        email: data.email,
+                        firebase_user_id: data.uid,
+                        bio: String,
+                        is_expert: true,
                         avatar: 'https://picsum.photos/200',
                     },
                 });

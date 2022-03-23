@@ -3,7 +3,6 @@ import {COLORS} from '@src/assets/const';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import ReactNativeModal from 'react-native-modal';
-import PostDetailsHeader from './post_details/PostDetailsHeader';
 
 type Props = {
     isVisible: boolean;
@@ -46,7 +45,6 @@ const DetailsModal: React.FC<Props> = props => {
                         setFullScreen(true);
                     }
                 }}>
-                <PostDetailsHeader closeModal={onClose} />
                 {children}
             </View>
         </ReactNativeModal>

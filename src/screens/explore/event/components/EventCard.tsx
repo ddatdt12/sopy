@@ -11,16 +11,15 @@ import {GestureResponderEvent} from 'react-native-modal';
 import {Event} from '../types';
 
 interface IEventCardProps {
-    event: Event;
+    description: string;
+    title: string;
+    image: string;
     onPress?: (event: GestureResponderEvent) => void;
 }
 
 const EventCard: React.FC<IEventCardProps> = props => {
     const {t} = useTranslation();
-    const {
-        event: {description, title, image},
-        onPress,
-    } = props;
+    const {description, title, image, onPress} = props;
 
     return (
         <TouchableOpacity onPress={onPress} style={STYLES.shadow}>

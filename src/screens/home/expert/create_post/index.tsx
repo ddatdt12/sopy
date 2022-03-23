@@ -1,14 +1,18 @@
 import {scaleSize} from '@core/utils';
+import postApi from '@src/api/postApi';
 import {COLORS, FONTS} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
 import DismissKeyboardView from '@src/components/DismissKeyboardView';
 import Input from '@src/components/Input';
-import {CreatePostScreenProps} from '@src/navigation/expert/type';
-import React, {useEffect, useState} from 'react';
+import {ExpertStackProps} from '@src/navigation/expert/type';
+import {uploadImage} from '@src/services/firebaseStorage';
+import {useAppSelector} from '@src/store';
+import React, {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
-import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Alert, Image, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {CameraOptions, launchImageLibrary} from 'react-native-image-picker';
 import Header from '../components/Header';
 import LabelCheckBox from './CheckBox';
 
@@ -17,9 +21,9 @@ type Data = {
     title: string;
     description: string;
 };
-const CreatePostScreen: React.FC<CreatePostScreenProps> = ({navigation}) => {
+const CreatePostScreen: React.FC<ExpertStackProps<'CreatePost'>> = ({navigation}) => {
     const {t} = useTranslation();
-
+    const user = useAppSelector(state => state.auth.user);
     const {
         control,
         handleSubmit,
@@ -34,14 +38,60 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({navigation}) => {
     const [selectedTag, setSelectedTag] = useState<string | undefined>(undefined);
     const [dirtyTag, setDirtyTag] = useState<boolean>(false);
     const [image, setImage] = useState<string | undefined>(undefined);
-
-    const onSubmit = (data: Data) => {
-        console.log({...data, selectedTag});
-    };
+    const [loading, setLoading] = useState<boolean>(false);
 
     const onCheckboxChange = (tag: string | undefined) => {
         setDirtyTag(true);
         setSelectedTag(prev => (prev === tag ? undefined : tag));
+    };
+    const onSubmit = async (data: Data) => {
+        console.log({...data, selectedTag});
+        const emotion = FEELS.findIndex(item => item === selectedTag) + 1;
+
+        if (!image) {
+            Alert.alert('Notice', 'Please select an image');
+            return;
+        }
+        setLoading(true);
+        const {url, error} = await uploadImage(image);
+        if (error || !url) {
+            Alert.alert('Notice', error);
+            setLoading(false);
+            return;
+        }
+        const post = {
+            title: data.title,
+            detail: data.description,
+            emotion,
+            picture: url,
+            firebase_user_id: user?.firebase_user_id,
+        };
+        try {
+            console.log(post);
+            await postApi.createPost(post);
+            console.log('Add success!');
+        } catch (errorApi: any) {
+            Alert.alert('Notice', errorApi?.message ?? 'Server Error');
+        }
+        setLoading(false);
+    };
+
+    const openLibrary = () => {
+        const option: CameraOptions = {
+            mediaType: 'photo',
+            quality: 1,
+        };
+
+        launchImageLibrary(option, res => {
+            if (res.didCancel) {
+                console.log('User Cancelled image picker');
+            } else if (res.errorCode) {
+                console.log(res.errorMessage);
+            } else {
+                const data = res && res.assets && res.assets[0];
+                setImage(data?.uri);
+            }
+        });
     };
     return (
         <Box container bgColor={COLORS.gray_1}>
@@ -112,8 +162,17 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({navigation}) => {
                             <View style={styles.textarea}>
                                 {!!image && (
                                     <View
-                                        style={{backgroundColor: 'red', width: 100, height: 100, alignSelf: 'center'}}
-                                    />
+                                        style={{
+                                            alignItems: 'center',
+                                        }}>
+                                        <Image
+                                            source={{uri: image}}
+                                            style={{backgroundColor: 'red', zIndex: 1000}}
+                                            width={250}
+                                            height={150}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
                                 )}
                                 <Controller
                                     control={control}
@@ -141,14 +200,14 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({navigation}) => {
                         {image ? (
                             <Button
                                 title="Reselect picture"
-                                onPress={() => setImage(undefined)}
+                                onPress={() => openLibrary()}
                                 style={{marginVertical: scaleSize(20)}}
                             />
                         ) : (
                             <Button
                                 title="Add picture"
                                 variant="secondary"
-                                onPress={() => setImage('something')}
+                                onPress={() => openLibrary()}
                                 style={{marginVertical: scaleSize(20)}}
                             />
                         )}

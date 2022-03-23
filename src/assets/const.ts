@@ -2,7 +2,7 @@ import {isIOS, scaleSize} from '@core/utils';
 import {Dimensions, StyleSheet} from 'react-native';
 const {width: WindowWidth, height: WindowHeight} = Dimensions.get('window');
 
-export const BASE_URL = 'https://api.github.com';
+export const BASE_URL = 'https://mental-health-gdsc-app.herokuapp.com';
 export const STORE_KEY = {
     TOKEN: 'token',
     REFRESH_TOKEN: 'refreshToken',

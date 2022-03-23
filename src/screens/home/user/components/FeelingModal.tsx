@@ -5,9 +5,9 @@ import DismissKeyboardView from '@src/components/DismissKeyboardView';
 import Stack from '@src/components/Stack';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Dimensions, KeyboardAvoidingView, Modal, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import ReactNativeModal from 'react-native-modal';
-import {Feelings} from '../feeling';
+import {Feeling, Feelings} from '../feeling';
 import FeelingCard from './FeelingCard';
 import Textarea from './Textarea';
 
@@ -19,6 +19,20 @@ const width = Dimensions.get('screen').width / 3 - scaleSize(20);
 
 const FeelingModal: React.FC<IFeelingModal> = ({modalVisible, setModalVisible}) => {
     const {t} = useTranslation();
+    const [selectedFeel, setSelectedFeel] = useState<Feeling | undefined>(undefined);
+    const [reason, setReason] = useState<string>('');
+
+    const handlePress = () => {
+        console.log({
+            reason,
+            feel: selectedFeel,
+        });
+    };
+    const handleCancelPress = () => {
+        setModalVisible(false);
+        setSelectedFeel(undefined);
+        setReason('');
+    };
     return (
         <ReactNativeModal
             isVisible={modalVisible}
@@ -40,15 +54,29 @@ const FeelingModal: React.FC<IFeelingModal> = ({modalVisible, setModalVisible}) 
                                 {Feelings.map((feel, index) => {
                                     if (index !== Feelings.length - 1) {
                                         return (
-                                            <FeelingCard key={feel.name} feeling={feel} size={width - scaleSize(2)} />
+                                            <FeelingCard
+                                                key={feel.name}
+                                                feeling={feel}
+                                                selected={feel === selectedFeel}
+                                                size={width - scaleSize(2)}
+                                                onPress={() => setSelectedFeel(feel)}
+                                            />
                                         );
                                     } else {
                                         const inputSize = 2 * (width - scaleSize(2));
                                         return (
                                             // <View key={feel.name} style={{flexDirection: 'row'}}>
                                             <Stack key={feel.name} direction="row">
-                                                <FeelingCard feeling={feel} size={width - scaleSize(2)} />
-                                                <Textarea inputSize={inputSize} placeholder={t("What's going on!")} />
+                                                <FeelingCard
+                                                    feeling={feel}
+                                                    size={width - scaleSize(2)}
+                                                    onPress={() => setSelectedFeel(feel)}
+                                                />
+                                                <Textarea
+                                                    inputSize={inputSize}
+                                                    onChangeText={text => setReason(text)}
+                                                    placeholder={t("What's going on!")}
+                                                />
                                             </Stack>
                                             // </View>
                                         );
@@ -58,9 +86,21 @@ const FeelingModal: React.FC<IFeelingModal> = ({modalVisible, setModalVisible}) 
                         </ScrollView>
 
                         {/* FIXME: Migrate into styled button component  */}
-                        <View style={styles.buttonWrapper}>
-                            <Button title={t('Save')} style={styles.button} />
-                        </View>
+                        <Stack style={styles.buttonWrapper} direction="row" space={scaleSize(30)}>
+                            <Button
+                                title={t('Save')}
+                                onPress={handlePress}
+                                color={COLORS.white_1}
+                                style={styles.button}
+                            />
+                            <Button
+                                title={t('Cancel')}
+                                color={COLORS.white_1}
+                                textStyle={{color: '#F67E7A'}}
+                                style={styles.button}
+                                onPress={handleCancelPress}
+                            />
+                        </Stack>
                     </KeyboardAvoidingView>
                 </View>
             </DismissKeyboardView>
@@ -108,5 +148,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    button: {paddingVertical: scaleSize(6), width: '60%'},
+    button: {
+        paddingVertical: scaleSize(6),
+        paddingHorizontal: scaleSize(40),
+    },
 });

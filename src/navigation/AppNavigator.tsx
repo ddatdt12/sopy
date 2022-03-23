@@ -7,6 +7,7 @@ import RoleScreen from '@src/screens/auth/role';
 import {SearchScreen} from '@src/screens/explore';
 import IntroScreen from '@src/screens/intro';
 import SendEmail from '@src/screens/reset_password';
+import SplashScreen from '@src/screens/splash';
 import {useAppSelector} from '@src/store';
 import React from 'react';
 import {AppStackParamList} from './AppStackParams';
@@ -19,10 +20,9 @@ const AppNavigator: React.FC = () => {
     const auth = useAppSelector(state => state.auth);
 
     const renderRoot = () => {
-        if (auth.user?.role === 'expert') {
+        if (auth.user?.is_expert) {
             return <AppStack.Screen name="Expert" component={ExpertStackNavigator} />;
         }
-
         return <AppStack.Screen name="User" component={UserStackNavigator} />;
     };
     return (
@@ -62,7 +62,6 @@ const AppNavigator: React.FC = () => {
             ) : (
                 <AppStack.Group screenOptions={{headerShown: false}}>
                     {renderRoot()}
-
                     <AppStack.Screen name="ExploreSearch" component={SearchScreen} />
                 </AppStack.Group>
             )}

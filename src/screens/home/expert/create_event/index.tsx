@@ -1,23 +1,26 @@
 import {scaleSize} from '@core/utils';
+import postApi from '@src/api/postApi';
 import {COLORS, FONTS} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
 import DismissKeyboardView from '@src/components/DismissKeyboardView';
 import Input from '@src/components/Input';
-import {CreateEventScreenProps} from '@src/navigation/expert/type';
-import React, {useEffect, useState} from 'react';
+import {ExpertStackProps} from '@src/navigation/expert/type';
+import {uploadImage} from '@src/services/firebaseStorage';
+import {useAppSelector} from '@src/store';
+import React, {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
-import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Alert, Image, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {CameraOptions, launchImageLibrary} from 'react-native-image-picker';
 import Header from '../components/Header';
-const FEELS = ['Happy', 'Angry', 'Sad', 'Normal', 'Scared', 'Worry', 'Depression'];
 type Data = {
     title: string;
     description: string;
 };
-const CreateEventScreen: React.FC<CreateEventScreenProps> = ({navigation}) => {
+const CreateEventScreen: React.FC<ExpertStackProps<'CreateEvent'>> = ({navigation}) => {
     const {t} = useTranslation();
-
+    const user = useAppSelector(state => state.auth.user);
     const {
         control,
         handleSubmit,
@@ -30,13 +33,55 @@ const CreateEventScreen: React.FC<CreateEventScreenProps> = ({navigation}) => {
         mode: 'onChange',
     });
     const [image, setImage] = useState<string | undefined>(undefined);
+    const [loading, setLoading] = useState(false);
 
-    const onSubmit = (data: Data) => {
-        console.log(data);
+    const onSubmit = async (data: Data) => {
+        if (!image) {
+            Alert.alert('Notice', 'Please select an image');
+            return;
+        }
+        setLoading(true);
+        const {url, error} = await uploadImage(image);
+        if (error) {
+            Alert.alert('Notice', error);
+            setLoading(false);
+
+            return;
+        }
+        const event = {
+            title: data.title,
+            detail: data.description,
+            emotion: 0,
+            firebase_user_id: user?.firebase_user_id,
+            image: url,
+        };
+        try {
+            await postApi.createPost(event);
+            console.log('create event successfully');
+        } catch (errorApi: any) {
+            Alert.alert('Notice', errorApi?.message ?? 'Server Error');
+        }
+        setLoading(false);
     };
+    const openLibrary = () => {
+        const option: CameraOptions = {
+            mediaType: 'photo',
+            quality: 1,
+        };
 
+        launchImageLibrary(option, res => {
+            if (res.didCancel) {
+                console.log('User Cancelled image picker');
+            } else if (res.errorCode) {
+                console.log(res.errorMessage);
+            } else {
+                const data = res && res.assets && res.assets[0];
+                setImage(data?.uri);
+            }
+        });
+    };
     return (
-        <Box container bgColor={COLORS.gray_1}>
+        <Box container bgColor={COLORS.gray_1} loading={loading}>
             <DismissKeyboardView>
                 <ScrollView contentContainerStyle={{flexGrow: 1, paddingBottom: scaleSize(20)}}>
                     <Header
@@ -74,8 +119,17 @@ const CreateEventScreen: React.FC<CreateEventScreenProps> = ({navigation}) => {
                             <View style={styles.textarea}>
                                 {!!image && (
                                     <View
-                                        style={{backgroundColor: 'red', width: 100, height: 100, alignSelf: 'center'}}
-                                    />
+                                        style={{
+                                            alignItems: 'center',
+                                        }}>
+                                        <Image
+                                            source={{uri: image}}
+                                            style={{backgroundColor: 'red', zIndex: 1000}}
+                                            width={250}
+                                            height={150}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
                                 )}
                                 <Controller
                                     control={control}
@@ -103,14 +157,14 @@ const CreateEventScreen: React.FC<CreateEventScreenProps> = ({navigation}) => {
                         {image ? (
                             <Button
                                 title="Reselect picture"
-                                onPress={() => setImage(undefined)}
+                                onPress={() => openLibrary()}
                                 style={{marginVertical: scaleSize(20)}}
                             />
                         ) : (
                             <Button
                                 title="Add picture"
                                 variant="secondary"
-                                onPress={() => setImage('something')}
+                                onPress={() => openLibrary()}
                                 style={{marginVertical: scaleSize(20)}}
                             />
                         )}

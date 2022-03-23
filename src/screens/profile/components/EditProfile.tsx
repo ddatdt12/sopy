@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Alert, Image, PermissionsAndroid, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {CameraOptions, launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {scaleSize, IsAndroid} from '@core/utils';
+import {scaleSize, isAndroid} from '@core/utils';
 import {FONTS, STYLES} from '@src/assets/const';
 import BottomModal from './BottomModal';
 
@@ -22,7 +22,7 @@ const EditProfile = (props: EditProfileProps) => {
             mediaType: 'photo',
             quality: 1,
         };
-        if (IsAndroid) {
+        if (isAndroid) {
             await requestCameraPermission();
         }
         launchCamera(option, res => {

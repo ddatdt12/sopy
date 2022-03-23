@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {SearchScreen} from '@src/screens/explore';
+import PostDetails from '@src/screens/explore/post_details';
 import CreateEventScreen from '@src/screens/home/expert/create_event';
 import CreatePostScreen from '@src/screens/home/expert/create_post';
 import ExpertEditProfileScreen from '@src/screens/profile/expert/ExpertEditProfile';

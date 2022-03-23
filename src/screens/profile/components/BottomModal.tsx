@@ -25,28 +25,19 @@ const BottomModal: React.FC<Props> = props => {
                 }}>
                 <View style={styles.modalView}>
                     <View style={styles.takePhotoModalOption}>
-                        <TouchableOpacity 
-                            onPress={onOpenCameraPress} 
-                            style={styles.modalButton}
-                        >
+                        <TouchableOpacity onPress={onOpenCameraPress} style={styles.modalButton}>
                             <Text style={styles.takePhotoText}>Take Photo</Text>
                         </TouchableOpacity>
 
                         <View style={{backgroundColor: '#BABCC1', height: scaleSize(1), width: scaleSize(376)}} />
 
-                        <TouchableOpacity 
-                            onPress={onOpenLibraryPress} 
-                            style={styles.modalButton}
-                        >
+                        <TouchableOpacity onPress={onOpenLibraryPress} style={styles.modalButton}>
                             <Text style={styles.chooseLibraryText}>Choose From Library</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={styles.chooseLibraryModalOption}>
-                        <TouchableOpacity 
-                            onPress={() => onCancel()} 
-                            style={styles.modalButton}
-                        >
+                        <TouchableOpacity onPress={() => onCancel()} style={styles.modalButton}>
                             <Text style={styles.cancelText}>Cancel</Text>
                         </TouchableOpacity>
                     </View>
@@ -89,21 +80,21 @@ const styles = StyleSheet.create({
     },
     takePhotoText: {
         fontSize: scaleSize(23),
-        color: '#1D325E'
-    }, 
+        color: '#1D325E',
+    },
     chooseLibraryText: {
-        fontSize: scaleSize(23), 
-        color: '#1D325E', 
-        marginBottom: scaleSize(9)
+        fontSize: scaleSize(23),
+        color: '#1D325E',
+        marginBottom: scaleSize(9),
     },
     cancelText: {
         ...FONTS.h1,
         fontSize: scaleSize(23),
     },
     modalButton: {
-        alignItems: 'center', 
+        alignItems: 'center',
         justifyContent: 'center',
-        height: scaleSize(58), 
+        height: scaleSize(58),
         width: scaleSize(376),
-    }
+    },
 });

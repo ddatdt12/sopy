@@ -1,18 +1,16 @@
 import {scaleSize} from '@core/utils';
-import {useNavigation} from '@react-navigation/native';
 import {COLORS, FONTS, STYLES} from '@src/assets/const';
 import IMAGES from '@src/assets/images';
+import {ExpertMainTabProps} from '@src/navigation/expert/type';
 import Events from '@src/screens/explore/event/events';
 import {Event} from '@src/screens/explore/event/types';
-import React from 'react';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {ScrollView, StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
-import {useState} from 'react';
+import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AvatarContainer from '../components/AvatarContainer';
 import EventCard from '../components/EventCard';
 import PopupDropdown from '../components/PopupDropdown';
-import {ExpertMainTabProps} from '@src/navigation/expert/type';
 
 const ExpertProfileScreen: React.FC<ExpertMainTabProps<'Profile'>> = ({navigation}) => {
     const renderItem = (item: Event) => {

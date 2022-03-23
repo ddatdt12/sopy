@@ -1,31 +1,42 @@
 import {scaleSize} from '@core/utils';
-import {FONTS} from '@src/assets/const';
+import {useFocusEffect} from '@react-navigation/native';
+import postApi from '@src/api/postApi';
+import {FONTS, RANDOM_IMAGE} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
+import Loading from '@src/components/Loading';
 import Neumorph from '@src/components/Neumorph';
 import Stack from '@src/components/Stack';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, ListRenderItem, StyleSheet, Text, View} from 'react-native';
 import ReactNativeModal from 'react-native-modal';
-import DetailsModal from '../DetailsModal';
+import DetailsModal from '../components/DetailsModal';
 import PostDetails from '../post_details';
+import PostDetailsHeader from '../post_details/PostDetailsHeader';
 import PostCard from './components/PostCard';
-import Posts from './posts';
-import {Post} from './types';
-interface IProps {}
+// import Posts from './posts';
+// import {Post} from './types';
+type Props = {
+    postList: Post[];
+    loading?: boolean;
+    forceRefresh?: () => void;
+};
 
-const PostsScreen = ({}: IProps) => {
+const PostsScreen: React.FC<Props> = ({postList, loading, forceRefresh}) => {
     const {t} = useTranslation();
-    const [modalVisible, setModalVisible] = useState(false);
+    const [post, setPost] = useState<Post>();
 
     const renderItem: ListRenderItem<Post> = ({item}) => {
         return (
+            // FIXME: now Data not correct
             <PostCard
                 title={item.title}
-                author={item.author}
-                image={item.image}
-                onPress={() => setModalVisible(true)}
+                author={item.expert.name}
+                image={item.picture}
+                onPress={() => {
+                    setPost(item);
+                }}
             />
         );
     };
@@ -45,17 +56,27 @@ const PostsScreen = ({}: IProps) => {
                     <Button title={t('Scared')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
                 </Neumorph>
             </Stack>
-            <FlatList
-                data={Posts}
-                renderItem={renderItem}
-                numColumns={2}
-                keyExtractor={item => item.id}
-                columnWrapperStyle={{justifyContent: 'space-between'}}
-                contentContainerStyle={{paddingBottom: scaleSize(76)}}
-            />
-            <DetailsModal isVisible={modalVisible} onClose={() => setModalVisible(false)}>
-                <PostDetails />
-            </DetailsModal>
+            {loading ? (
+                <Loading />
+            ) : (
+                <FlatList
+                    data={postList}
+                    renderItem={renderItem}
+                    numColumns={2}
+                    keyExtractor={item => item.id}
+                    columnWrapperStyle={{justifyContent: 'space-between'}}
+                    contentContainerStyle={{paddingBottom: scaleSize(76)}}
+                />
+            )}
+
+            {post && (
+                <PostDetails
+                    post={post}
+                    modalVisible={!!post}
+                    setModalVisible={() => setPost(undefined)}
+                    forceRefresh={forceRefresh}
+                />
+            )}
         </Box>
     );
 };

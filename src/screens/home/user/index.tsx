@@ -14,6 +14,7 @@ const HomeScreen: React.FC<UserMainTabProps<'Home'>> = ({navigation}) => {
     const {t} = useTranslation();
     const [modalVisible, setModalVisible] = useState(false);
     const dispatch = useAppDispatch();
+
     return (
         <BackgroundImage>
             <View style={{flex: 1}}>
