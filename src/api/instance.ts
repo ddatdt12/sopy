@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
 
 export default axiosInstance;
 
-export const setToken = (token: string) => {
+export const setToken = (token?: string) => {
     // @ts-ignore
     axiosInstance.defaults.headers['x-firebase-uid'] = token;
 };

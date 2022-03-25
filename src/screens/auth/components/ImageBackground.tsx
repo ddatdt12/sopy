@@ -16,12 +16,7 @@ const ImageBackground: React.FC<ImageBackgroundProps> = props => {
     return (
         <SafeAreaView style={styles.container}>
             {/* <ScrollView style={{flex: 1}}> */}
-            <Image
-                style={[styles.background, style]}
-                source={source || IMAGES.bg_intro_step_1}
-                blurRadius={blurRadius}
-                resizeMode="cover"
-            />
+            <Image style={[styles.background, style]} source={source || IMAGES.bg_intro_step_1} resizeMode="cover" />
             {children}
             {/* </ScrollView> */}
         </SafeAreaView>
@@ -37,11 +32,10 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     background: {
-        position: 'absolute',
-        left: '-50%',
-        right: '-30%',
-        top: '-0%',
-        bottom: '32%',
         flex: 1,
+        position: 'absolute',
+        top: '0%',
+        width: '80%',
+        height: '80%',
     },
 });

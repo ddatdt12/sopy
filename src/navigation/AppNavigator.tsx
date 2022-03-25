@@ -1,4 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {setToken} from '@src/api/instance';
 import NavHeader from '@src/components/NavHeader';
 import ExpertLoginScreen from '@src/screens/auth/login/expert';
 import UserLoginScreen from '@src/screens/auth/login/user';
@@ -6,10 +7,11 @@ import RegisterScreen from '@src/screens/auth/register';
 import RoleScreen from '@src/screens/auth/role';
 import {SearchScreen} from '@src/screens/explore';
 import IntroScreen from '@src/screens/intro';
-import SendEmail from '@src/screens/reset_password';
+import SendResetPassEmail from '@src/screens/reset_password';
+import SendEmailScreen from '@src/screens/reset_password';
 import SplashScreen from '@src/screens/splash';
 import {useAppSelector} from '@src/store';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {AppStackParamList} from './AppStackParams';
 import ExpertStackNavigator from './expert/ExpertStackNavigator';
 import UserStackNavigator from './user/UserStackNavigator';
@@ -19,6 +21,11 @@ const AppStack = createNativeStackNavigator<AppStackParamList>();
 const AppNavigator: React.FC = () => {
     const auth = useAppSelector(state => state.auth);
 
+    useEffect(() => {
+        setToken(auth.token);
+    }, [auth.token]);
+
+    console.log('Auth: ', auth);
     const renderRoot = () => {
         if (auth.user?.is_expert) {
             return <AppStack.Screen name="Expert" component={ExpertStackNavigator} />;
@@ -56,7 +63,7 @@ const AppNavigator: React.FC = () => {
                             title: 'Reset password',
                             header: props => <NavHeader {...props} />,
                         }}
-                        component={SendEmail}
+                        component={SendEmailScreen}
                     />
                 </>
             ) : (

@@ -5,7 +5,7 @@ import TabBarButton from '@src/components/TabBarButton';
 import UserChatHomeScreen from '@src/screens/chat/user';
 import ExploreScreen from '@src/screens/explore';
 import HomeScreen from '@src/screens/home/user';
-import UserProfileScreen from '@src/screens/profile/user';
+import UserProfileScreen from '@src/screens/profile/profile_user';
 import React from 'react';
 import {View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';

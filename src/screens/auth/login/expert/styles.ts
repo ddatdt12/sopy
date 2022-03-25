@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
     contentWrapper: {
         flex: 1,
         paddingHorizontal: scaleSize(30),
-        marginTop: '35%',
+        marginTop: '30%',
+        paddingTop: scaleSize(60),
     },
     textWrapper: {
         width: '100%',

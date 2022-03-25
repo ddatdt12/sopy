@@ -2,7 +2,7 @@ import {scaleSize} from '@core/utils';
 import {IMAGES} from '@src/assets';
 import {COLORS, FONTS} from '@src/assets/const';
 import Text from '@src/components/Text';
-import {UserLoginScreenProps} from '@src/navigation/AppStackParams';
+import {AppStackProps} from '@src/navigation/AppStackParams';
 import {facebookLogin, googleSignIn} from '@src/services/auth';
 import {useAppDispatch} from '@src/store';
 import {authActions} from '@src/store/authSlice';
@@ -12,7 +12,7 @@ import {Alert, ScrollView, StyleSheet, View} from 'react-native';
 import ImageBackground from '../../components/ImageBackground';
 import LoginForm from '../../components/LoginForm';
 import LogoButton from '../../components/LogoButton';
-const UserLoginScreen: React.FC<UserLoginScreenProps> = ({navigation}) => {
+const UserLoginScreen: React.FC<AppStackProps<'UserLogin'>> = ({navigation}) => {
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
 
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: scaleSize(30),
         marginTop: '30%',
+        paddingTop: scaleSize(60),
     },
     textWrapper: {
         width: '100%',

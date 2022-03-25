@@ -31,7 +31,7 @@ export const authSlice = createSlice({
         loading: state => {
             state.loading = true;
         },
-        logout: state => {
+        logout: () => {
             return initialState;
         },
         stopLoading: state => {
@@ -43,13 +43,17 @@ export const authSlice = createSlice({
     },
     extraReducers: builder => {
         builder.addCase(login.pending, state => {
+            console.log('Pending login');
             state.loading = true;
         });
         builder.addCase(login.fulfilled, (state, action: PayloadAction<any>) => {
             return {...state, loading: false, ...action.payload};
         });
-        builder.addCase(login.rejected, (state, {error}) => {
+        builder.addCase(login.rejected, () => {
             return initialState;
+        });
+        builder.addCase(register.pending, (state, action: PayloadAction<any>) => {
+            state.loading = true;
         });
         builder.addCase(register.fulfilled, (state, action: PayloadAction<any>) => {
             return {...state, loading: false, ...action.payload};

@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: scaleSize(36),
         marginTop: '30%',
+        paddingTop: scaleSize(60),
     },
     textWrapper: {
         width: '100%',
