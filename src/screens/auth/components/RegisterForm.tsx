@@ -64,14 +64,7 @@ const RegisterForm: React.FC = props => {
         });
 
         if (!error && user) {
-            await dispatch(
-                authActions.register({
-                    firebase_user_id: user?.uid,
-                    email,
-                    name: user.displayName || name,
-                    picture: user.photoURL,
-                }),
-            );
+            await dispatch(authActions.register(user));
             Alert.alert('Notice', 'You have successfully register!');
         } else {
             Alert.alert(error ?? 'Server Error');

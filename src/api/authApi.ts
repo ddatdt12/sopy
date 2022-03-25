@@ -2,15 +2,15 @@ import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {AuthState} from '@src/store/authSlice';
 import axiosInstance, {setToken} from './instance';
 const userApi = {
-    login: async (firebaseUser: FirebaseAuthTypes.User): Promise<AuthState> => {
-        setToken(firebaseUser.uid);
+    login: async (firebase_user_id: string): Promise<AuthState> => {
+        setToken(firebase_user_id);
         const {
             data: {data},
         } = await axiosInstance.post('/user/login');
         console.log('Login status: ', data);
 
         return {
-            token: firebaseUser.uid,
+            token: firebase_user_id,
             user: {...data},
         };
     },

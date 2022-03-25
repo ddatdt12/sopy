@@ -5,6 +5,7 @@ import Button from '@src/components/Button';
 import {UserMainTabProps} from '@src/navigation/user/type';
 import Events from '@src/screens/explore/event/events';
 import {Event} from '@src/screens/explore/event/types';
+import {useAppSelector} from '@src/store';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
@@ -15,6 +16,7 @@ import PopupDropdown from '../components/PopupDropdown';
 
 const UserProfileScreen: React.FC<UserMainTabProps<'Profile'>> = ({navigation}) => {
     const {t} = useTranslation();
+    const user = useAppSelector(state => state.auth.user);
     const [optionsViewVisible, setOptionsViewVisible] = useState(false);
     const renderItem = (item: Event) => {
         return <EventCard event={item} key={item.id} />;
@@ -39,7 +41,7 @@ const UserProfileScreen: React.FC<UserMainTabProps<'Profile'>> = ({navigation}) 
                         </TouchableOpacity>
                     </View>
                 </PopupDropdown>
-                <AvatarContainer name="Tan User" image="" style={{zIndex: -10}} />
+                <AvatarContainer name={user?.name} picture={user?.picture} style={{zIndex: -10}} />
 
                 <Text style={styles.aboutText}>{t('About me')}</Text>
                 <View style={styles.emailDescriptionContainer}>

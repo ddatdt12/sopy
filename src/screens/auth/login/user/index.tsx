@@ -1,4 +1,5 @@
 import {scaleSize} from '@core/utils';
+import {unwrapResult} from '@reduxjs/toolkit';
 import {IMAGES} from '@src/assets';
 import {COLORS, FONTS} from '@src/assets/const';
 import Text from '@src/components/Text';
@@ -19,7 +20,12 @@ const UserLoginScreen: React.FC<AppStackProps<'UserLogin'>> = ({navigation}) => 
     const handleFacebookLogin = async () => {
         const {user, error} = await facebookLogin();
         if (user) {
-            await dispatch(authActions.login(user));
+            const result = await dispatch(authActions.login(user.uid));
+            try {
+                await unwrapResult(result);
+            } catch (errorLogin: any) {
+                await dispatch(authActions.register(user));
+            }
         } else if (error) {
             Alert.alert('Error', error);
         }
@@ -27,8 +33,14 @@ const UserLoginScreen: React.FC<AppStackProps<'UserLogin'>> = ({navigation}) => 
     const handleGoogleLogin = async () => {
         //Just work only Android
         const {user, error} = await googleSignIn();
+        console.log(user);
         if (user) {
-            await dispatch(authActions.login(user));
+            const result = await dispatch(authActions.login(user.uid));
+            try {
+                await unwrapResult(result);
+            } catch (errorLogin: any) {
+                await dispatch(authActions.register(user));
+            }
         } else if (error) {
             Alert.alert('Error', error);
         }

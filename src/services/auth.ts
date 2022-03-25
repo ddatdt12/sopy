@@ -102,12 +102,12 @@ const facebookLogin = async (): Promise<AuthResponse> => {
 
         // Create a Firebase credential with the AccessToken
         const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
-        console.log(facebookCredential);
         const userCredential = await auth().signInWithCredential(facebookCredential);
         return {user: userCredential.user, error: undefined};
     } catch (error: any) {
         let errorMessage = error.message ?? 'Something went wrong';
 
+        console.log('Error fb: ', error);
         return {user: undefined, error: errorMessage};
     }
 

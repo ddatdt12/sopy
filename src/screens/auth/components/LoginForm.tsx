@@ -48,7 +48,7 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
         const {user, error} = await emailPasswordLogin({email, password});
         console.log({user, error});
         if (!error) {
-            await dispatch(authActions.login(user));
+            await dispatch(authActions.login(user?.uid));
         } else {
             Alert.alert(error);
         }
