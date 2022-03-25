@@ -1,37 +1,28 @@
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import axiosInstance from './instance';
-const authApi = {
-    login: async (firebaseUser: FirebaseAuthTypes.User) => {
+import {AuthState} from '@src/store/authSlice';
+import axiosInstance, {setToken} from './instance';
+const userApi = {
+    login: async (firebaseUser: FirebaseAuthTypes.User): Promise<AuthState> => {
+        setToken(firebaseUser.uid);
         const {
             data: {data},
-        } = await axiosInstance.post('/user/get-info', {});
-        console.log(data);
-        return data;
-        // return new Promise((resolve, reject) => {
-        //     setTimeout(() => {
-        //         resolve({
-        //             token: 'token',
-        //             refreshToken: 'refreshToken',
-        //             user: {
-        //                 id: 'userId',
-        //                 name: 'Đạt Đỗ',
-        //                 email: data.email,
-        //                 firebase_user_id: data.uid,
-        //                 bio: String,
-        //                 is_expert: true,
-        //                 avatar: 'https://picsum.photos/200',
-        //             },
-        //         });
-        //     }, 1000);
-        // });
+        } = await axiosInstance.get('/user/login');
+        console.log('Login status: ', data);
+        return {
+            token: firebaseUser.uid,
+            user: {...data},
+        };
     },
-
-    register: async (user: any) => {
-        const {
-            data: {data},
-        } = await axiosInstance.post('/user', {...user});
-        return data;
+    register: async (user: any): Promise<AuthState> => {
+        setToken(user.uid);
+        console.log('before call api register:', user);
+        const {data} = await axiosInstance.post('/user', user);
+        console.log('Login status: ', data);
+        return {
+            token: user.uid,
+            user: {...data},
+        };
     },
 };
 
-export default authApi;
+export default userApi;

@@ -14,12 +14,14 @@ import * as yup from 'yup';
 
 const schema = yup
     .object({
+        name: yup.string().required(),
         email: yup.string().email().required(),
         password: yup.string().min(6).max(100).required(),
         confirmPassword: yup.string().min(6).max(100).required(),
     })
     .required();
 export type RegisterData = {
+    name: string;
     email: string;
     password: string;
     confirmPassword: string;
@@ -36,6 +38,7 @@ const RegisterForm: React.FC = props => {
         setError,
     } = useForm<RegisterData>({
         defaultValues: {
+            name: '',
             email: '',
             password: '',
             confirmPassword: '',
@@ -52,7 +55,7 @@ const RegisterForm: React.FC = props => {
             return;
         }
 
-        const {email, password} = data;
+        const {name, email, password} = data;
 
         dispatch(authActions.loading());
         const {user, error} = await emailPasswordRegister({
@@ -60,16 +63,40 @@ const RegisterForm: React.FC = props => {
             password,
         });
 
-        if (!error) {
-            dispatch(authActions.login(user));
+        if (!error && user) {
+            dispatch(
+                authActions.register({
+                    firebase_user_id: user?.uid,
+                    email,
+                    name: user.displayName || name,
+                    picture: user.photoURL,
+                }),
+            );
         } else {
-            Alert.alert(error);
+            Alert.alert(error ?? 'Server Error');
         }
         dispatch(authActions.stopLoading());
         console.log({user, error});
     };
     return (
         <>
+            <Controller
+                control={control}
+                rules={{
+                    required: true,
+                }}
+                render={({field: {onChange, onBlur, value}}) => (
+                    <Input
+                        placeholder="Name"
+                        style={{marginTop: scaleSize(16)}}
+                        onBlur={onBlur}
+                        onChangeText={onChange}
+                        value={value}
+                        error={errors.name?.message}
+                    />
+                )}
+                name="name"
+            />
             <Controller
                 control={control}
                 rules={{

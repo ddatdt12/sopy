@@ -3,25 +3,25 @@ import {authApi} from '@src/api';
 
 export type AuthState = Partial<{
     token: string;
-    refreshToken: string;
-    userId: string;
     user: User;
     loading: boolean;
     error: string;
 }>;
 
 const login = createAsyncThunk('auth/login', async (data: any) => {
-    const response = await authApi.login(data);
-    return response;
+    const authState = await authApi.login(data);
+    return authState;
+});
+const register = createAsyncThunk('auth/register', async (data: any) => {
+    const authState = await authApi.register(data);
+    return authState;
 });
 
 export const initialState: AuthState = {
     error: undefined,
     loading: false,
-    refreshToken: undefined,
     token: undefined,
     user: undefined,
-    userId: undefined,
 };
 
 export const authSlice = createSlice({
@@ -49,8 +49,10 @@ export const authSlice = createSlice({
             return {...state, loading: false, ...action.payload};
         });
         builder.addCase(login.rejected, (state, {error}) => {
-            console.log(error);
             return initialState;
+        });
+        builder.addCase(register.fulfilled, (state, action: PayloadAction<any>) => {
+            return {...state, loading: false, ...action.payload};
         });
     },
 });
@@ -58,4 +60,5 @@ export const authSlice = createSlice({
 export const authActions = {
     ...authSlice.actions,
     login,
+    register,
 };

@@ -1,7 +1,7 @@
 import {scaleSize} from '@core/utils';
 import {IMAGES} from '@src/assets';
 import {COLORS, FONTS} from '@src/assets/const';
-import {RegisterScreenProps} from '@src/navigation/AppStackParams';
+import {AppStackProps} from '@src/navigation/AppStackParams';
 import {facebookLogin, googleSignIn} from '@src/services/auth';
 import {useAppDispatch} from '@src/store';
 import {authActions} from '@src/store/authSlice';
@@ -12,14 +12,14 @@ import ImageBackground from '../components/ImageBackground';
 import LogoButton from '../components/LogoButton';
 import RegisterForm from '../components/RegisterForm';
 
-const RegisterScreen: React.FC<RegisterScreenProps> = ({navigation}) => {
+const RegisterScreen: React.FC<AppStackProps<'Register'>> = ({navigation}) => {
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
 
     const handleFacebookLogin = async () => {
         const {user, error} = await facebookLogin();
         if (user) {
-            await dispatch(authActions.login(user));
+            await dispatch(authActions.register(user));
         } else if (error) {
             Alert.alert('error', error);
         }
@@ -27,7 +27,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({navigation}) => {
     const handleGoogleLogin = async () => {
         const {user, error} = await googleSignIn();
         if (user) {
-            await dispatch(authActions.login(user));
+            await dispatch(authActions.register(user));
         } else if (error) {
             Alert.alert('Error', error);
         }
