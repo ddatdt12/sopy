@@ -47,7 +47,7 @@ const UserLoginScreen: React.FC<AppStackProps<'UserLogin'>> = ({navigation}) => 
     };
     return (
         <ImageBackground source={IMAGES.bg_intro_step_1}>
-            <ScrollView contentContainerStyle={{paddingBottom: scaleSize(10)}}>
+            <ScrollView contentContainerStyle={{paddingBottom: scaleSize(20)}}>
                 <View style={styles.contentWrapper}>
                     <View style={styles.textWrapper}>
                         <Text style={styles.title}>{t('Welcome')}</Text>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     contentWrapper: {
         flex: 1,
         paddingHorizontal: scaleSize(30),
-        marginTop: '30%',
+        marginTop: '25%',
         paddingTop: scaleSize(60),
     },
     textWrapper: {

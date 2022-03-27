@@ -27,10 +27,8 @@ const ExploreScreen: React.FC = () => {
                     let data = [];
                     if (route === 'Event') {
                         data = await postApi.getAllEvents();
-                        console.log('Event: ', data);
                     } else {
                         data = await postApi.getAllPosts();
-                        console.log('Post: ', data);
                     }
                     if (mounted) {
                         setPostList(data);

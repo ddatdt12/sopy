@@ -5,7 +5,6 @@ import {authApi} from '@src/api';
 export type AuthState = Partial<{
     token: string;
     user: User;
-    loading: boolean;
     error: string;
 }>;
 
@@ -25,7 +24,6 @@ const register = createAsyncThunk('auth/register', async (user: FirebaseAuthType
 
 export const initialState: AuthState = {
     error: undefined,
-    loading: false,
     token: undefined,
     user: undefined,
 };
@@ -34,14 +32,8 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        loading: state => {
-            state.loading = true;
-        },
         logout: () => {
             return initialState;
-        },
-        stopLoading: state => {
-            state.loading = false;
         },
         update: (state, action: PayloadAction<AuthState>) => {
             state = {...state, ...action.payload};

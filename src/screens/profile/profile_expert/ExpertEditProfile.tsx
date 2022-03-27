@@ -32,7 +32,6 @@ const ExpertEditProfileScreen: React.FC<ExpertStackProps<'EditProfile'>> = ({nav
             {
                 text: 'OK',
                 onPress: async () => {
-                    console.log('check');
                     await firebaseLogout();
                     dispatch(authActions.logout());
                 },

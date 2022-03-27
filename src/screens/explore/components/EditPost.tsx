@@ -55,7 +55,6 @@ const EditPostScreen: React.FC<Props> = ({post, goBack, isVisible, updatePost}) 
         setSelectedTag(prev => (prev === tag ? undefined : tag));
     };
     const onSubmit = async (data: Data) => {
-        console.log(data);
         if (!image) {
             Alert.alert('Notice', 'Please select an image');
             return;

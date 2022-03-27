@@ -9,6 +9,8 @@ export const STORE_KEY = {
     USER_ID: 'userId',
 };
 export const RANDOM_IMAGE = 'https://picsum.photos/200/300';
+export const NON_AVATAR =
+    'https://firebasestorage.googleapis.com/v0/b/mental-heath-gdsc-uit.appspot.com/o/no-avatar.png?alt=media&token=0480e33f-9693-46df-ad1f-acbea7577d10';
 
 export const COLORS = {
     white_1: '#F5F9FD',

@@ -26,7 +26,6 @@ const EditProfile = (props: EditProfileProps) => {
             await requestCameraPermission();
         }
         launchCamera(option, res => {
-            console.log(res);
             if (res.didCancel) {
                 console.log('User Cancelled image picker');
             } else if (res.errorCode) {

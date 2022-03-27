@@ -34,7 +34,7 @@ const RegisterScreen: React.FC<AppStackProps<'Register'>> = ({navigation}) => {
     };
     return (
         <ImageBackground source={IMAGES.bg_intro_step_1}>
-            <ScrollView contentContainerStyle={{paddingBottom: scaleSize(20)}}>
+            <ScrollView contentContainerStyle={{flexGrow: 1, paddingBottom: scaleSize(20)}}>
                 <View style={styles.contentWrapper}>
                     <View style={styles.textWrapper}>
                         <Text style={styles.title}>Welcome</Text>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     contentWrapper: {
         flex: 1,
         paddingHorizontal: scaleSize(36),
-        marginTop: '30%',
+        marginTop: '18%',
         paddingTop: scaleSize(60),
     },
     textWrapper: {

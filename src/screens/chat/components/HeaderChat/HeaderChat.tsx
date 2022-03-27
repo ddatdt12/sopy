@@ -1,7 +1,7 @@
 import {isIOS, scaleSize} from '@core/utils';
 import {useNavigation} from '@react-navigation/native';
 import {IMAGES} from '@src/assets';
-import {COLORS, FONTS, RANDOM_IMAGE, STYLES} from '@src/assets/const';
+import {COLORS, FONTS, NON_AVATAR, RANDOM_IMAGE, STYLES} from '@src/assets/const';
 import {Stack} from '@src/components';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
@@ -29,15 +29,13 @@ interface IHeaderChat {
     profile?: boolean;
     goToProfile?: () => void;
     emotion?: boolean;
-    role?: 'user' | 'expert';
-    user: any;
+    user: User;
 }
 
 const HeaderChat: React.FC<IHeaderChat> = props => {
-    const {profile, emotion, role, user, goToProfile} = props;
+    const {profile, emotion, user, goToProfile} = props;
     const navigation = useNavigation();
     const {t} = useTranslation();
-
     const [optionsViewVisible, setOptionsViewVisible] = useState(false);
     const [typeProblemModalVisible, setTypeProblemModalVisible] = useState(false);
     const [uploadPictureModalVisible, setUploadPictureModalVisible] = useState(false);
@@ -192,7 +190,7 @@ const HeaderChat: React.FC<IHeaderChat> = props => {
                 }}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <BackButton />
-                    <ChatTitle name={user?.name} avatar={user?.avatar ?? RANDOM_IMAGE} />
+                    <ChatTitle name={user.name} avatar={user?.picture ?? NON_AVATAR} />
                 </View>
                 <IconButton
                     style={styles.optionsButton}

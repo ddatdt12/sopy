@@ -1,8 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MainChatScreen from '@src/screens/chat/main_chat';
 import ChatSearchScreen from '@src/screens/chat/search';
-// User
-import UserChatHomeScreen from '@src/screens/chat/user';
 import ChooseExpertScreen from '@src/screens/chat/user/withExpert';
 import ExpertProfileChatScreen from '@src/screens/chat/user/withExpert/ExpertProfile';
 import React from 'react';

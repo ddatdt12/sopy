@@ -1,22 +1,21 @@
 import {COLORS, STYLES} from '@src/assets/const';
-import {Event} from '@src/screens/explore/event/types';
 import React from 'react';
 import {StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle} from 'react-native';
 import {scaleSize} from '../../../../core/utils';
 
 interface EventCardProps {
-    event: Event;
+    event: Post;
     style?: StyleProp<ViewStyle>;
 }
 
 const EventCard = (props: EventCardProps) => {
     const {
-        event: {title, createdAt},
+        event: {title, created_at},
     } = props;
 
     return (
         <TouchableOpacity style={styles.container}>
-            <Text style={styles.time}>{createdAt?.toUTCString()}</Text>
+            <Text style={styles.time}>{created_at?.toUTCString()}</Text>
             <Text style={styles.content}>{title}</Text>
         </TouchableOpacity>
     );

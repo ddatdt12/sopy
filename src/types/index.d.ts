@@ -18,6 +18,7 @@ type User = {
     email: string;
     firebase_user_id: string;
     bio: string;
+    picture?: string;
     is_expert: boolean;
     created_at?: Date;
     updated_at?: Date;

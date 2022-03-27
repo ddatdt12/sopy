@@ -1,21 +1,46 @@
 import {scaleSize} from '@core/utils';
 import {useNavigation} from '@react-navigation/native';
+import userApi from '@src/api/userApi';
 import {COLORS, FONTS} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
 import Input from '@src/components/Input';
 import {UserChatStackProps} from '@src/navigation/user/type';
 import BackButton from '@src/screens/chat/components/BackButton';
-import React from 'react';
+import {getRandomUser} from '@src/utils/User';
+import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Image, ListRenderItem, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ContactData from '../../components/contact';
 import ContactList from '../../components/ContactList';
-import {Contact} from '../../components/types';
 const ChooseExpertScreen: React.FC = () => {
     const {t} = useTranslation();
     const navigation = useNavigation<UserChatStackProps<'ChooseExpert'>['navigation']>();
+    const [experts, setExperts] = useState<User[]>([]);
+
+    console.log('ChooseExpertScreen');
+    useEffect(() => {
+        let mounted = true;
+        userApi
+            .getAllUsers()
+            .then(data => {
+                if (!Array.isArray(data)) {
+                    return;
+                }
+                const expertsList = data.filter(user => user.is_expert);
+                console.log('expertsList: ', expertsList);
+                if (mounted) {
+                    setExperts(data.filter(user => user.is_expert));
+                }
+            })
+            .catch(e => {
+                console.log('Error: ', e);
+            });
+
+        return () => {
+            mounted = false;
+        };
+    }, []);
     return (
         <Box bgColor={COLORS.gray_1} container safeArea={true}>
             <View style={styles.top}>
@@ -33,8 +58,8 @@ const ChooseExpertScreen: React.FC = () => {
                 />
                 <View style={{height: '70%', marginVertical: scaleSize(14)}}>
                     <ContactList
-                        contacts={ContactData.filter(c => c.role === 'expert')}
-                        onContactPress={user => navigation.navigate('MainChat', {user})}
+                        contacts={experts}
+                        onContactPress={expert => navigation.navigate('MainChat', {user: expert})}
                     />
                 </View>
                 <Button
@@ -45,7 +70,7 @@ const ChooseExpertScreen: React.FC = () => {
                         height: scaleSize(44),
                         alignSelf: 'center',
                     }}
-                    onPress={() => navigation.push('MainChat', {user: ContactData[0]})}
+                    onPress={() => navigation.push('MainChat', {user: getRandomUser(experts)})}
                 />
             </View>
         </Box>

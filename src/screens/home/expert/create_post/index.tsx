@@ -67,9 +67,7 @@ const CreatePostScreen: React.FC<ExpertStackProps<'CreatePost'>> = ({navigation}
             firebase_user_id: user?.firebase_user_id,
         };
         try {
-            console.log(post);
             await postApi.createPost(post);
-            console.log('Add success!');
         } catch (errorApi: any) {
             Alert.alert('Notice', errorApi?.message ?? 'Server Error');
         }

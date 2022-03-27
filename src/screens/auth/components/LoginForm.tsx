@@ -9,7 +9,7 @@ import {AppStackProps} from '@src/navigation/AppStackParams';
 import {emailPasswordLogin} from '@src/services/auth';
 import {useAppDispatch, useAppSelector} from '@src/store';
 import {authActions} from '@src/store/authSlice';
-import React from 'react';
+import React, {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
 import {Alert, StyleSheet, View} from 'react-native';
@@ -30,7 +30,8 @@ type LoginFormProps = {};
 const LoginForm: React.FC<LoginFormProps> = ({}) => {
     const {t} = useTranslation();
     const {navigate} = useNavigation<AppStackProps<'UserLogin'>['navigation']>();
-    const {loading, error: authError} = useAppSelector(state => state.auth);
+    const {error: authError} = useAppSelector(state => state.auth);
+    const [loading, setLoading] = useState(false);
     const dispatch = useAppDispatch();
     const {
         control,
@@ -43,8 +44,9 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
         },
         resolver: yupResolver(schema),
     });
+    console.log(loading);
     const onSubmit = async ({email, password}: LoginData) => {
-        dispatch(authActions.loading());
+        setLoading(true);
         const {user, error} = await emailPasswordLogin({email, password});
         console.log({user, error});
         if (!error) {
@@ -52,7 +54,7 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
         } else {
             Alert.alert(error);
         }
-        dispatch(authActions.stopLoading());
+        setLoading(false);
 
         // await dispatch(authActions.login(user));
     };

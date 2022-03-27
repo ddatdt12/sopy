@@ -43,6 +43,26 @@ const postApi = {
         } = await axiosInstance.delete(`/post/${postId}`);
         return data;
     },
+    getPostsOfUser: async (firebase_user_id: string): Promise<Post[]> => {
+        const {
+            data: {data},
+        } = await axiosInstance.get('/post');
+        if (Array.isArray(data)) {
+            return (data as Post[]).filter(p => p.firebase_user_id === firebase_user_id && p.emotion > 0);
+        }
+        return data;
+    },
+    getEventsOfUser: async (firebase_user_id: string): Promise<Post[]> => {
+        const {
+            data: {data},
+        } = await axiosInstance.get('/post');
+        if (Array.isArray(data)) {
+            return (data as Post[]).filter(
+                p => p.firebase_user_id === firebase_user_id && (!p.emotion || p.emotion === 0),
+            );
+        }
+        return data;
+    },
 };
 
 export default postApi;

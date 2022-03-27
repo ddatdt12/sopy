@@ -1,14 +1,12 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import Box from '@src/components/Box';
-import {useNavigation} from '@react-navigation/native';
-import {useTranslation} from 'react-i18next';
-import {COLORS, FONTS, SIZES} from '@src/assets/const';
-import SearchBar from '@src/screens/chat/components/SearchBar';
-import ConversationList from '@src/screens/chat/components/ConversationList';
-import {ExpertMainTabProps} from '@src/navigation/expert/type';
 import {scaleSize} from '@core/utils';
-import ContactData from '../components/contact';
+import {COLORS, FONTS, SIZES} from '@src/assets/const';
+import Box from '@src/components/Box';
+import {ExpertMainTabProps} from '@src/navigation/expert/type';
+import ConversationList from '@src/screens/chat/components/ConversationList';
+import SearchBar from '@src/screens/chat/components/SearchBar';
+import React from 'react';
+import {useTranslation} from 'react-i18next';
+import {StyleSheet, Text, View} from 'react-native';
 
 const ExpertChatHomeScreen: React.FC<ExpertMainTabProps<'Chat'>> = ({navigation}) => {
     const {t} = useTranslation();
@@ -26,9 +24,13 @@ const ExpertChatHomeScreen: React.FC<ExpertMainTabProps<'Chat'>> = ({navigation}
                 />
             </View>
             <ConversationList
-                items={ContactData.filter(c => c.role !== 'expert')}
-                onItemPress={user => navigation.navigate('ExpertChatStack', {screen: 'WithUserChat', params: {user}})}
                 contentContainerStyle={{paddingHorizontal: scaleSize(15), paddingBottom: SIZES.bottomPadding}}
+                onItemPress={item => {
+                    navigation.navigate('ExpertChatStack', {
+                        screen: 'WithUserChat',
+                        params: {user: item},
+                    });
+                }}
             />
         </Box>
     );

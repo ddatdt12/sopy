@@ -34,10 +34,10 @@ export type UserProfileStackProps<T extends keyof UserProfileStackParamList> = N
 
 //Chat
 export type UserChatStackParamList = {
-    MainChat: {user: any; withStranger?: boolean};
+    MainChat: {user: User; withStranger?: boolean};
     ChatSearch: undefined;
     ChooseExpert: undefined;
-    ExpertProfileChat: undefined;
+    ExpertProfileChat: {expert: User};
 };
 export type UserChatStackProps<T extends keyof UserChatStackParamList> = NativeStackScreenProps<
     UserChatStackParamList,

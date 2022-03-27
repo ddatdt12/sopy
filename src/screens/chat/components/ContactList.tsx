@@ -17,15 +17,15 @@ import SeparateLine from './SeparateLine';
 import {Contact} from './types';
 
 type Props = {
-    onContactPress: (user: Contact) => void;
-    contacts: Contact[];
+    onContactPress: (user: User) => void;
+    contacts: User[];
     contentContainerStyle?: StyleProp<ViewStyle>;
 };
 
 const ContactList: React.FC<Props> = props => {
     const {contacts, onContactPress, contentContainerStyle} = props;
 
-    const renderItem: ListRenderItem<Contact> = ({item}) => {
+    const renderItem: ListRenderItem<User> = ({item}) => {
         return (
             <TouchableOpacity onPress={() => onContactPress(item)}>
                 <Stack
@@ -35,7 +35,7 @@ const ContactList: React.FC<Props> = props => {
                         alignItems: 'center',
                         height: scaleSize(95),
                     }}>
-                    <Image source={{uri: item.avatar}} style={styles.userAvatar} />
+                    <Image source={{uri: item.picture}} style={styles.userAvatar} />
                     <Text style={styles.userName}>{item.name}</Text>
                 </Stack>
             </TouchableOpacity>

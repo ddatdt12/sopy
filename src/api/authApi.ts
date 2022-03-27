@@ -1,7 +1,7 @@
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {AuthState} from '@src/store/authSlice';
 import axiosInstance, {setToken} from './instance';
-const userApi = {
+const authApi = {
     login: async (firebase_user_id: string): Promise<AuthState> => {
         setToken(firebase_user_id);
         const {
@@ -27,4 +27,4 @@ const userApi = {
     },
 };
 
-export default userApi;
+export default authApi;

@@ -1,5 +1,6 @@
 import {scaleSize} from '@core/utils';
 import {useNavigation} from '@react-navigation/native';
+import userApi from '@src/api/userApi';
 import {COLORS, FONTS, SIZES} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Input from '@src/components/Input';
@@ -7,7 +8,7 @@ import Stack from '@src/components/Stack';
 import {ExpertChatStackProps} from '@src/navigation/expert/type';
 import {UserStackProps} from '@src/navigation/user/type';
 import {useAppSelector} from '@src/store';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image, ListRenderItem, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -17,35 +18,32 @@ import {Contact} from '../components/types';
 
 const ChatSearchScreen: React.FC = () => {
     const {t} = useTranslation();
-    const {role} = useAppSelector(state => state.auth.user);
+    const user = useAppSelector(state => state.auth.user);
     const userNavigation = useNavigation<UserStackProps<'ChatStack'>['navigation']>();
     const expertNavigation = useNavigation<ExpertChatStackProps<'ExpertSearchChat'>['navigation']>();
-    const renderItem: ListRenderItem<Contact> = ({item}) => {
-        return (
-            <TouchableOpacity
-                onPress={() => {
-                    if (role === 'expert') {
-                        expertNavigation.navigate('WithUserChat', {user: item});
-                    } else {
-                        userNavigation.navigate('ChatStack', {
-                            screen: 'MainChat',
-                            params: {user: item},
-                        });
-                    }
-                }}>
-                <Stack
-                    direction="row"
-                    space={scaleSize(18)}
-                    style={{
-                        alignItems: 'center',
-                        height: scaleSize(95),
-                    }}>
-                    <Image source={{uri: item.avatar}} style={styles.userAvatar} />
-                    <Text style={styles.userName}>{item.name}</Text>
-                </Stack>
-            </TouchableOpacity>
-        );
-    };
+    const [contacts, setContacs] = useState<User[]>([]);
+
+    useEffect(() => {
+        let mounted = true;
+        userApi
+            .getAllUsers()
+            .then(data => {
+                if (!Array.isArray(data)) {
+                    return;
+                }
+                const contactList = data.filter(d => !d.is_expert && d.firebase_user_id !== user?.firebase_user_id);
+                if (mounted) {
+                    setContacs(contactList);
+                }
+            })
+            .catch(e => {
+                console.log('Error: ', e);
+            });
+
+        return () => {
+            mounted = false;
+        };
+    }, [user?.firebase_user_id]);
     return (
         <Box container bgColor={COLORS.gray_1} safeArea>
             <Stack
@@ -73,14 +71,14 @@ const ChatSearchScreen: React.FC = () => {
                 </Text>
             </Stack>
             <ContactList
-                contacts={ContactData.filter(c => c.role !== 'expert')}
-                onContactPress={user => {
-                    if (role === 'expert') {
-                        expertNavigation.navigate('WithUserChat', {user});
+                contacts={contacts}
+                onContactPress={contact => {
+                    if (contact.is_expert) {
+                        expertNavigation.navigate('WithUserChat', {user: contact});
                     } else {
                         userNavigation.navigate('ChatStack', {
                             screen: 'MainChat',
-                            params: {user},
+                            params: {user: contact},
                         });
                     }
                 }}

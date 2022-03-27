@@ -45,7 +45,6 @@ const UserEditProfileScreen: React.FC<UserProfileStackProps<'EditProfile'>> = ({
         setProfile(prev => ({...prev, [name]: value}));
         setIsDirty(true);
     };
-    console.log(profile);
 
     const handleSubmit = async () => {
         setLoading(true);

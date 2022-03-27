@@ -21,8 +21,8 @@ export type ExpertStackProps<T extends keyof ExpertStackParamList> = NativeStack
 
 export type ExpertChatStackParamList = {
     // Expert
-    WithUserChat: {user: Object};
-    UserProfileChat: undefined;
+    WithUserChat: {user: User};
+    UserProfileChat: {user: User};
     DashboardEmotionDiary: undefined;
     ExpertSearchChat: undefined;
 };

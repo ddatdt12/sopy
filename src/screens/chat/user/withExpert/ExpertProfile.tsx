@@ -1,22 +1,42 @@
 import {scaleSize} from '@core/utils';
-import {IMAGES} from '@src/assets';
-import {COLORS, FONTS} from '@src/assets/const';
-import {useTranslation} from 'react-i18next';
-import React from 'react';
-import {Image, StyleSheet, Text, View, ScrollView} from 'react-native';
-import {Box, Button} from '@src/components';
+import postApi from '@src/api/postApi';
+import {COLORS, FONTS, NON_AVATAR} from '@src/assets/const';
+import {Box} from '@src/components';
+import {UserChatStackProps} from '@src/navigation/user/type';
 import BackButton from '@src/screens/chat/components/BackButton';
-import EventCard from '@src/screens/profile/components/EventCard';
-import {Event} from '@src/screens/explore/event/types';
-import Events from '@src/screens/explore/event/events';
-import AvatarContainer from '@src/screens/profile/components/AvatarContainer';
 import Profile from '@src/screens/chat/components/Profile';
+import Events from '@src/screens/explore/event/events';
+import {Event} from '@src/screens/explore/event/types';
+import EventCard from '@src/screens/profile/components/EventCard';
+import React, {useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 
-const ExpertProfileChatScreen: React.FC = props => {
+const ExpertProfileChatScreen: React.FC<UserChatStackProps<'ExpertProfileChat'>> = ({route}) => {
     const {t} = useTranslation();
-    const renderItem = (item: Event) => {
+    const [events, setEvents] = useState<Post[]>([]);
+    const expert = route.params.expert;
+    const renderItem = (item: Post) => {
         return <EventCard event={item} key={item.id} />;
     };
+
+    useEffect(() => {
+        let mouted = true;
+        postApi
+            .getEventsOfUser(expert.firebase_user_id)
+            .then(data => {
+                if (mouted) {
+                    setEvents(data);
+                }
+            })
+            .catch(e => {
+                console.log('Error: ', e);
+            });
+
+        return () => {
+            mouted = true;
+        };
+    }, [expert.firebase_user_id]);
 
     return (
         <Box bgColor={COLORS.gray_1} container safeArea={true}>
@@ -25,18 +45,18 @@ const ExpertProfileChatScreen: React.FC = props => {
             </View>
 
             <ScrollView>
-                <Profile />
+                <Profile name={expert.name} image={expert.picture ?? NON_AVATAR} email={expert.email} />
 
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.descriptionText}>
-                        {t('About')}: {'Dat DT'}
+                        {t('About')}: {expert.bio}
                     </Text>
                 </View>
 
                 <Text style={styles.label}>{t('Activities')}</Text>
 
-                {Events.length ? (
-                    <View style={{paddingHorizontal: scaleSize(14)}}>{Events.map(renderItem)}</View>
+                {events.length ? (
+                    <View style={{paddingHorizontal: scaleSize(14)}}>{events.map(renderItem)}</View>
                 ) : (
                     <Text style={styles.noEventText}>No posts or events</Text>
                 )}

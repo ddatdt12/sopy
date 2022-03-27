@@ -10,10 +10,10 @@ const WithUserChatScreen: React.FC<ExpertChatStackProps<'WithUserChat'>> = ({nav
         <Box bgColor={COLORS.gray_1} container safeArea={true}>
             <HeaderChat
                 profile={true}
-                user={route?.params?.user}
-                goToProfile={() => navigation.navigate('UserProfileChat')}
+                user={route.params.user as User}
+                goToProfile={() => navigation.navigate('UserProfileChat', {user: route.params.user})}
             />
-            <BottomChat />
+            <BottomChat friend={route.params.user} />
         </Box>
     );
 };

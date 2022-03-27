@@ -1,5 +1,7 @@
-import {BASE_URL} from '@src/assets/const';
+// import {BASE_URL} from '@src/assets/const';
 import axios, {AxiosRequestConfig} from 'axios';
+
+const BASE_URL = 'https://mental-health-gdsc-app.herokuapp.com';
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
