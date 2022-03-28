@@ -6,6 +6,7 @@ import Loading from '@src/components/Loading';
 import {useChat} from '@src/context/ChatContext';
 import {useAppSelector} from '@src/store';
 import {selectUser} from '@src/store/selector/auth';
+import {User} from '@src/types';
 import React, {useCallback, useEffect, useState} from 'react';
 import {
     FlatList,
@@ -22,7 +23,7 @@ import SeparateLine from './SeparateLine';
 
 type Props = {
     contentContainerStyle?: StyleProp<ViewStyle>;
-    onItemPress: (user: User) => void;
+    onItemPress: (user: User, showEmotion?: boolean) => void;
 };
 type Message = {
     Content: string;
@@ -30,10 +31,11 @@ type Message = {
     Sender: string;
 };
 
-type Conversation = {
+export type Conversation = {
     id: string;
     friend: User;
     lastMessage: Message;
+    showEmotion?: boolean;
 };
 const ConversationList: React.FC<Props> = props => {
     const {contentContainerStyle, onItemPress} = props;
@@ -41,7 +43,6 @@ const ConversationList: React.FC<Props> = props => {
     const {ws} = useChat();
     const [conversations, setConversations] = useState<Conversation[]>([]);
     const [loading, setLoading] = useState(false);
-    const navigation = useNavigation<any>();
     useFocusEffect(
         useCallback(() => {
             let mounted = true;
@@ -55,6 +56,7 @@ const ConversationList: React.FC<Props> = props => {
                                 id: d.ChatID,
                                 friend: {...d.Friend},
                                 lastMessage: d.LastMessage,
+                                showEmotion: d.ShowEmotion,
                             })) ?? [];
                         console.log('List conversations: ', conversationsData);
                         if (mounted) {
@@ -75,18 +77,22 @@ const ConversationList: React.FC<Props> = props => {
 
     useEffect(() => {
         let mounted = true;
-        console.log('Conversation list: ', conversations);
         ws.onmessage = e => {
             const message = JSON.parse(e.data);
             if (message && user) {
                 chatApi
                     .getUserConversations(user.firebase_user_id)
                     .then(data => {
+                        console.log('checck emotions: ', data);
+                        if (!Array.isArray(data)) {
+                            return;
+                        }
                         const conversationsData: Conversation[] =
                             data?.map((d: any) => ({
                                 id: d.ChatID,
                                 friend: {...d.Friend},
                                 lastMessage: d.LastMessage,
+                                showEmotion: d.ShowEmotion,
                             })) ?? [];
                         console.log('List conversations: ', conversationsData);
                         if (mounted) {
@@ -110,7 +116,8 @@ const ConversationList: React.FC<Props> = props => {
         return (
             <TouchableOpacity
                 onPress={() => {
-                    onItemPress(item.friend);
+                    console.log('Conversation: ', item);
+                    onItemPress(item.friend, item.showEmotion);
                 }}>
                 <View style={styles.userDataContainer}>
                     <Image source={{uri: item.friend.picture}} style={styles.userAvatar} />

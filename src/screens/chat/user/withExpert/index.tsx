@@ -7,6 +7,7 @@ import Button from '@src/components/Button';
 import Input from '@src/components/Input';
 import {UserChatStackProps} from '@src/navigation/user/type';
 import BackButton from '@src/screens/chat/components/BackButton';
+import {User} from '@src/types';
 import {getRandomUser} from '@src/utils/User';
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';

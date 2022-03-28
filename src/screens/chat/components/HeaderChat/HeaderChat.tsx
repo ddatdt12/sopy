@@ -1,13 +1,17 @@
 import {isIOS, scaleSize} from '@core/utils';
 import {useNavigation} from '@react-navigation/native';
+import chatApi from '@src/api/chatApi';
 import {IMAGES} from '@src/assets';
-import {COLORS, FONTS, NON_AVATAR, RANDOM_IMAGE, STYLES} from '@src/assets/const';
+import {COLORS, FONTS, NON_AVATAR, STYLES} from '@src/assets/const';
 import {Stack} from '@src/components';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
 import IconButton from '@src/components/IconButton';
 import BackButton from '@src/screens/chat/components/BackButton';
 import ChatTitle from '@src/screens/chat/components/HeaderChat/ChatTitle';
+import {useAppSelector} from '@src/store';
+import {selectUser} from '@src/store/selector/auth';
+import {User} from '@src/types';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {
@@ -18,7 +22,6 @@ import {
     StyleSheet,
     Text,
     TextInput,
-    TouchableHighlight,
     TouchableOpacity,
     View,
 } from 'react-native';
@@ -34,6 +37,7 @@ interface IHeaderChat {
 
 const HeaderChat: React.FC<IHeaderChat> = props => {
     const {profile, emotion, user, goToProfile} = props;
+    const currentUSer = useAppSelector(selectUser);
     const navigation = useNavigation();
     const {t} = useTranslation();
     const [optionsViewVisible, setOptionsViewVisible] = useState(false);
@@ -58,7 +62,16 @@ const HeaderChat: React.FC<IHeaderChat> = props => {
 
     function shareEmotionDiaryAlert() {
         Alert.alert(t('Notice'), t('Are you sure you want to allow this expert to see your Emotion Diary?'), [
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
+            {
+                text: 'OK',
+                onPress: async () => {
+                    try {
+                        await chatApi.updateShowEmotionWithExpert(currentUSer!.firebase_user_id, user.firebase_user_id);
+                    } catch (error) {
+                        console.log('Error ShowEmotion: ', error?.message);
+                    }
+                },
+            },
             {text: t('Cancel'), onPress: () => console.log('Cancel pressed')},
         ]);
     }
@@ -214,7 +227,7 @@ const HeaderChat: React.FC<IHeaderChat> = props => {
                                         }}>
                                         <Text style={styles.optionsText}>{t('Go to profile')}</Text>
                                     </TouchableOpacity>
-                                    <Image source={IMAGES.line} style={styles.lineOption} />
+                                    <Image source={IMAGES.lineChat} style={styles.lineOption} />
                                 </View>
                             )}
 
@@ -223,14 +236,14 @@ const HeaderChat: React.FC<IHeaderChat> = props => {
                                     <TouchableOpacity onPress={shareEmotionDiaryAlert}>
                                         <Text style={styles.optionsText}>{t('Show Emotion Diary')}</Text>
                                     </TouchableOpacity>
-                                    <Image source={IMAGES.line} style={styles.lineOption} />
+                                    <Image source={IMAGES.lineChat} style={styles.lineOption} />
                                 </View>
                             )}
 
                             <TouchableOpacity onPress={deleteConversationAlert}>
                                 <Text style={styles.optionsText}>{t('Delete conversation')}</Text>
                             </TouchableOpacity>
-                            <Image source={IMAGES.line} style={styles.lineOption} />
+                            <Image source={IMAGES.lineChat} style={styles.lineOption} />
                             <TouchableOpacity onPress={reportAlert}>
                                 <Text style={styles.optionsText}>{t('Report')}</Text>
                             </TouchableOpacity>
@@ -238,7 +251,7 @@ const HeaderChat: React.FC<IHeaderChat> = props => {
                     ) : null}
                 </View>
             </View>
-            <Image source={IMAGES.line} style={styles.line} />
+            <Image source={IMAGES.lineChat} style={styles.line} />
         </Box>
     );
 };

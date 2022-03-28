@@ -25,10 +25,10 @@ const ExpertChatHomeScreen: React.FC<ExpertMainTabProps<'Chat'>> = ({navigation}
             </View>
             <ConversationList
                 contentContainerStyle={{paddingHorizontal: scaleSize(15), paddingBottom: SIZES.bottomPadding}}
-                onItemPress={item => {
+                onItemPress={(item, showEmotion) => {
                     navigation.navigate('ExpertChatStack', {
                         screen: 'WithUserChat',
-                        params: {user: item},
+                        params: {user: item, showEmotion},
                     });
                 }}
             />

@@ -45,7 +45,7 @@ const ExpertProfileChatScreen: React.FC<UserChatStackProps<'ExpertProfileChat'>>
             </View>
 
             <ScrollView>
-                <Profile name={expert.name} image={expert.picture ?? NON_AVATAR} email={expert.email} />
+                <Profile name={expert.name} picture={expert.picture ?? NON_AVATAR} email={expert.email} />
 
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.descriptionText}>

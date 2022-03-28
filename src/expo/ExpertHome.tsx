@@ -1,13 +1,11 @@
-import {IMAGES} from '@src/assets';
-import {ExpertMainTabProps, ExpertStackProps} from '@src/navigation/expert/type';
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-const ExpertHomeScreen: React.FC<ExpertMainTabProps<'Home'>> = ({navigation}) => {
+const ExpertHomeScreen: React.FC = () => {
     return (
         <View style={styles.container}>
-            <Image source={IMAGES.bg_intro_step_1} style={styles.backgroundTop} />
-            <Image source={IMAGES.bg_login_1} style={styles.backgroundBottom} resizeMode="contain" blurRadius={10} />
+            <Image source={require('./assets/imageTop.png')} style={styles.backgroundTop} />
+            <Image source={require('./assets/imageBottom.png')} style={styles.backgroundBottom} />
 
             <View style={styles.textContainer}>
                 <Text style={styles.text}>Hi Tan, </Text>
@@ -17,19 +15,19 @@ const ExpertHomeScreen: React.FC<ExpertMainTabProps<'Home'>> = ({navigation}) =>
                     <View style={styles.wrapper}>
                         <View style={styles.dot} />
                         <View style={styles.box}>
-                            <TouchableOpacity style={styles.Post} onPress={() => navigation.navigate('CreatePost')}>
+                            <TouchableOpacity style={styles.Post}>
                                 <Text style={styles.PostText}>Create post</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
 
-                    <Image source={IMAGES.line} style={styles.backgroundLine} />
+                    <Image source={require('./assets/imageLine.png')} style={styles.backgroundLine} />
 
                     <View style={styles.wrapper}>
                         <View style={styles.dot} />
                         <View style={styles.box}>
-                            <TouchableOpacity style={styles.Post} onPress={() => navigation.navigate('CreateEvent')}>
-                                <Text style={styles.PostText}>Create event</Text>
+                            <TouchableOpacity style={styles.Post}>
+                                <Text style={styles.PostText}> Create event </Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -49,15 +47,12 @@ const styles = StyleSheet.create({
         flex: 1,
         position: 'absolute',
         top: 0,
-        left: '-50%',
     },
     backgroundBottom: {
         flex: 1,
         position: 'absolute',
-        bottom: '-5%',
-        right: '-60%',
-        height: '50%',
-        width: '140%',
+        bottom: -25,
+        right: 0,
     },
     textContainer: {
         marginTop: 120,
@@ -90,6 +85,8 @@ const styles = StyleSheet.create({
         elevation: 14,
     },
     PostText: {
+        //alignItems:"center",
+        //justifyContent: "center",
         textAlign: 'center',
         fontSize: 24,
         color: '#8F9BB2',

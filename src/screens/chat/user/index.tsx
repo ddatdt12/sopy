@@ -8,6 +8,7 @@ import ConversationList from '@src/screens/chat/components/ConversationList';
 import SearchBar from '@src/screens/chat/components/SearchBar';
 import {useAppSelector} from '@src/store';
 import {selectUser} from '@src/store/selector/auth';
+import {User} from '@src/types';
 import {getRandomUser} from '@src/utils/User';
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';

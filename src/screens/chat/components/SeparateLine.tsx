@@ -3,7 +3,7 @@ import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 
 const SeparateLine: React.FC = () => {
-    return <Image style={{alignSelf: 'center'}} source={IMAGES.line} />;
+    return <Image style={{alignSelf: 'center'}} source={IMAGES.lineChat} />;
 };
 
 export default SeparateLine;

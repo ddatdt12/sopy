@@ -12,12 +12,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const MainChatScreen: React.FC<UserChatStackProps<'MainChat'>> = ({navigation, route}) => {
     const {withStranger, user: partner} = route.params;
 
+    console.log('My partner: ', partner);
     const withExpert = partner.is_expert;
     return (
         <Box bgColor={COLORS.gray_1} container safeArea>
             <HeaderChat
                 profile={!withStranger && withExpert}
-                emotion={!withStranger && withExpert}
+                emotion={withExpert}
                 user={route?.params?.user}
                 goToProfile={() =>
                     navigation.navigate('ExpertProfileChat', {

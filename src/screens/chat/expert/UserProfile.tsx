@@ -11,7 +11,7 @@ import Profile from '../components/Profile';
 
 const UserProfileChatScreen: React.FC<ExpertChatStackProps<'UserProfileChat'>> = ({navigation, route}) => {
     const {t} = useTranslation();
-    const user = route.params.user;
+    const {user, showEmotion} = route.params;
     return (
         <Box bgColor={COLORS.gray_1} container safeArea={true}>
             <View style={{marginTop: scaleSize(15)}}>
@@ -19,18 +19,20 @@ const UserProfileChatScreen: React.FC<ExpertChatStackProps<'UserProfileChat'>> =
             </View>
 
             <ScrollView contentContainerStyle={{flexGrow: 1}}>
-                <Profile name={user.name} image={user.picture ?? NON_AVATAR} email={user.email} />
-                <Button
-                    title={t('Emotion Diary')}
-                    style={{
-                        marginTop: scaleSize(25),
-                        width: scaleSize(180),
-                        height: scaleSize(40),
-                        alignSelf: 'center',
-                    }}
-                    textStyle={{color: COLORS.dark_blue_2}}
-                    onPress={() => navigation.navigate('DashboardEmotionDiary')}
-                />
+                <Profile name={user.name} picture={user.picture ?? NON_AVATAR} email={user.email} />
+                {showEmotion && (
+                    <Button
+                        title={t('Emotion Diary')}
+                        style={{
+                            marginTop: scaleSize(25),
+                            width: scaleSize(180),
+                            height: scaleSize(40),
+                            alignSelf: 'center',
+                        }}
+                        textStyle={{color: COLORS.dark_blue_2}}
+                        onPress={() => navigation.navigate('DashboardEmotionDiary')}
+                    />
+                )}
             </ScrollView>
         </Box>
     );

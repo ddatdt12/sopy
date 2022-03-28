@@ -1,6 +1,7 @@
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {CompositeScreenProps, NavigatorScreenParams} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {User} from '@src/types';
 import {MainTabParamsList} from '../TabNavigatorParams';
 
 export type ExpertMainTabProps<T extends keyof MainTabParamsList> = CompositeScreenProps<
@@ -21,8 +22,8 @@ export type ExpertStackProps<T extends keyof ExpertStackParamList> = NativeStack
 
 export type ExpertChatStackParamList = {
     // Expert
-    WithUserChat: {user: User};
-    UserProfileChat: {user: User};
+    WithUserChat: {user: User; showEmotion?: boolean};
+    UserProfileChat: {user: User; showEmotion?: boolean};
     DashboardEmotionDiary: undefined;
     ExpertSearchChat: undefined;
 };

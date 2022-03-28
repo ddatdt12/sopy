@@ -4,6 +4,7 @@ import {COLORS, RANDOM_IMAGE, STYLES} from '@src/assets/const';
 import {useChat} from '@src/context/ChatContext';
 import SplashScreen from '@src/screens/splash';
 import {useAppSelector} from '@src/store';
+import {User} from '@src/types';
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {Bubble, GiftedChat, IMessage, InputToolbar, Send} from 'react-native-gifted-chat';
@@ -17,7 +18,6 @@ const Messages: React.FC<MessagesProps> = ({friend}) => {
     const {ws} = useChat();
     const [messageList, setMessageList] = useState<IMessage[]>([]);
     const [loading, setLoading] = useState(false);
-    console.log('Friend: ', friend);
     useEffect(() => {
         let mounted = true;
         setMessageList([]);
