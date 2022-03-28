@@ -4,6 +4,7 @@ import IMAGES from '@src/assets/images';
 import {ExpertMainTabProps} from '@src/navigation/expert/type';
 import Events from '@src/screens/explore/event/events';
 import {Event} from '@src/screens/explore/event/types';
+import {useAppSelector} from '@src/store';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
@@ -18,9 +19,11 @@ const ExpertProfileScreen: React.FC<ExpertMainTabProps<'Profile'>> = ({navigatio
     };
     const [optionsViewVisible, setOptionsViewVisible] = useState(false);
     const {t} = useTranslation();
+    const user = useAppSelector(state => state.auth.user);
+
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView /*contentContainerStyle={{paddingBottom: SIZES.bottomBarHeight + scaleSize(20)}}*/>
+            <ScrollView>
                 <PopupDropdown visible={optionsViewVisible} visibleToggle={() => setOptionsViewVisible(prev => !prev)}>
                     <View style={styles.optionsView}>
                         <TouchableOpacity
@@ -36,29 +39,31 @@ const ExpertProfileScreen: React.FC<ExpertMainTabProps<'Profile'>> = ({navigatio
                         </TouchableOpacity>
                     </View>
                 </PopupDropdown>
-                <AvatarContainer name="Tan Expert" image="" />
 
+                <AvatarContainer name={user?.name} picture={user?.picture} />
                 <Text style={styles.aboutText}>{t('About me')}</Text>
 
                 <View style={styles.emailDescriptionContainer}>
                     <Text style={styles.descriptionText}>
-                        {t('Email')}: {'@gmail.com'}
+                        {t('Email')}: {user?.email}
                     </Text>
                 </View>
 
                 <View style={styles.aboutDescriptionContainer}>
                     <Text style={styles.descriptionText}>
-                        {t('About')}: {'Dat DT'}
+                        {t('About')}: {user?.bio}
                     </Text>
                 </View>
 
                 <Text style={styles.activitiesText}>{t('Activities')}</Text>
 
-                {Events.length ? (
-                    <View style={{paddingHorizontal: scaleSize(14)}}>{Events.map(renderItem)}</View>
-                ) : (
-                    <Text style={styles.noEventText}>No posts or events</Text>
-                )}
+                {
+                    /*Events.length*/ 0 ? (
+                        <View style={{paddingHorizontal: scaleSize(14)}}>{Events.map(renderItem)}</View>
+                    ) : (
+                        <Text style={styles.noEventText}>No posts or events</Text>
+                    )
+                }
             </ScrollView>
         </SafeAreaView>
     );

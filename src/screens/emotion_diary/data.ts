@@ -3,7 +3,7 @@ export type Feeling = {
     color: string;
     value: number;
     y?: number;
-    x?: 13;
+    x?: number;
     percentage?: string;
 };
 export type FeelingColor = {
@@ -29,6 +29,16 @@ const feelingStatistics: Feeling[] = [
         value: 30,
     },
     {
+        name: 'Scared',
+        color: '#A3A8AE',
+        value: 5,
+    },
+    {
+        name: 'Angry',
+        color: '#AB6ADE',
+        value: 60,
+    },
+    {
         name: 'Worry',
         color: '#9BE98F',
         value: 30,
@@ -39,19 +49,9 @@ const feelingStatistics: Feeling[] = [
         value: 40,
     },
     {
-        name: 'Angry',
-        color: '#AB6ADE',
-        value: 60,
-    },
-    {
         name: 'Depression',
         color: '#EFA922',
         value: 10,
-    },
-    {
-        name: 'Scared',
-        color: '#A3A8AE',
-        value: 5,
     },
 ];
 

@@ -1,19 +1,16 @@
 import {scaleSize} from '@core/utils';
-import {useFocusEffect} from '@react-navigation/native';
-import postApi from '@src/api/postApi';
-import {FONTS, RANDOM_IMAGE} from '@src/assets/const';
+import {FONTS} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
 import Loading from '@src/components/Loading';
 import Neumorph from '@src/components/Neumorph';
 import Stack from '@src/components/Stack';
+import {Post} from '@src/types';
+import {convertEmotionIntoNumber, POST_EMOTION} from '@src/utils';
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, ListRenderItem, StyleSheet, Text, View} from 'react-native';
-import ReactNativeModal from 'react-native-modal';
-import DetailsModal from '../components/DetailsModal';
+import {FlatList, ListRenderItem, StyleSheet} from 'react-native';
 import PostDetails from '../post_details';
-import PostDetailsHeader from '../post_details/PostDetailsHeader';
 import PostCard from './components/PostCard';
 // import Posts from './posts';
 // import {Post} from './types';
@@ -22,10 +19,23 @@ type Props = {
     loading?: boolean;
     forceRefresh?: () => void;
 };
-
+type Filter = 'All' | 'Happy' | 'Sad' | 'Scared' | 'Angry' | 'Worry' | 'Normal' | 'Depression';
 const PostsScreen: React.FC<Props> = ({postList, loading, forceRefresh}) => {
     const {t} = useTranslation();
     const [post, setPost] = useState<Post>();
+    const [filteredPosts, setFilteredPost] = useState<Post[]>([]);
+    const [filter, setFilter] = useState<Filter>('All');
+
+    console.log('Filter', filter);
+    useEffect(() => {
+        if (postList) {
+            if (filter === 'All') {
+                setFilteredPost(postList);
+            } else {
+                setFilteredPost(postList.filter(p => convertEmotionIntoNumber(p.emotion) === filter));
+            }
+        }
+    }, [postList, filter]);
 
     const renderItem: ListRenderItem<Post> = ({item}) => {
         return (
@@ -44,23 +54,55 @@ const PostsScreen: React.FC<Props> = ({postList, loading, forceRefresh}) => {
         <Box container safeArea={false}>
             <Stack direction="row" space={scaleSize(10)} style={styles.tabWrapper}>
                 <Neumorph borderRadius={scaleSize(60)}>
-                    <Button title={t('All')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
+                    <Button
+                        title={t('All')}
+                        selected={filter === 'All'}
+                        style={styles.button}
+                        textStyle={{...FONTS.h3}}
+                        onPress={() => {
+                            setFilter('All');
+                        }}
+                    />
                 </Neumorph>
                 <Neumorph borderRadius={scaleSize(60)}>
-                    <Button title={t('Happy')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
+                    <Button
+                        title={t('Happy')}
+                        selected={filter === 'Happy'}
+                        style={styles.button}
+                        textStyle={{...FONTS.h3}}
+                        onPress={() => {
+                            setFilter('Happy');
+                        }}
+                    />
                 </Neumorph>
                 <Neumorph borderRadius={scaleSize(60)}>
-                    <Button title={t('Sad')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
+                    <Button
+                        title={t('Sad')}
+                        selected={filter === 'Sad'}
+                        style={styles.button}
+                        textStyle={{...FONTS.h3}}
+                        onPress={() => {
+                            setFilter('Sad');
+                        }}
+                    />
                 </Neumorph>
                 <Neumorph borderRadius={scaleSize(60)}>
-                    <Button title={t('Scared')} style={styles.button} textStyle={{...FONTS.h3}} onPress={() => {}} />
+                    <Button
+                        title={t('Scared')}
+                        selected={filter === 'Scared'}
+                        style={styles.button}
+                        textStyle={{...FONTS.h3}}
+                        onPress={() => {
+                            setFilter('Scared');
+                        }}
+                    />
                 </Neumorph>
             </Stack>
             {loading ? (
                 <Loading />
             ) : (
                 <FlatList
-                    data={postList}
+                    data={filteredPosts}
                     renderItem={renderItem}
                     numColumns={2}
                     keyExtractor={item => item.id}

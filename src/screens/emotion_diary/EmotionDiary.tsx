@@ -1,16 +1,20 @@
 import {scaleSize} from '@core/utils';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import feelApi from '@src/api/feelApi';
 import {COLORS, SIZES, STYLES} from '@src/assets/const';
 import Box from '@src/components/Box';
 import Button from '@src/components/Button';
+import Loading from '@src/components/Loading';
 import {UserProfileStackProps} from '@src/navigation/user/type';
-import React, {useState} from 'react';
+import {useAppSelector} from '@src/store';
+import {Feel} from '@src/types';
+import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Calendar, DateData} from 'react-native-calendars';
+import {Feelings} from '../home/user/feeling';
 import Arrow from './components/Arrow';
 import DiaryCard from './components/DiaryCard';
-import {diaryList} from './data';
 
 type Props = {};
 
@@ -18,8 +22,35 @@ const EmotionDiaryScreen: React.FC = () => {
     const {t} = useTranslation();
     const navigation = useNavigation<UserProfileStackProps<'EmotionDiary'>['navigation']>();
     const [selectedDate, setSelectedDate] = useState<DateData | null>(null);
+    const user = useAppSelector(state => state.auth.user);
+    const [loading, setLoading] = useState(false);
+    const [feel, setFeel] = useState<Feel[]>([]);
 
     const renderArrow = (direction: 'left' | 'right') => <Arrow variant={direction} />;
+    useFocusEffect(
+        React.useCallback(() => {
+            let mounted = true;
+            setLoading(true);
+            (async () => {
+                try {
+                    const feels = await feelApi.getUserFeel(user.firebase_user_id);
+                    console.log(feels);
+                    if (mounted && feels) {
+                        setFeel(feels);
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+                if (mounted) {
+                    setLoading(false);
+                }
+            })();
+
+            return () => {
+                mounted = false;
+            };
+        }, [user.firebase_user_id]),
+    );
 
     return (
         <Box bgColor={COLORS.gray_1} container safeArea={false}>
@@ -70,9 +101,21 @@ const EmotionDiaryScreen: React.FC = () => {
                     style={styles.calendar}
                 />
                 {/* <ListDiary data={diaryList} /> */}
-                {diaryList.map(diary => (
-                    <DiaryCard key={diary.id} {...diary} />
-                ))}
+
+                {loading ? (
+                    <Loading />
+                ) : (
+                    <>
+                        {feel.map(diary => (
+                            <DiaryCard
+                                key={diary.id}
+                                time={diary.created_at!}
+                                feel={Feelings[diary.feel_id - 1].name}
+                                reason={diary.reason}
+                            />
+                        ))}
+                    </>
+                )}
             </ScrollView>
         </Box>
     );

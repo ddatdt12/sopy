@@ -1,6 +1,7 @@
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {authApi} from '@src/api';
+import {User} from '@src/types';
 
 export type AuthState = Partial<{
     token: string;
@@ -38,23 +39,19 @@ export const authSlice = createSlice({
         update: (state, action: PayloadAction<AuthState>) => {
             state = {...state, ...action.payload};
         },
+        refreshUser: (state, action: PayloadAction<User>) => {
+            state.user = {...state.user, ...action.payload};
+        },
     },
     extraReducers: builder => {
-        builder.addCase(login.pending, state => {
-            console.log('Pending login');
-            state.loading = true;
-        });
         builder.addCase(login.fulfilled, (state, action: PayloadAction<any>) => {
-            return {...state, loading: false, ...action.payload};
+            return {...state, ...action.payload};
         });
         builder.addCase(login.rejected, () => {
             return initialState;
         });
-        builder.addCase(register.pending, (state, action: PayloadAction<any>) => {
-            state.loading = true;
-        });
         builder.addCase(register.fulfilled, (state, action: PayloadAction<any>) => {
-            return {...state, loading: false, ...action.payload};
+            return {...state, ...action.payload};
         });
         builder.addCase(register.rejected, (state, action: PayloadAction<any>) => {
             return initialState;

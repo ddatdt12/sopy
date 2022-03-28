@@ -5,11 +5,14 @@ import DismissKeyboardView from '@src/components/DismissKeyboardView';
 import Stack from '@src/components/Stack';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Dimensions, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Alert, Dimensions, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import {Feeling, Feelings} from '../feeling';
 import FeelingCard from './FeelingCard';
+import {useAppSelector} from '@src/store';
+import { Feel, User } from '@src/types';
 import Textarea from './Textarea';
+import feelApi from '@src/api/feelApi';
 
 interface IFeelingModal {
     modalVisible?: boolean;
@@ -21,12 +24,41 @@ const FeelingModal: React.FC<IFeelingModal> = ({modalVisible, setModalVisible}) 
     const {t} = useTranslation();
     const [selectedFeel, setSelectedFeel] = useState<Feeling | undefined>(undefined);
     const [reason, setReason] = useState<string>('');
+    const user = useAppSelector(state => state.auth.user);
 
-    const handlePress = () => {
+    function Notice() {
+        Alert.alert('Notice', 'Create Emotion Diary successfully', [
+            {
+                text: 'OK',
+                onPress: async () => {
+                    handleCancelPress();
+                },
+            },
+            {text: 'Exit', onPress: () => {
+                handleCancelPress();}},
+        ]);
+    }
+
+    const handlePress = async () => {
         console.log({
             reason,
             feel: selectedFeel,
         });
+        
+        const newFeel: Feel = {
+            id: "",
+            firebase_user_id: user.firebase_user_id,
+            feel_id: selectedFeel!.number,
+            reason: reason,
+        }
+        try {
+            console.log("pre create: ", newFeel)
+            const res = await feelApi.createFeel(newFeel);
+            console.log("after create: ", res);
+        } catch (error) {
+            console.log(error);
+        }
+        Notice();
     };
     const handleCancelPress = () => {
         setModalVisible(false);

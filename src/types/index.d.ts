@@ -1,4 +1,4 @@
-type Post = {
+export type Post = {
     id: string;
     title: string;
     emotion: number; //  Post: >0, Event: 0
@@ -12,7 +12,7 @@ type Post = {
     deleted_at?: Date;
 };
 
-type User = {
+export type User = {
     id: string;
     name: string;
     email: string;
@@ -25,4 +25,15 @@ type User = {
     deleted?: boolean;
     deleted_at?: Date;
     picture?: string;
+};
+
+export type Feel = {
+    id: string;
+    firebase_user_id: string;
+    feel_id: number;
+    reason: string;
+    created_at?: Date;
+    updated_at?: Date;
+    deleted?: boolean;
+    deleted_at?: Date;
 };

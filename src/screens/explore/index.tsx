@@ -3,6 +3,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import postApi from '@src/api/postApi';
 import {COLORS} from '@src/assets/const';
 import Box from '@src/components/Box';
+import {Post} from '@src/types';
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {StyleSheet} from 'react-native';
@@ -13,7 +14,6 @@ import PostDetailsScreen from './post_details';
 import SearchScreen from './search';
 
 const ExploreScreen: React.FC = () => {
-    const {t} = useTranslation();
     const [route, setRoute] = useState<'Post' | 'Event'>('Post');
     const [postList, setPostList] = useState<Post[]>([]);
     const [loading, setLoading] = useState(false);

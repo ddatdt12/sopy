@@ -1,29 +1,38 @@
 import {scaleSize} from '@core/utils';
-import {COLORS, FONTS} from '@src/assets/const';
+import userApi from '@src/api/userApi';
+import {COLORS, FONTS, NON_AVATAR} from '@src/assets/const';
 import {Box, Button, Header} from '@src/components';
 import Neumorph from '@src/components/Neumorph';
 import {UserProfileStackProps} from '@src/navigation/user/type';
 import {firebaseLogout} from '@src/services/auth';
 import {uploadImage} from '@src/services/firebaseStorage';
-import {useAppDispatch} from '@src/store';
+import {useAppDispatch, useAppSelector} from '@src/store';
 import {authActions} from '@src/store/authSlice';
-import React, {useState} from 'react';
+import {User} from '@src/types';
+import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Alert, StyleSheet, View} from 'react-native';
 import EditProfile from '../components/EditProfile';
 
+type ProfileEditForm = {
+    name: string;
+    avatar?: string;
+    uri?: string;
+};
 const UserEditProfileScreen: React.FC<UserProfileStackProps<'EditProfile'>> = ({navigation}) => {
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
-    const [profile, setProfile] = useState({
-        name: 'Đạt ĐT',
-        avatar: 'https://picsum.photos/id/237/200/300',
-        uri: 'https://picsum.photos/id/237/200/300',
+    const user = useAppSelector(state => state.auth.user);
+    const [profile, setProfile] = useState<ProfileEditForm>({
+        name: '',
     });
-
     const [isDirty, setIsDirty] = useState(false);
     const [isImageChange, setIsImageChange] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setProfile({name: user!.name, avatar: user!.picture, uri: user!.picture});
+    }, [user]);
 
     function alertLogout() {
         Alert.alert('Notice', 'Are you sure want to log out', [
@@ -38,6 +47,17 @@ const UserEditProfileScreen: React.FC<UserProfileStackProps<'EditProfile'>> = ({
         ]);
     }
 
+    function alertUpdateSuccess() {
+        Alert.alert('Notice', 'Update profile successfully', [
+            {
+                text: 'OK',
+                onPress: async () => {
+                    navigation.goBack();
+                },
+            },
+        ]);
+    }
+
     const onChangeData = (name: string, value: any) => {
         if (name === 'uri' && value) {
             setIsImageChange(true);
@@ -48,7 +68,6 @@ const UserEditProfileScreen: React.FC<UserProfileStackProps<'EditProfile'>> = ({
 
     const handleSubmit = async () => {
         setLoading(true);
-        console.log(profile);
         if (isImageChange && profile.uri) {
             const {url, error} = await uploadImage(profile.uri);
             if (!error && url) {
@@ -61,7 +80,34 @@ const UserEditProfileScreen: React.FC<UserProfileStackProps<'EditProfile'>> = ({
                 Alert.alert('Error', error);
             }
         }
+
+        let url = user?.picture;
+        if (profile.uri && profile.uri !== profile.avatar) {
+            const res = await uploadImage(profile.uri);
+            if (res.error || !res.url) {
+                Alert.alert('Notice', res.error);
+                setLoading(false);
+                return;
+            }
+            url = res.url;
+        }
+
+        const newProfile = {
+            id: user!.id,
+            name: profile.name,
+            firebase_user_id: user!.firebase_user_id,
+            picture: url,
+            bio: user!.bio,
+        };
+
+        try {
+            const updated = await userApi.updateProfile(newProfile as User);
+            dispatch(authActions.refreshUser(updated));
+        } catch (errorApi: any) {
+            Alert.alert('Notice', errorApi?.message ?? 'Server Error');
+        }
         setLoading(false);
+        alertUpdateSuccess();
     };
     return (
         <Box container bgColor={COLORS.gray_1} safeArea loading={loading}>
@@ -80,7 +126,8 @@ const UserEditProfileScreen: React.FC<UserProfileStackProps<'EditProfile'>> = ({
                     />
                 )}
             />
-            <EditProfile name={profile.name} image={profile.uri} onChangeData={onChangeData} />
+
+            <EditProfile name={profile.name} image={profile!.uri ?? NON_AVATAR} onChangeData={onChangeData} />
             <View style={styles.buttonWrapper}>
                 <Neumorph borderRadius={scaleSize(60)}>
                     <Button

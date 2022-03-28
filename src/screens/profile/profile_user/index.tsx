@@ -21,6 +21,7 @@ const UserProfileScreen: React.FC<UserMainTabProps<'Profile'>> = ({navigation}) 
     const renderItem = (item: Event) => {
         return <EventCard event={item} key={item.id} />;
     };
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView /*contentContainerStyle={{paddingBottom: SIZES.bottomBarHeight + scaleSize(20)}}*/>
@@ -41,12 +42,12 @@ const UserProfileScreen: React.FC<UserMainTabProps<'Profile'>> = ({navigation}) 
                         </TouchableOpacity>
                     </View>
                 </PopupDropdown>
-                <AvatarContainer name={user?.name} picture={user?.picture} style={{zIndex: -10}} />
 
+                <AvatarContainer name={user?.name} picture={user?.picture} style={{zIndex: -10}} />
                 <Text style={styles.aboutText}>{t('About me')}</Text>
                 <View style={styles.emailDescriptionContainer}>
                     <Text style={styles.descriptionText}>
-                        {t('Email')}: {'@gmail.com'}
+                        {t('Email')}: {user?.email}
                     </Text>
                 </View>
 
