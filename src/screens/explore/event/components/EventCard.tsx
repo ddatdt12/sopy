@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: scaleSize(120),
         flex: 1,
+        borderRadius: scaleSize(10),
     },
     content: {
         flex: 2,

@@ -1,6 +1,8 @@
 import {COLORS, STYLES} from '@src/assets/const';
+import {Post} from '@src/types';
+import dayjs from 'dayjs';
 import React from 'react';
-import {StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle} from 'react-native';
+import {StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
 import {scaleSize} from '../../../../core/utils';
 
 interface EventCardProps {
@@ -12,10 +14,10 @@ const EventCard = (props: EventCardProps) => {
     const {
         event: {title, created_at},
     } = props;
-
+    const formatDate = dayjs(created_at! * 1000).format('HH:mm, DD MMM YYYY');
     return (
         <TouchableOpacity style={styles.container}>
-            <Text style={styles.time}>{created_at?.toUTCString()}</Text>
+            <Text style={styles.time}>{formatDate}</Text>
             <Text style={styles.content}>{title}</Text>
         </TouchableOpacity>
     );

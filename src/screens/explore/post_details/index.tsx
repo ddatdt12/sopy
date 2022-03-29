@@ -2,6 +2,8 @@ import {scaleSize} from '@core/utils';
 import postApi from '@src/api/postApi';
 import {COLORS} from '@src/assets/const';
 import Box from '@src/components/Box';
+import {Post} from '@src/types';
+import dayjs from 'dayjs';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Alert, Image, ScrollView, StyleSheet, Text, View} from 'react-native';
@@ -22,7 +24,7 @@ const PostDetails: React.FC<Props> = ({post: selectedPost, modalVisible, setModa
     const [optionModalVisible, setOptionModalVisible] = useState(false);
     const [editPostVisible, setEditPostVisible] = useState(false);
     const [post, setPost] = useState(selectedPost);
-
+    const formatDate = dayjs(post.created_at! * 1000).format('dddd DD MMM YYYY, HH:mm');
     const handleDeletePress = async () => {
         try {
             await postApi.deletePost(post.id);
@@ -56,9 +58,13 @@ const PostDetails: React.FC<Props> = ({post: selectedPost, modalVisible, setModa
                     expertId={post.firebase_user_id}
                     openOptionModal={() => setOptionModalVisible(true)}
                 />
-                <Box container paddingHorizontal={scaleSize(20)}>
-                    <ScrollView>
-                        <Text style={styles.smallText}>Thứ 6, 21/1/2022, 22:41 </Text>
+                <Box container>
+                    <ScrollView
+                        contentContainerStyle={{
+                            paddingHorizontal: scaleSize(20),
+                            paddingBottom: scaleSize(40),
+                        }}>
+                        <Text style={styles.smallText}>{formatDate}</Text>
                         <View style={styles.marginY}>
                             <Text style={styles.title}>{post?.title}</Text>
                         </View>
@@ -68,7 +74,18 @@ const PostDetails: React.FC<Props> = ({post: selectedPost, modalVisible, setModa
                                 {post?.detail}
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem veritatis tempora
                                 totam qui eius quas magni vero sunt sed. Corrupti, unde omnis excepturi in qui labore
-                                exercitationem necessitatibus error.
+                                exercitationem necessitatibus error. Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Harum tempora, ducimus autem ratione excepturi minima accusamus expedita a numquam
+                                ex eum qui perspiciatis omnis. Voluptas adipisci veniam cumque magni fugit. Lorem ipsum
+                                dolor sit, amet consectetur adipisicing elit. A perferendis officiis magnam repellendus
+                                consequatur reiciendis labore at laborum, odio provident recusandae ut facere velit
+                                vero, impedit maiores eos, veniam accusamus ad deleniti quam exercitationem! Nemo qui,
+                                quibusdam ut reiciendis maxime inventore repudiandae obcaecati provident neque incidunt
+                                id molestiae architecto! Veniam inventore pariatur odit praesentium temporibus deserunt
+                                deleniti modi ipsa magni? Repellat, et eaque ad nulla nemo dignissimos quam iure sed
+                                ullam consequuntur consectetur. Numquam quae libero at incidunt vero minus perferendis,
+                                nam voluptatum saepe veritatis rem deleniti aperiam eum voluptatibus odit consequatur
+                                nisi, facilis maiores accusamus illo? Alias, dolor unde.
                             </Text>
                         </View>
                         <Box marginTop={scaleSize(20)}>

@@ -53,11 +53,11 @@ const CreateEventScreen: React.FC<ExpertStackProps<'CreateEvent'>> = ({navigatio
             detail: data.description,
             emotion: 0,
             firebase_user_id: user?.firebase_user_id,
-            image: url,
+            picture: url,
         };
         try {
             await postApi.createPost(event);
-            console.log('create event successfully');
+            Alert.alert('Notice', 'Create post successfully', [{text: 'OK', onPress: () => navigation.goBack()}]);
         } catch (errorApi: any) {
             Alert.alert('Notice', errorApi?.message ?? 'Server Error');
         }

@@ -1,18 +1,18 @@
 import {scaleSize} from '@core/utils';
+import feelApi from '@src/api/feelApi';
 import {COLORS} from '@src/assets/const';
 import Button from '@src/components/Button';
 import DismissKeyboardView from '@src/components/DismissKeyboardView';
 import Stack from '@src/components/Stack';
+import {useAppSelector} from '@src/store';
+import {Feel} from '@src/types';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Alert, Dimensions, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import {Feeling, Feelings} from '../feeling';
 import FeelingCard from './FeelingCard';
-import {useAppSelector} from '@src/store';
-import { Feel, User } from '@src/types';
 import Textarea from './Textarea';
-import feelApi from '@src/api/feelApi';
 
 interface IFeelingModal {
     modalVisible?: boolean;
@@ -24,9 +24,10 @@ const FeelingModal: React.FC<IFeelingModal> = ({modalVisible, setModalVisible}) 
     const {t} = useTranslation();
     const [selectedFeel, setSelectedFeel] = useState<Feeling | undefined>(undefined);
     const [reason, setReason] = useState<string>('');
+    const [loading, setLoading] = useState(false);
     const user = useAppSelector(state => state.auth.user);
 
-    function Notice() {
+    const Notice = () => {
         Alert.alert('Notice', 'Create Emotion Diary successfully', [
             {
                 text: 'OK',
@@ -34,30 +35,28 @@ const FeelingModal: React.FC<IFeelingModal> = ({modalVisible, setModalVisible}) 
                     handleCancelPress();
                 },
             },
-            {text: 'Exit', onPress: () => {
-                handleCancelPress();}},
         ]);
-    }
+    };
 
     const handlePress = async () => {
         console.log({
             reason,
             feel: selectedFeel,
         });
-        
+
         const newFeel: Feel = {
-            id: "",
-            firebase_user_id: user.firebase_user_id,
+            id: '',
+            firebase_user_id: user!.firebase_user_id,
             feel_id: selectedFeel!.number,
             reason: reason,
-        }
+        };
         try {
-            console.log("pre create: ", newFeel)
+            setLoading(true);
             const res = await feelApi.createFeel(newFeel);
-            console.log("after create: ", res);
         } catch (error) {
             console.log(error);
         }
+        setLoading(false);
         Notice();
     };
     const handleCancelPress = () => {
@@ -102,6 +101,7 @@ const FeelingModal: React.FC<IFeelingModal> = ({modalVisible, setModalVisible}) 
                                                 <FeelingCard
                                                     feeling={feel}
                                                     size={width - scaleSize(2)}
+                                                    selected={feel === selectedFeel}
                                                     onPress={() => setSelectedFeel(feel)}
                                                 />
                                                 <Textarea
@@ -124,6 +124,7 @@ const FeelingModal: React.FC<IFeelingModal> = ({modalVisible, setModalVisible}) 
                                 onPress={handlePress}
                                 color={COLORS.white_1}
                                 style={styles.button}
+                                loading={loading}
                             />
                             <Button
                                 title={t('Cancel')}

@@ -36,4 +36,11 @@ export default {
         reflex: require('./splash/reflex.png'),
         shape: require('./splash/shape.png'),
     },
+
+    //Home
+    home_user: {
+        box: require('./user_home/box.png'),
+        circle_box: require('./user_home/circle_box.png'),
+        tam_giac: require('./user_home/tam_giac.png'),
+    },
 };

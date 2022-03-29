@@ -22,19 +22,17 @@ const EmotionDiaryScreen: React.FC = () => {
     const {t} = useTranslation();
     const navigation = useNavigation<UserProfileStackProps<'EmotionDiary'>['navigation']>();
     const [selectedDate, setSelectedDate] = useState<DateData | null>(null);
-    const user = useAppSelector(state => state.auth.user);
     const [loading, setLoading] = useState(false);
     const [feel, setFeel] = useState<Feel[]>([]);
 
-    const renderArrow = (direction: 'left' | 'right') => <Arrow variant={direction} />;
     useFocusEffect(
         React.useCallback(() => {
             let mounted = true;
             setLoading(true);
             (async () => {
                 try {
-                    const feels = await feelApi.getUserFeel(user.firebase_user_id);
-                    console.log(feels);
+                    const feels = await feelApi.getUserFeel();
+                    console.log('Feels: ', feels);
                     if (mounted && feels) {
                         setFeel(feels);
                     }
@@ -49,8 +47,9 @@ const EmotionDiaryScreen: React.FC = () => {
             return () => {
                 mounted = false;
             };
-        }, [user.firebase_user_id]),
+        }, []),
     );
+    const renderArrow = (direction: 'left' | 'right') => <Arrow variant={direction} />;
 
     return (
         <Box bgColor={COLORS.gray_1} container safeArea={false}>

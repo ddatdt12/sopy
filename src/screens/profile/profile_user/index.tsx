@@ -18,13 +18,10 @@ const UserProfileScreen: React.FC<UserMainTabProps<'Profile'>> = ({navigation}) 
     const {t} = useTranslation();
     const user = useAppSelector(state => state.auth.user);
     const [optionsViewVisible, setOptionsViewVisible] = useState(false);
-    const renderItem = (item: Event) => {
-        return <EventCard event={item} key={item.id} />;
-    };
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView /*contentContainerStyle={{paddingBottom: SIZES.bottomBarHeight + scaleSize(20)}}*/>
+            <ScrollView contentContainerStyle={{flexGrow: 1}}>
                 <PopupDropdown visible={optionsViewVisible} visibleToggle={() => setOptionsViewVisible(prev => !prev)}>
                     <View style={styles.optionsView}>
                         <TouchableOpacity
@@ -66,17 +63,6 @@ const UserProfileScreen: React.FC<UserMainTabProps<'Profile'>> = ({navigation}) 
                         })
                     }
                 />
-
-                <View style={{paddingHorizontal: scaleSize(16), marginTop: scaleSize(20)}}>
-                    <Text style={styles.activitiesText}>{t('Interested Posts and Events')}</Text>
-                    {Events.length ? (
-                        <View>{Events.map(renderItem)}</View>
-                    ) : (
-                        <Text style={styles.noEventText}>No interested posts or events</Text>
-                    )}
-                </View>
-
-                {/* <Text style={styles.noEventText}>No posts or events</Text> */}
             </ScrollView>
         </SafeAreaView>
     );

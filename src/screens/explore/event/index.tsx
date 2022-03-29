@@ -1,10 +1,10 @@
 import {scaleSize} from '@core/utils';
-import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {useNavigation} from '@react-navigation/native';
 import {RANDOM_IMAGE, SIZES} from '@src/assets/const';
 import {Box} from '@src/components';
 import Loading from '@src/components/Loading';
 import {MainTabCompositeProps} from '@src/navigation/AppStackParams';
+import {Post} from '@src/types';
 import React, {useState} from 'react';
 import {FlatList, ListRenderItem, StyleSheet, View} from 'react-native';
 import PostDetails from '../post_details';
@@ -19,13 +19,12 @@ type Props = {
 const EventScreen: React.FC<Props> = props => {
     const {eventList, loading} = props;
     const [post, setPost] = useState<Post>();
-    const navigation = useNavigation<MainTabCompositeProps<'Explore'>['navigation']>();
     const renderItem: ListRenderItem<Post> = ({item}) => {
         return (
             <EventCard
                 title={item.title}
                 description={item.detail}
-                image={RANDOM_IMAGE}
+                image={item.picture}
                 onPress={() => {
                     setPost(item);
                 }}

@@ -68,6 +68,7 @@ const CreatePostScreen: React.FC<ExpertStackProps<'CreatePost'>> = ({navigation}
         };
         try {
             await postApi.createPost(post);
+            Alert.alert('Notice', 'Create post successfully', [{text: 'OK', onPress: () => navigation.goBack()}]);
         } catch (errorApi: any) {
             Alert.alert('Notice', errorApi?.message ?? 'Server Error');
         }
@@ -92,7 +93,7 @@ const CreatePostScreen: React.FC<ExpertStackProps<'CreatePost'>> = ({navigation}
         });
     };
     return (
-        <Box container bgColor={COLORS.gray_1}>
+        <Box container bgColor={COLORS.gray_1} loading={loading}>
             <DismissKeyboardView>
                 <ScrollView contentContainerStyle={{flexGrow: 1, paddingBottom: scaleSize(20)}}>
                     <Header

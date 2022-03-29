@@ -1,10 +1,14 @@
 import {scaleSize} from '@core/utils';
-import {COLORS, FONTS, STYLES} from '@src/assets/const';
+import {useFocusEffect} from '@react-navigation/native';
+import postApi from '@src/api/postApi';
+import {COLORS, FONTS, SIZES, STYLES} from '@src/assets/const';
 import IMAGES from '@src/assets/images';
+import Loading from '@src/components/Loading';
 import {ExpertMainTabProps} from '@src/navigation/expert/type';
 import Events from '@src/screens/explore/event/events';
 import {Event} from '@src/screens/explore/event/types';
 import {useAppSelector} from '@src/store';
+import {Post} from '@src/types';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
@@ -14,16 +18,40 @@ import EventCard from '../components/EventCard';
 import PopupDropdown from '../components/PopupDropdown';
 
 const ExpertProfileScreen: React.FC<ExpertMainTabProps<'Profile'>> = ({navigation}) => {
-    const renderItem = (item: Event) => {
+    const renderItem = (item: Post) => {
         return <EventCard event={item} key={item.id} />;
     };
     const [optionsViewVisible, setOptionsViewVisible] = useState(false);
     const {t} = useTranslation();
     const user = useAppSelector(state => state.auth.user);
+    const [loading, setLoading] = useState(false);
+    const [posts, setPosts] = useState<Post[]>([]);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            let mounted = true;
+            setLoading(true);
+            (async () => {
+                try {
+                    const data = await postApi.getAllPostOfUser(user!.firebase_user_id);
+                    setPosts(data);
+                } catch (error) {
+                    console.log(error);
+                }
+                if (mounted) {
+                    setLoading(false);
+                }
+            })();
+
+            return () => {
+                mounted = false;
+            };
+        }, [user]),
+    );
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView>
+            <ScrollView contentContainerStyle={{paddingBottom: SIZES.bottomBarHeight + scaleSize(20)}}>
                 <PopupDropdown visible={optionsViewVisible} visibleToggle={() => setOptionsViewVisible(prev => !prev)}>
                     <View style={styles.optionsView}>
                         <TouchableOpacity
@@ -57,13 +85,13 @@ const ExpertProfileScreen: React.FC<ExpertMainTabProps<'Profile'>> = ({navigatio
 
                 <Text style={styles.activitiesText}>{t('Activities')}</Text>
 
-                {
-                    /*Events.length*/ 0 ? (
-                        <View style={{paddingHorizontal: scaleSize(14)}}>{Events.map(renderItem)}</View>
-                    ) : (
-                        <Text style={styles.noEventText}>No posts or events</Text>
-                    )
-                }
+                {loading ? (
+                    <Loading />
+                ) : posts.length !== 0 ? (
+                    <View style={{paddingHorizontal: scaleSize(14)}}>{posts.map(renderItem)}</View>
+                ) : (
+                    <Text style={styles.noEventText}>No posts or events</Text>
+                )}
             </ScrollView>
         </SafeAreaView>
     );

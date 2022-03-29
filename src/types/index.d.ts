@@ -6,7 +6,7 @@ export type Post = {
     picture: string;
     firebase_user_id: string;
     expert: User;
-    created_at?: Date;
+    created_at?: number;
     updated_at?: Date;
     deleted?: boolean;
     deleted_at?: Date;
@@ -24,7 +24,6 @@ export type User = {
     updated_at?: Date;
     deleted?: boolean;
     deleted_at?: Date;
-    picture?: string;
 };
 
 export type Feel = {
