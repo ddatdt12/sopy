@@ -20,8 +20,9 @@ const UserProfileScreen: React.FC<UserMainTabProps<'Profile'>> = ({navigation}) 
     const [optionsViewVisible, setOptionsViewVisible] = useState(false);
     const selectedLanguageCode = i18n.language;
 
+    console.log('Langeuage: ', selectedLanguageCode);
     const handleChangeLanguagePress = () => {
-        return i18n.changeLanguage(selectedLanguageCode === 'en' ? 'vi' : 'en');
+        return i18n.changeLanguage(selectedLanguageCode === 'en' ? 'vn' : 'en');
     };
     return (
         <SafeAreaView style={styles.container}>
@@ -40,7 +41,7 @@ const UserProfileScreen: React.FC<UserMainTabProps<'Profile'>> = ({navigation}) 
                         <Image source={IMAGES.optionsLine} style={styles.lineOption} />
                         <TouchableOpacity onPress={handleChangeLanguagePress}>
                             <Text style={styles.optionsText}>
-                                {t('Change languages')}: {selectedLanguageCode === 'vi' ? 'VN' : 'EN'}
+                                {t('Change languages')}: {selectedLanguageCode === 'vn' ? 'VN' : 'EN'}
                             </Text>
                         </TouchableOpacity>
                     </View>

@@ -102,6 +102,7 @@ const Messages: React.FC<MessagesProps> = ({friend, isAnonymous}) => {
                 console.log('Mounted', mounted);
                 clearInterval(timer);
             };
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [user, friend.firebase_user_id]),
     );
 

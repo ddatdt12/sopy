@@ -27,7 +27,7 @@ const ExpertProfileScreen: React.FC<ExpertMainTabProps<'Profile'>> = ({navigatio
     const selectedLanguageCode = i18n.language;
 
     const handleChangeLanguagePress = () => {
-        return i18n.changeLanguage(selectedLanguageCode === 'en' ? 'vi' : 'en');
+        return i18n.changeLanguage(selectedLanguageCode === 'en' ? 'vn' : 'en');
     };
     useFocusEffect(
         React.useCallback(() => {
@@ -68,7 +68,7 @@ const ExpertProfileScreen: React.FC<ExpertMainTabProps<'Profile'>> = ({navigatio
                         <Image source={IMAGES.optionsLine} style={styles.lineOption} />
                         <TouchableOpacity onPress={handleChangeLanguagePress}>
                             <Text style={styles.optionsText}>
-                                {t('Change languages')}: {selectedLanguageCode === 'vi' ? 'EN' : 'VN'}
+                                {t('Change languages')}: {selectedLanguageCode === 'vn' ? 'VN' : 'EN'}
                             </Text>
                         </TouchableOpacity>
                     </View>
