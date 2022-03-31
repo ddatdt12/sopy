@@ -5,6 +5,7 @@ import {COLORS} from '@src/assets/const';
 import {scaleSize} from '@core/utils';
 import {useTranslation} from 'react-i18next';
 import {feelingColors} from '../data';
+import dayjs from 'dayjs';
 
 type Props = {
     time: Date;
@@ -16,16 +17,20 @@ const DiaryCard = (props: Props) => {
     const {t} = useTranslation();
     const {time, feel, reason} = props;
     const feelColors = feelingColors.find(f => f.label === feel)?.color;
-    var tmpString = time.toString()
-    var tmpNumber: number = +tmpString;
-    var getTime = new Date(tmpNumber * 1000);
-    //console.log(getTime);
+
+    const formatDate = dayjs(time).format('HH:mm, DD/MM/YYYY');
 
     return (
         <View style={[styles.card]}>
             <View>
                 <Text style={styles.titleLabel}>
-                    Time: <Text style={{color: COLORS.gray_4}}>{`${getTime.getHours()}:${getTime.getMinutes()} - ${getTime.getDate()}/${getTime.getMonth()}/${getTime.getFullYear()}`}</Text>
+                    Time:{' '}
+                    <Text
+                        style={{
+                            color: COLORS.gray_4,
+                        }}>
+                        {formatDate}
+                    </Text>
                 </Text>
             </View>
             <View style={styles.lineWrapper}>

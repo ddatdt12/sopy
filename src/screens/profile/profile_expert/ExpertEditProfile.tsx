@@ -39,7 +39,7 @@ const ExpertEditProfileScreen: React.FC<ExpertStackProps<'EditProfile'>> = ({nav
     }, [user]);
 
     function alertLogout() {
-        Alert.alert('Notice', 'Are you sure want to log out', [
+        Alert.alert(t('Notice'), t('Are you sure want to log out'), [
             {
                 text: 'OK',
                 onPress: async () => {
@@ -47,12 +47,12 @@ const ExpertEditProfileScreen: React.FC<ExpertStackProps<'EditProfile'>> = ({nav
                     dispatch(authActions.logout());
                 },
             },
-            {text: 'Cancel', onPress: () => console.log('Cancel Pressed')},
+            {text: t('Cancel'), onPress: () => console.log('Cancel Pressed')},
         ]);
     }
 
     function alertUpdateSuccess() {
-        Alert.alert('Notice', 'Update profile successfully', [
+        Alert.alert(t('Notice'), t('Update profile successfully'), [
             {
                 text: 'OK',
                 onPress: async () => {
@@ -78,9 +78,9 @@ const ExpertEditProfileScreen: React.FC<ExpertStackProps<'EditProfile'>> = ({nav
 
                 setIsImageChange(false);
                 setIsDirty(false);
-                Alert.alert('', 'Update profile successfully');
+                Alert.alert('', t('Update profile successfully'));
             } else {
-                Alert.alert('Error', error);
+                Alert.alert(t('Error'), error);
             }
         }
 
@@ -88,7 +88,7 @@ const ExpertEditProfileScreen: React.FC<ExpertStackProps<'EditProfile'>> = ({nav
         if (profile.uri && profile.uri !== profile.avatar) {
             const res = await uploadImage(profile.uri);
             if (res.error || !res.url) {
-                Alert.alert('Notice', res.error);
+                Alert.alert(t('Notice'), res.error);
                 setLoading(false);
                 return;
             }
@@ -107,7 +107,7 @@ const ExpertEditProfileScreen: React.FC<ExpertStackProps<'EditProfile'>> = ({nav
             const updated = await userApi.updateProfile(newProfile as User);
             dispatch(authActions.refreshUser(updated));
         } catch (errorApi: any) {
-            Alert.alert('Notice', errorApi?.message ?? 'Server Error');
+            Alert.alert(t('Notice'), errorApi?.message ?? t('Server Error'));
         }
         setLoading(false);
         alertUpdateSuccess();
@@ -115,12 +115,12 @@ const ExpertEditProfileScreen: React.FC<ExpertStackProps<'EditProfile'>> = ({nav
     return (
         <Box container safeArea bgColor={COLORS.gray_1} loading={loading}>
             <Header
-                title="Edit Profile"
+                title={t('Edit Profile')}
                 canGoBack={navigation.canGoBack()}
                 goBack={() => navigation.goBack()}
                 headerRight={() => (
                     <Button
-                        title="Done"
+                        title={t('Done')}
                         onPress={handleSubmit}
                         disabled={!isDirty || !(profile?.uri || profile?.name)}
                         variant="secondary"
@@ -134,13 +134,13 @@ const ExpertEditProfileScreen: React.FC<ExpertStackProps<'EditProfile'>> = ({nav
                 }}>
                 <EditProfile name={profile.name} image={profile.uri ?? NON_AVATAR} onChangeData={onChangeData} />
                 <View style={styles.textInputContainer}>
-                    <Text style={styles.aboutLabel}>About</Text>
+                    <Text style={styles.aboutLabel}>{t('About')}</Text>
                     <Input defaultValue={profile.about} onChangeText={text => onChangeData('about', text)} />
                 </View>
                 <View style={styles.buttonWrapper}>
                     <Neumorph borderRadius={scaleSize(60)}>
                         <Button
-                            title="Log out"
+                            title={t('Log out')}
                             style={{paddingHorizontal: scaleSize(40)}}
                             textStyle={{color: COLORS.black_1}}
                             onPress={() => alertLogout()}

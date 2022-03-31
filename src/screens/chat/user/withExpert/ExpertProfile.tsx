@@ -8,6 +8,7 @@ import Profile from '@src/screens/chat/components/Profile';
 import Events from '@src/screens/explore/event/events';
 import {Event} from '@src/screens/explore/event/types';
 import EventCard from '@src/screens/profile/components/EventCard';
+import {Post} from '@src/types';
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';

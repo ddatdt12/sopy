@@ -31,7 +31,7 @@ export type Feel = {
     firebase_user_id: string;
     feel_id: number;
     reason: string;
-    created_at?: Date;
+    created_at?: number;
     updated_at?: Date;
     deleted?: boolean;
     deleted_at?: Date;

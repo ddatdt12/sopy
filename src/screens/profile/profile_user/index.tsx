@@ -15,10 +15,14 @@ import EventCard from '../components/EventCard';
 import PopupDropdown from '../components/PopupDropdown';
 
 const UserProfileScreen: React.FC<UserMainTabProps<'Profile'>> = ({navigation}) => {
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
     const user = useAppSelector(state => state.auth.user);
     const [optionsViewVisible, setOptionsViewVisible] = useState(false);
+    const selectedLanguageCode = i18n.language;
 
+    const handleChangeLanguagePress = () => {
+        return i18n.changeLanguage(selectedLanguageCode === 'en' ? 'vi' : 'en');
+    };
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -34,8 +38,10 @@ const UserProfileScreen: React.FC<UserMainTabProps<'Profile'>> = ({navigation}) 
                             <Text style={styles.optionsText}>{t('Edit Profile')}</Text>
                         </TouchableOpacity>
                         <Image source={IMAGES.optionsLine} style={styles.lineOption} />
-                        <TouchableOpacity>
-                            <Text style={styles.optionsText}>{t('Change to Vietnamese')}</Text>
+                        <TouchableOpacity onPress={handleChangeLanguagePress}>
+                            <Text style={styles.optionsText}>
+                                {t('Change languages')}: {selectedLanguageCode === 'vi' ? 'VN' : 'EN'}
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </PopupDropdown>
@@ -49,12 +55,11 @@ const UserProfileScreen: React.FC<UserMainTabProps<'Profile'>> = ({navigation}) 
                 </View>
 
                 <Button
-                    title="Emotion Diary"
+                    title={t('Emotion Diary')}
                     style={{
-                        width: scaleSize(155),
-                        height: scaleSize(40),
                         alignSelf: 'center',
                         marginTop: scaleSize(25),
+                        paddingVertical: scaleSize(12),
                     }}
                     textStyle={{color: COLORS.dark_blue_2, fontSize: scaleSize(16)}}
                     onPress={() =>

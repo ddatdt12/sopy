@@ -105,10 +105,12 @@ const facebookLogin = async (): Promise<AuthResponse> => {
         const userCredential = await auth().signInWithCredential(facebookCredential);
         return {user: userCredential.user, error: undefined};
     } catch (error: any) {
-        let errorMessage = error.message ?? 'Something went wrong';
-
+        let errorMessage = error.message;
+        if (error.code === 'auth/account-exists-with-different-credential') {
+            errorMessage = 'That email address with Facebook is already in use!';
+        }
         console.log('Error fb: ', error);
-        return {user: undefined, error: errorMessage};
+        return {user: undefined, error: errorMessage ?? 'Something went wrong'};
     }
 
     // Sign-in the user with the credential

@@ -22,5 +22,3 @@ const LinearStroke: React.FC<Props> = ({children, style}) => {
 };
 
 export default LinearStroke;
-
-const styles = StyleSheet.create({});

@@ -24,7 +24,7 @@ export type ExpertChatStackParamList = {
     // Expert
     WithUserChat: {user: User; showEmotion?: boolean};
     UserProfileChat: {user: User; showEmotion?: boolean};
-    DashboardEmotionDiary: undefined;
+    DashboardEmotionDiary: {userId?: string};
     ExpertSearchChat: undefined;
 };
 

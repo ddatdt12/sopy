@@ -1,5 +1,5 @@
 import React from 'react';
-import {Keyboard, KeyboardAvoidingView, ScrollView, TouchableWithoutFeedback, ViewProps} from 'react-native';
+import {Keyboard, TouchableWithoutFeedback} from 'react-native';
 
 const DismissKeyboardView: React.FC = props => {
     const {children} = props;

@@ -1,6 +1,7 @@
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {CompositeScreenProps, NavigatorScreenParams} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {User} from '@src/types';
 import {MainTabParamsList} from '../TabNavigatorParams';
 
 export type UserMainTabProps<T extends keyof MainTabParamsList> = CompositeScreenProps<

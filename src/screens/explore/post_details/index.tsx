@@ -30,7 +30,7 @@ const PostDetails: React.FC<Props> = ({post: selectedPost, modalVisible, setModa
             await postApi.deletePost(post.id);
             forceRefresh?.();
             setOptionModalVisible(false);
-            Alert.alert('Success', 'Post deleted successfully!', [
+            Alert.alert(t('Success'), t('Post deleted successfully!'), [
                 {
                     text: 'OK',
                     onPress: () => {
@@ -40,7 +40,7 @@ const PostDetails: React.FC<Props> = ({post: selectedPost, modalVisible, setModa
             ]);
         } catch (error) {
             console.log(error);
-            Alert.alert('Error', 'Server error occurred!');
+            Alert.alert(t('Error'), t('Server error occurred!'));
         }
     };
     const handleEditPress = () => {
@@ -70,23 +70,7 @@ const PostDetails: React.FC<Props> = ({post: selectedPost, modalVisible, setModa
                         </View>
                         <Image source={{uri: post.picture}} style={styles.image} />
                         <View style={styles.marginY}>
-                            <Text style={styles.description}>
-                                {post?.detail}
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem veritatis tempora
-                                totam qui eius quas magni vero sunt sed. Corrupti, unde omnis excepturi in qui labore
-                                exercitationem necessitatibus error. Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Harum tempora, ducimus autem ratione excepturi minima accusamus expedita a numquam
-                                ex eum qui perspiciatis omnis. Voluptas adipisci veniam cumque magni fugit. Lorem ipsum
-                                dolor sit, amet consectetur adipisicing elit. A perferendis officiis magnam repellendus
-                                consequatur reiciendis labore at laborum, odio provident recusandae ut facere velit
-                                vero, impedit maiores eos, veniam accusamus ad deleniti quam exercitationem! Nemo qui,
-                                quibusdam ut reiciendis maxime inventore repudiandae obcaecati provident neque incidunt
-                                id molestiae architecto! Veniam inventore pariatur odit praesentium temporibus deserunt
-                                deleniti modi ipsa magni? Repellat, et eaque ad nulla nemo dignissimos quam iure sed
-                                ullam consequuntur consectetur. Numquam quae libero at incidunt vero minus perferendis,
-                                nam voluptatum saepe veritatis rem deleniti aperiam eum voluptatibus odit consequatur
-                                nisi, facilis maiores accusamus illo? Alias, dolor unde.
-                            </Text>
+                            <Text style={styles.description}>{post?.detail}</Text>
                         </View>
                         <Box marginTop={scaleSize(20)}>
                             <Text>{post?.expert.name}</Text>
@@ -101,16 +85,16 @@ const PostDetails: React.FC<Props> = ({post: selectedPost, modalVisible, setModa
                 }}
                 onDeletePress={() => {
                     Alert.alert(
-                        'Delete',
-                        'Are you sure you want to delete this entry?',
+                        t('Delete'),
+                        t('Are you sure you want to delete this entry?'),
                         [
                             {
-                                text: 'Delete',
+                                text: t('Delete'),
                                 onPress: handleDeletePress,
                                 style: 'default',
                             },
                             {
-                                text: 'Cancel',
+                                text: '',
                                 style: 'cancel',
                             },
                         ],

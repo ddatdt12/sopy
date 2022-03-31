@@ -1,11 +1,7 @@
-import {scaleSize} from '@core/utils';
-import {useNavigation} from '@react-navigation/native';
 import {COLORS, FONTS, SIZES} from '@src/assets/const';
-import Button from '@src/components/Button';
-import Neumorph from '@src/components/Neumorph';
 import React from 'react';
-import {StyleSheet, View, Text, Image, ImageSourcePropType} from 'react-native';
-
+import {Image, ImageSourcePropType, StyleSheet, Text, View} from 'react-native';
+import {useTranslation} from 'react-i18next';
 interface IIntroProps {
     text: string;
     bgImage: ImageSourcePropType;
@@ -14,6 +10,7 @@ interface IIntroProps {
 }
 
 const Intro: React.FC<IIntroProps> = ({text, bgImage, image, last}) => {
+    const {t} = useTranslation();
     return (
         <View style={styles.container}>
             <Image
@@ -37,7 +34,7 @@ const Intro: React.FC<IIntroProps> = ({text, bgImage, image, last}) => {
                 resizeMode="cover"
             />
             <View style={styles.descriptionContainer}>
-                <Text style={styles.descriptionText}>{text}</Text>
+                <Text style={styles.descriptionText}>{t(text)}</Text>
             </View>
         </View>
     );

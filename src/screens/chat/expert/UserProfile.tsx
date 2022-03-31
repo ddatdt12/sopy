@@ -25,12 +25,12 @@ const UserProfileChatScreen: React.FC<ExpertChatStackProps<'UserProfileChat'>> =
                         title={t('Emotion Diary')}
                         style={{
                             marginTop: scaleSize(25),
-                            width: scaleSize(180),
-                            height: scaleSize(40),
                             alignSelf: 'center',
+                            paddingHorizontal: scaleSize(20),
+                            paddingVertical: scaleSize(10),
                         }}
                         textStyle={{color: COLORS.dark_blue_2}}
-                        onPress={() => navigation.navigate('DashboardEmotionDiary')}
+                        onPress={() => navigation.navigate('DashboardEmotionDiary', {userId: user.firebase_user_id})}
                     />
                 )}
             </ScrollView>

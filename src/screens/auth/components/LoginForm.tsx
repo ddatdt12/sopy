@@ -50,7 +50,7 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
         const {user, error} = await emailPasswordLogin({email, password});
         console.log({user, error});
         if (!error) {
-            await dispatch(authActions.login(user?.uid));
+            await dispatch(authActions.login(user!.uid));
         } else {
             Alert.alert(error);
         }
@@ -68,7 +68,7 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
                 }}
                 render={({field: {onChange, onBlur, value}}) => (
                     <Input
-                        placeholder="Email"
+                        placeholder={t("Email")}
                         style={{marginTop: scaleSize(8)}}
                         onBlur={onBlur}
                         onChangeText={onChange}
@@ -82,7 +82,7 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
                 control={control}
                 render={({field: {onChange, onBlur, value}}) => (
                     <Input
-                        placeholder="Password"
+                        placeholder={t("Password")}
                         onBlur={onBlur}
                         style={{marginTop: scaleSize(18)}}
                         onChangeText={onChange}

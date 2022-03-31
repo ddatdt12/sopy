@@ -5,15 +5,13 @@ import Box from '@src/components/Box';
 import Button from '@src/components/Button';
 import {UserMainTabProps} from '@src/navigation/user/type';
 import ConversationList from '@src/screens/chat/components/ConversationList';
-import SearchBar from '@src/screens/chat/components/SearchBar';
 import {useAppSelector} from '@src/store';
 import {selectUser} from '@src/store/selector/auth';
 import {User} from '@src/types';
 import {getRandomUser} from '@src/utils/User';
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {StyleSheet, Text, View} from 'react-native';
-
+import {Alert, StyleSheet, Text, View} from 'react-native';
 const UserChatHomeScreen: React.FC<UserMainTabProps<'Chat'>> = ({navigation}) => {
     const {t} = useTranslation();
     const [users, setUsers] = useState<User[]>([]);
@@ -42,12 +40,21 @@ const UserChatHomeScreen: React.FC<UserMainTabProps<'Chat'>> = ({navigation}) =>
                     <Button
                         title={t('With stranger')}
                         style={styles.button}
-                        onPress={() =>
+                        onPress={() => {
+                            const userList = users.filter(u => !u.is_expert);
+                            if (userList.length === 0) {
+                                Alert.alert(t('No user found'));
+                                return;
+                            }
+
                             navigation.push('ChatStack', {
                                 screen: 'MainChat',
-                                params: {user: getRandomUser(users, user), withStranger: true},
-                            })
-                        }
+                                params: {
+                                    user: getRandomUser(userList, user),
+                                    withStranger: true,
+                                },
+                            });
+                        }}
                         textStyle={{fontWeight: '600'}}
                     />
 
@@ -59,14 +66,6 @@ const UserChatHomeScreen: React.FC<UserMainTabProps<'Chat'>> = ({navigation}) =>
                     />
                 </View>
                 <Text style={styles.label}>{t('Messages')}</Text>
-
-                <SearchBar
-                    onInputPress={() =>
-                        navigation.navigate('ChatStack', {
-                            screen: 'ChatSearch',
-                        })
-                    }
-                />
             </Box>
 
             <ConversationList

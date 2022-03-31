@@ -2,6 +2,7 @@ import {Modal, Pressable, StyleSheet, Text, TouchableOpacity, View} from 'react-
 import React from 'react';
 import {scaleSize} from '@core/utils';
 import {COLORS, FONTS, SIZES, STYLES} from '@src/assets/const';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
     visible: boolean;
@@ -12,6 +13,7 @@ type Props = {
 
 const BottomModal: React.FC<Props> = props => {
     const {visible, onEditPress, onDeletePress, onCancel} = props;
+    const {t} = useTranslation()
     return (
         <Modal animationType="fade" transparent={true} visible={visible}>
             <View
@@ -26,19 +28,19 @@ const BottomModal: React.FC<Props> = props => {
                 <View style={styles.modalView}>
                     <View style={[styles.option, {marginBottom: scaleSize(18)}]}>
                         <TouchableOpacity onPress={onEditPress} style={styles.modalButton}>
-                            <Text style={FONTS.body2}>Edit</Text>
+                            <Text style={FONTS.body2}>{t('Edit')}</Text>
                         </TouchableOpacity>
 
                         <View style={{backgroundColor: '#BABCC1', height: scaleSize(1), width: scaleSize(376)}} />
 
                         <TouchableOpacity onPress={onDeletePress} style={styles.modalButton}>
-                            <Text style={[FONTS.body2, {color: COLORS.error_1}]}>Delete</Text>
+                            <Text style={[FONTS.body2, {color: COLORS.error_1}]}>{t("Delete")}</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={styles.option}>
                         <TouchableOpacity onPress={() => onCancel()} style={styles.modalButton}>
-                            <Text style={styles.cancelText}>Cancel</Text>
+                            <Text style={styles.cancelText}>{t("Cancel")}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

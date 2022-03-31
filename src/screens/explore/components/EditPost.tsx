@@ -6,6 +6,7 @@ import Button from '@src/components/Button';
 import DismissKeyboardView from '@src/components/DismissKeyboardView';
 import Input from '@src/components/Input';
 import {uploadImage} from '@src/services/firebaseStorage';
+import {Post} from '@src/types';
 import React, {useEffect, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
@@ -118,7 +119,7 @@ const EditPostScreen: React.FC<Props> = ({post, goBack, isVisible, updatePost}) 
                 <DismissKeyboardView>
                     <ScrollView contentContainerStyle={{flexGrow: 1, paddingBottom: scaleSize(20)}}>
                         <Header
-                            title="Create Post"
+                            title={t('Create Post')}
                             submitButtonOption={{
                                 onPress: handleSubmit(onSubmit),
                                 disabled: !isValid,
@@ -157,7 +158,7 @@ const EditPostScreen: React.FC<Props> = ({post, goBack, isVisible, updatePost}) 
                                             }}>
                                             <Image
                                                 source={{uri: image}}
-                                                style={{backgroundColor: 'red', zIndex: 1000}}
+                                                style={{zIndex: 1000}}
                                                 width={250}
                                                 height={150}
                                                 resizeMode="cover"
@@ -189,13 +190,13 @@ const EditPostScreen: React.FC<Props> = ({post, goBack, isVisible, updatePost}) 
 
                             {image ? (
                                 <Button
-                                    title="Reselect picture"
+                                    title={t('Reselect picture')}
                                     onPress={() => openLibrary()}
                                     style={{marginVertical: scaleSize(20)}}
                                 />
                             ) : (
                                 <Button
-                                    title="Add picture"
+                                    title={t('Add picture')}
                                     variant="secondary"
                                     onPress={() => openLibrary()}
                                     style={{marginVertical: scaleSize(20)}}

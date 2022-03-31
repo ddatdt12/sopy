@@ -124,7 +124,7 @@ const CreateEventScreen: React.FC<ExpertStackProps<'CreateEvent'>> = ({navigatio
                                         }}>
                                         <Image
                                             source={{uri: image}}
-                                            style={{backgroundColor: 'red', zIndex: 1000}}
+                                            style={{zIndex: 1000}}
                                             width={250}
                                             height={150}
                                             resizeMode="cover"

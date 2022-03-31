@@ -15,13 +15,6 @@ const ExpertChatHomeScreen: React.FC<ExpertMainTabProps<'Chat'>> = ({navigation}
         <Box bgColor={COLORS.gray_1} container safeArea={true}>
             <View style={{paddingHorizontal: scaleSize(15)}}>
                 <Text style={styles.screenTitle}>{t('Messages')}</Text>
-                <SearchBar
-                    onInputPress={() =>
-                        navigation.navigate('ExpertChatStack', {
-                            screen: 'ExpertSearchChat',
-                        })
-                    }
-                />
             </View>
             <ConversationList
                 contentContainerStyle={{paddingHorizontal: scaleSize(15), paddingBottom: SIZES.bottomPadding}}

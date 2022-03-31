@@ -1,42 +1,42 @@
 import {scaleSize} from '@core/utils';
+import {useFocusEffect} from '@react-navigation/native';
 import chatApi from '@src/api/chatApi';
-import {COLORS, RANDOM_IMAGE, STYLES} from '@src/assets/const';
+import {COLORS, NON_AVATAR, RANDOM_IMAGE, STYLES} from '@src/assets/const';
+import {DismissKeyboardView} from '@src/components';
 import {useChat} from '@src/context/ChatContext';
 import SplashScreen from '@src/screens/splash';
 import {useAppSelector} from '@src/store';
 import {User} from '@src/types';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {Bubble, GiftedChat, IMessage, InputToolbar, Send} from 'react-native-gifted-chat';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 type MessagesProps = {
     friend: User;
+    isAnonymous?: boolean;
 };
-const Messages: React.FC<MessagesProps> = ({friend}) => {
+const Messages: React.FC<MessagesProps> = ({friend, isAnonymous}) => {
     const user = useAppSelector(state => state.auth.user);
-    const {ws} = useChat();
+    const {t} = useTranslation();
     const [messageList, setMessageList] = useState<IMessage[]>([]);
     const [loading, setLoading] = useState(false);
-    useEffect(() => {
-        let mounted = true;
-        setMessageList([]);
-        setLoading(true);
-        chatApi
-            .getMessages(user!.firebase_user_id, friend.firebase_user_id)
-            .then(({data}) => {
-                if (mounted) {
-                    console.log(data);
-                    if (!data?.Message) {
-                        setMessageList([]);
-                        setLoading(false);
+    const [sending, setSending] = useState(false);
+    const [fetchingMessage, setFetchingMessage] = useState(false);
 
+    useFocusEffect(
+        useCallback(() => {
+            let mounted = true;
+            setLoading(true);
+            chatApi
+                .getMessages(user!.firebase_user_id, friend.firebase_user_id)
+                .then(({data}: any) => {
+                    if (!data?.Message && mounted) {
+                        setLoading(false);
+                        setMessageList([]);
                         return;
                     }
-                    console.log(
-                        'Data: ',
-                        data.Message.map((m: any) => m.Sender),
-                    );
                     const messages: IMessage[] = data?.Message.map((item: any) => ({
                         _id: item.ID,
                         text: item.Content,
@@ -49,71 +49,99 @@ const Messages: React.FC<MessagesProps> = ({friend}) => {
                         sent: true,
                     }));
                     messages.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
-                    setMessageList(previousMessages => GiftedChat.append(previousMessages, messages));
-                    setLoading(false);
-                }
-            })
-            .catch(e => {
-                console.log('error message:', e);
-            });
-        return () => {
-            mounted = false;
-        };
-    }, [user, friend.firebase_user_id]);
 
-    useEffect(() => {
-        let isMounted = true;
-        ws.onopen = () => {
-            console.log('Connected to the server');
-        };
-        ws.onclose = e => {
-            console.log('Disconnected. Check internet or server.');
-        };
-        ws.onerror = e => {
-            console.log(e.message);
-        };
-        ws.onmessage = e => {
-            console.log('Not parse: ', e);
-            const message = JSON.parse(e.data);
-            console.log('Parsed: ', message);
-            const formatMessage: IMessage = {
-                _id: message.ID,
-                text: message.Content,
-                createdAt: message.CreatedAt ?? new Date(),
-                user: {_id: message.SenderID, name: message.Sender.Name, avatar: message.Sender.Picture},
-                sent: true,
+                    console.log('First loading messages: ');
+                    if (mounted) {
+                        setMessageList(messages);
+                        setLoading(false);
+                    }
+                })
+                .catch(e => {
+                    console.log('error message:', e);
+                    if (mounted) {
+                        setLoading(false);
+                    }
+                });
+            const timer = setInterval(() => {
+                setFetchingMessage(true);
+                !sending &&
+                    !loading &&
+                    chatApi
+                        .getMessages(user!.firebase_user_id, friend.firebase_user_id)
+                        .then(({data}: any) => {
+                            if (!data?.Message) {
+                                setMessageList([]);
+                                return;
+                            }
+                            const messages: IMessage[] = data?.Message.map((item: any) => ({
+                                _id: item.ID,
+                                text: item.Content,
+                                createdAt: item.CreatedAt,
+                                user: {
+                                    _id: item.SenderID,
+                                    name: item.Sender.name ?? 'Dat DT',
+                                    avatar: item.Sender.picture || RANDOM_IMAGE,
+                                },
+                                sent: true,
+                            }));
+                            console.log('Messages successfully ');
+                            messages.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+                            if (mounted && !sending && !loading && messages.length > messageList.length) {
+                                setMessageList(messages);
+                            }
+                        })
+                        .catch(e => {
+                            console.log('error message:', e);
+                        });
+                setFetchingMessage(false);
+            }, 10000);
+            console.log('User: ', user);
+            console.log('Friend: ', friend);
+            return () => {
+                mounted = false;
+                console.log('Mounted', mounted);
+                clearInterval(timer);
             };
+        }, [user, friend.firebase_user_id]),
+    );
 
-            if (isMounted) {
-                if (formatMessage.user._id !== user?.firebase_user_id) {
-                    setMessageList(previousMessages => GiftedChat.append(previousMessages, [formatMessage]));
-                } else {
-                    setMessageList(previousMessages => {
-                        const prevCopy = [...previousMessages];
-                        const index = previousMessages.findIndex(m => !m.sent);
-                        prevCopy[index] = formatMessage;
-                        if (index === -1) {
-                            return previousMessages;
-                        }
-                        return prevCopy;
-                    });
-                }
-            }
-        };
-
-        return () => {
-            isMounted = false;
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const submitMessage = (messages: IMessage[]) => {
+    const submitMessage = async (messages: IMessage[]) => {
+        setSending(true);
         const message = messages[0];
         message.sent = false;
         setMessageList(previousMessages => GiftedChat.append(previousMessages, [message]));
-        const messageObjString = JSON.stringify({Content: message.text, ReceiverID: friend.firebase_user_id});
-        console.log(messageObjString);
-        ws.send(messageObjString);
+        try {
+            console.log('Just Sended');
+            const data = await chatApi.sendMessage({
+                senderId: user?.firebase_user_id,
+                content: message.text,
+                receiverId: friend.firebase_user_id,
+            });
+            console.log('Send successfully');
+            setMessageList(previousMessages => {
+                const prevMessages = [...previousMessages];
+                const index = previousMessages.findIndex(item => item._id === message._id);
+                if (index !== -1) {
+                    prevMessages[index] = {
+                        _id: data.id ?? message._id,
+                        text: data.content ?? message.text,
+                        createdAt: data.createdAt ?? new Date(),
+                        user: {
+                            _id: user!.firebase_user_id,
+                            name: user!.name ?? 'Dat DT',
+                            avatar: user!.picture || RANDOM_IMAGE,
+                        },
+                        sent: true,
+                    };
+                    return prevMessages;
+                }
+
+                return previousMessages;
+            });
+        } catch (error) {
+            console.log(error);
+        }
+        setSending(false);
     };
 
     if (!user) {
@@ -139,9 +167,11 @@ const Messages: React.FC<MessagesProps> = ({friend}) => {
                         backgroundColor: COLORS.light_blue_2,
                         ...STYLES.deepShadow,
                         marginBottom: scaleSize(20),
+                        paddingVertical: scaleSize(4),
                     },
                     left: {
                         backgroundColor: COLORS.white_3,
+                        paddingVertical: scaleSize(4),
                         ...STYLES.deepShadow,
                     },
                 }}
@@ -162,6 +192,7 @@ const Messages: React.FC<MessagesProps> = ({friend}) => {
                         />
                     )
                 }
+                containerStyle={{right: {elevation: -1}}}
             />
         );
     };
@@ -195,17 +226,12 @@ export default Messages;
 
 const styles = StyleSheet.create({
     toolbar: {
-        width: scaleSize(252),
         backgroundColor: COLORS.gray_1,
-        borderWidth: 1,
-        borderRadius: scaleSize(20),
-        borderColor: COLORS.dark_gray_2,
-        bottom: scaleSize(10),
-        marginLeft: scaleSize(60),
+        paddingVertical: scaleSize(2),
     },
     text: {
         color: COLORS.black_1,
-        fontSize: scaleSize(20),
+        fontSize: scaleSize(16),
     },
     timeText: {color: COLORS.gray_4, fontSize: scaleSize(12)},
 });

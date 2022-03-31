@@ -1,6 +1,7 @@
 import {scaleSize} from '@core/utils';
 import {COLORS} from '@src/assets/const';
 import Stack from '@src/components/Stack';
+import {User} from '@src/types';
 import React from 'react';
 import {
     FlatList,
@@ -32,8 +33,8 @@ const ContactList: React.FC<Props> = props => {
                     direction="row"
                     space={scaleSize(18)}
                     style={{
+                        // height: scaleSize(95),
                         alignItems: 'center',
-                        height: scaleSize(95),
                     }}>
                     <Image source={{uri: item.picture}} style={styles.userAvatar} />
                     <Text style={styles.userName}>{item.name}</Text>
@@ -46,7 +47,7 @@ const ContactList: React.FC<Props> = props => {
         <FlatList
             data={contacts}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.firebase_user_id}
             ItemSeparatorComponent={SeparateLine}
             contentContainerStyle={contentContainerStyle}
         />
@@ -74,7 +75,6 @@ const styles = StyleSheet.create({
         fontSize: scaleSize(22),
         fontWeight: '500',
         color: COLORS.black_1,
-        marginBottom: scaleSize(3),
     },
     lastMessage: {
         fontSize: scaleSize(17),

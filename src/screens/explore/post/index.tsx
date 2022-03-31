@@ -6,10 +6,10 @@ import Loading from '@src/components/Loading';
 import Neumorph from '@src/components/Neumorph';
 import Stack from '@src/components/Stack';
 import {Post} from '@src/types';
-import {convertEmotionIntoNumber, POST_EMOTION} from '@src/utils';
+import {convertEmotion, POST_EMOTION} from '@src/utils';
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, ListRenderItem, StyleSheet} from 'react-native';
+import {FlatList, ListRenderItem, ScrollView, StyleSheet} from 'react-native';
 import PostDetails from '../post_details';
 import PostCard from './components/PostCard';
 // import Posts from './posts';
@@ -32,7 +32,7 @@ const PostsScreen: React.FC<Props> = ({postList, loading, forceRefresh}) => {
             if (filter === 'All') {
                 setFilteredPost(postList);
             } else {
-                setFilteredPost(postList.filter(p => convertEmotionIntoNumber(p.emotion) === filter));
+                setFilteredPost(postList.filter(p => convertEmotion(p.emotion - 1) === filter));
             }
         }
     }, [postList, filter]);
@@ -53,50 +53,96 @@ const PostsScreen: React.FC<Props> = ({postList, loading, forceRefresh}) => {
     return (
         <Box container safeArea={false}>
             <Stack direction="row" space={scaleSize(10)} style={styles.tabWrapper}>
-                <Neumorph borderRadius={scaleSize(60)}>
-                    <Button
-                        title={t('All')}
-                        selected={filter === 'All'}
-                        style={styles.button}
-                        textStyle={{...FONTS.h3}}
-                        onPress={() => {
-                            setFilter('All');
-                        }}
-                    />
-                </Neumorph>
-                <Neumorph borderRadius={scaleSize(60)}>
-                    <Button
-                        title={t('Happy')}
-                        selected={filter === 'Happy'}
-                        style={styles.button}
-                        textStyle={{...FONTS.h3}}
-                        onPress={() => {
-                            setFilter('Happy');
-                        }}
-                    />
-                </Neumorph>
-                <Neumorph borderRadius={scaleSize(60)}>
-                    <Button
-                        title={t('Sad')}
-                        selected={filter === 'Sad'}
-                        style={styles.button}
-                        textStyle={{...FONTS.h3}}
-                        onPress={() => {
-                            setFilter('Sad');
-                        }}
-                    />
-                </Neumorph>
-                <Neumorph borderRadius={scaleSize(60)}>
-                    <Button
-                        title={t('Scared')}
-                        selected={filter === 'Scared'}
-                        style={styles.button}
-                        textStyle={{...FONTS.h3}}
-                        onPress={() => {
-                            setFilter('Scared');
-                        }}
-                    />
-                </Neumorph>
+                <ScrollView horizontal={true} contentContainerStyle={{paddingVertical: scaleSize(10)}}>
+                    <Neumorph borderRadius={scaleSize(60)} shadowContainerStyle={{marginRight: scaleSize(10)}}>
+                        <Button
+                            title={t('All')}
+                            selected={filter === 'All'}
+                            style={styles.button}
+                            textStyle={{...FONTS.h3}}
+                            onPress={() => {
+                                setFilter('All');
+                            }}
+                        />
+                    </Neumorph>
+                    <Neumorph borderRadius={scaleSize(60)} shadowContainerStyle={{marginRight: scaleSize(10)}}>
+                        <Button
+                            title={t('Happy')}
+                            selected={filter === 'Happy'}
+                            style={styles.button}
+                            textStyle={{...FONTS.h3}}
+                            onPress={() => {
+                                setFilter('Happy');
+                            }}
+                        />
+                    </Neumorph>
+                    <Neumorph borderRadius={scaleSize(60)} shadowContainerStyle={{marginRight: scaleSize(10)}}>
+                        <Button
+                            title={t('Sad')}
+                            selected={filter === 'Sad'}
+                            style={styles.button}
+                            textStyle={{...FONTS.h3}}
+                            onPress={() => {
+                                setFilter('Sad');
+                            }}
+                        />
+                    </Neumorph>
+                    <Neumorph borderRadius={scaleSize(60)} shadowContainerStyle={{marginRight: scaleSize(10)}}>
+                        <Button
+                            title={t('Scared')}
+                            selected={filter === 'Scared'}
+                            style={styles.button}
+                            textStyle={{...FONTS.h3}}
+                            onPress={() => {
+                                setFilter('Scared');
+                            }}
+                        />
+                    </Neumorph>
+                    <Neumorph borderRadius={scaleSize(60)} shadowContainerStyle={{marginRight: scaleSize(10)}}>
+                        <Button
+                            title={t('Angry')}
+                            selected={filter === 'Angry'}
+                            style={styles.button}
+                            textStyle={{...FONTS.h3}}
+                            onPress={() => {
+                                setFilter('Angry');
+                            }}
+                        />
+                    </Neumorph>
+                    <Neumorph borderRadius={scaleSize(60)} shadowContainerStyle={{marginRight: scaleSize(10)}}>
+                        <Button
+                            title={t('Worry')}
+                            selected={filter === 'Worry'}
+                            style={styles.button}
+                            textStyle={{...FONTS.h3}}
+                            onPress={() => {
+                                setFilter('Worry');
+                            }}
+                        />
+                    </Neumorph>
+                    <Neumorph borderRadius={scaleSize(60)} shadowContainerStyle={{marginRight: scaleSize(10)}}>
+                        <Button
+                            title={t('Normal')}
+                            selected={filter === 'Normal'}
+                            style={styles.button}
+                            textStyle={{...FONTS.h3}}
+                            onPress={() => {
+                                setFilter('Normal');
+                            }}
+                        />
+                    </Neumorph>
+                    <Neumorph borderRadius={scaleSize(60)} shadowContainerStyle={{marginRight: scaleSize(10)}}>
+                        <Button
+                            title={t('Depression')}
+                            selected={filter === 'Depression'}
+                            style={styles.button}
+                            textStyle={{...FONTS.h3}}
+                            onPress={() => {
+                                setFilter('Depression');
+                            }}
+                        />
+                    </Neumorph>
+                </ScrollView>
             </Stack>
             {loading ? (
                 <Loading />

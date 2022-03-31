@@ -4,21 +4,23 @@ import {FONTS} from '@src/assets/const';
 import Card from '@src/components/Card';
 import {RoleChooseScreenProps} from '@src/navigation/AppStackParams';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import ImageBackground from '../components/ImageBackground';
 
 const RoleScreen: React.FC<RoleChooseScreenProps> = ({navigation}) => {
+    const {t} = useTranslation();
     return (
         <ImageBackground source={IMAGES.bg_intro_step_1}>
             <View style={styles.contentWrapper}>
-                <Text style={styles.title}>Who are you?</Text>
+                <Text style={styles.title}>{t('Who are you?')}</Text>
                 <TouchableHighlight
                     style={styles.touchableHighlight}
                     activeOpacity={0.6}
                     underlayColor="#B4D1FC"
                     onPress={() => navigation.push('UserLogin')}>
                     <Card style={styles.roleCard}>
-                        <Text style={styles.text}>A User</Text>
+                        <Text style={styles.text}>{t('A User')}</Text>
                     </Card>
                 </TouchableHighlight>
                 <TouchableHighlight
@@ -27,7 +29,7 @@ const RoleScreen: React.FC<RoleChooseScreenProps> = ({navigation}) => {
                     underlayColor="#B4D1FC"
                     onPress={() => navigation.push('ExpertLogin')}>
                     <Card style={styles.roleCard}>
-                        <Text style={styles.text}>An Expert</Text>
+                        <Text style={styles.text}>{t('An Expert')}</Text>
                     </Card>
                 </TouchableHighlight>
             </View>

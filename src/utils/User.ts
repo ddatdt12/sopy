@@ -1,3 +1,5 @@
+import {User} from '@src/types';
+
 const getRandomUser = (arr: User[], exclude?: User) => {
     let user;
     while (!user) {

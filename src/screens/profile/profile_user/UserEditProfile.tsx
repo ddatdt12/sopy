@@ -35,7 +35,7 @@ const UserEditProfileScreen: React.FC<UserProfileStackProps<'EditProfile'>> = ({
     }, [user]);
 
     function alertLogout() {
-        Alert.alert('Notice', 'Are you sure want to log out', [
+        Alert.alert(t('Notice'), t('Are you sure you want to log out'), [
             {
                 text: 'OK',
                 onPress: async () => {
@@ -43,12 +43,12 @@ const UserEditProfileScreen: React.FC<UserProfileStackProps<'EditProfile'>> = ({
                     dispatch(authActions.logout());
                 },
             },
-            {text: 'Cancel', onPress: () => console.log('Cancel Pressed')},
+            {text: t('Cancel'), onPress: () => console.log('Cancel Pressed')},
         ]);
     }
 
     function alertUpdateSuccess() {
-        Alert.alert('Notice', 'Update profile successfully', [
+        Alert.alert(t('Notice'), t('Update profile successfully'), [
             {
                 text: 'OK',
                 onPress: async () => {
@@ -75,9 +75,9 @@ const UserEditProfileScreen: React.FC<UserProfileStackProps<'EditProfile'>> = ({
 
                 setIsImageChange(false);
                 setIsDirty(false);
-                Alert.alert('', 'Update profile success');
+                Alert.alert('', t('Update profile successfully'));
             } else {
-                Alert.alert('Error', error);
+                Alert.alert(t('Error'), error);
             }
         }
 
@@ -104,7 +104,7 @@ const UserEditProfileScreen: React.FC<UserProfileStackProps<'EditProfile'>> = ({
             const updated = await userApi.updateProfile(newProfile as User);
             dispatch(authActions.refreshUser(updated));
         } catch (errorApi: any) {
-            Alert.alert('Notice', errorApi?.message ?? 'Server Error');
+            Alert.alert(t('Notice'), errorApi?.message ?? t('Server Error'));
         }
         setLoading(false);
         alertUpdateSuccess();
@@ -112,12 +112,12 @@ const UserEditProfileScreen: React.FC<UserProfileStackProps<'EditProfile'>> = ({
     return (
         <Box container bgColor={COLORS.gray_1} safeArea loading={loading}>
             <Header
-                title="Edit Profile"
+                title={t('Edit Profile')}
                 canGoBack={navigation.canGoBack()}
                 goBack={() => navigation.goBack()}
                 headerRight={() => (
                     <Button
-                        title="Done"
+                        title={t('Done')}
                         loading={loading}
                         onPress={handleSubmit}
                         disabled={!isDirty || !(profile?.uri || profile?.name)}
@@ -131,7 +131,7 @@ const UserEditProfileScreen: React.FC<UserProfileStackProps<'EditProfile'>> = ({
             <View style={styles.buttonWrapper}>
                 <Neumorph borderRadius={scaleSize(60)}>
                     <Button
-                        title="Log out"
+                        title={t('Log out')}
                         style={{paddingHorizontal: scaleSize(40)}}
                         textStyle={{color: COLORS.black_1}}
                         onPress={() => alertLogout()}

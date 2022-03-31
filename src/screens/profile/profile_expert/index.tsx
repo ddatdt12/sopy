@@ -5,8 +5,6 @@ import {COLORS, FONTS, SIZES, STYLES} from '@src/assets/const';
 import IMAGES from '@src/assets/images';
 import Loading from '@src/components/Loading';
 import {ExpertMainTabProps} from '@src/navigation/expert/type';
-import Events from '@src/screens/explore/event/events';
-import {Event} from '@src/screens/explore/event/types';
 import {useAppSelector} from '@src/store';
 import {Post} from '@src/types';
 import React, {useState} from 'react';
@@ -22,11 +20,15 @@ const ExpertProfileScreen: React.FC<ExpertMainTabProps<'Profile'>> = ({navigatio
         return <EventCard event={item} key={item.id} />;
     };
     const [optionsViewVisible, setOptionsViewVisible] = useState(false);
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
     const user = useAppSelector(state => state.auth.user);
     const [loading, setLoading] = useState(false);
     const [posts, setPosts] = useState<Post[]>([]);
+    const selectedLanguageCode = i18n.language;
 
+    const handleChangeLanguagePress = () => {
+        return i18n.changeLanguage(selectedLanguageCode === 'en' ? 'vi' : 'en');
+    };
     useFocusEffect(
         React.useCallback(() => {
             let mounted = true;
@@ -34,7 +36,9 @@ const ExpertProfileScreen: React.FC<ExpertMainTabProps<'Profile'>> = ({navigatio
             (async () => {
                 try {
                     const data = await postApi.getAllPostOfUser(user!.firebase_user_id);
-                    setPosts(data);
+                    if (mounted) {
+                        setPosts(data);
+                    }
                 } catch (error) {
                     console.log(error);
                 }
@@ -62,8 +66,10 @@ const ExpertProfileScreen: React.FC<ExpertMainTabProps<'Profile'>> = ({navigatio
                             <Text style={styles.optionsText}>{t('Edit Profile')}</Text>
                         </TouchableOpacity>
                         <Image source={IMAGES.optionsLine} style={styles.lineOption} />
-                        <TouchableOpacity>
-                            <Text style={styles.optionsText}>{t('Change to Vietnamese')}</Text>
+                        <TouchableOpacity onPress={handleChangeLanguagePress}>
+                            <Text style={styles.optionsText}>
+                                {t('Change languages')}: {selectedLanguageCode === 'vi' ? 'EN' : 'VN'}
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </PopupDropdown>
@@ -90,7 +96,7 @@ const ExpertProfileScreen: React.FC<ExpertMainTabProps<'Profile'>> = ({navigatio
                 ) : posts.length !== 0 ? (
                     <View style={{paddingHorizontal: scaleSize(14)}}>{posts.map(renderItem)}</View>
                 ) : (
-                    <Text style={styles.noEventText}>No posts or events</Text>
+                    <Text style={styles.noEventText}>{t('No posts or events')}</Text>
                 )}
             </ScrollView>
         </SafeAreaView>

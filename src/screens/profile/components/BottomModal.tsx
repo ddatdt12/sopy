@@ -2,6 +2,7 @@ import {Modal, Pressable, StyleSheet, Text, TouchableOpacity, View} from 'react-
 import React from 'react';
 import {scaleSize} from '@core/utils';
 import {FONTS, STYLES} from '@src/assets/const';
+import { t } from 'i18next';
 
 interface Props {
     visible: boolean;
@@ -26,13 +27,13 @@ const BottomModal: React.FC<Props> = props => {
                 <View style={styles.modalView}>
                     <View style={styles.takePhotoModalOption}>
                         <TouchableOpacity onPress={onOpenCameraPress} style={styles.modalButton}>
-                            <Text style={styles.takePhotoText}>Take Photo</Text>
+                            <Text style={styles.takePhotoText}>{t('Take Photo')}</Text>
                         </TouchableOpacity>
 
                         <View style={{backgroundColor: '#BABCC1', height: scaleSize(1), width: scaleSize(376)}} />
 
                         <TouchableOpacity onPress={onOpenLibraryPress} style={styles.modalButton}>
-                            <Text style={styles.chooseLibraryText}>Choose From Library</Text>
+                            <Text style={styles.chooseLibraryText}>{t('Choose From Library')}</Text>
                         </TouchableOpacity>
                     </View>
 

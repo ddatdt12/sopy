@@ -12,11 +12,13 @@ interface avatarContainerProps {
 const AvatarContainer = (props: avatarContainerProps) => {
     const {name, picture, style} = props;
     return (
-        <View style={[styles.avatarContainer, style]}>
-            <View style={styles.avatarShadow}>
-                <Image source={{uri: picture}} style={styles.profileImage} />
+        <View>
+            <View style={[styles.avatarContainer, style]}>
+                <View style={styles.avatarShadow}>
+                    <Image source={{uri: picture}} style={styles.profileImage} />
+                </View>
+                <Text style={styles.name}>{name}</Text>
             </View>
-            <Text style={styles.name}>{name}</Text>
         </View>
     );
 };
@@ -38,12 +40,13 @@ const styles = StyleSheet.create({
         marginTop: scaleSize(10),
     },
     avatarContainer: {
-        width: scaleSize(232),
-        height: scaleSize(160),
         borderRadius: 10,
         backgroundColor: '#F5F9FD',
         alignSelf: 'center',
+        maxWidth: scaleSize(250),
         marginTop: scaleSize(6),
+        paddingVertical: scaleSize(10),
+        paddingHorizontal: scaleSize(30),
         ...STYLES.mediumShadow,
     },
     avatarShadow: {

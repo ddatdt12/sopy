@@ -64,6 +64,7 @@ const RegisterForm: React.FC = props => {
         });
 
         if (!error && user) {
+            user.displayName = name;
             await dispatch(authActions.register(user));
             Alert.alert('Notice', 'You have successfully register!');
         } else {
@@ -82,7 +83,7 @@ const RegisterForm: React.FC = props => {
                 }}
                 render={({field: {onChange, onBlur, value}}) => (
                     <Input
-                        placeholder="Name"
+                        placeholder={t('Name')}
                         style={{marginTop: scaleSize(16)}}
                         onBlur={onBlur}
                         onChangeText={onChange}

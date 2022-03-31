@@ -8,6 +8,7 @@ import Stack from '@src/components/Stack';
 import {ExpertChatStackProps} from '@src/navigation/expert/type';
 import {UserStackProps} from '@src/navigation/user/type';
 import {useAppSelector} from '@src/store';
+import {User} from '@src/types';
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image, ListRenderItem, StyleSheet, Text, TouchableOpacity, View} from 'react-native';

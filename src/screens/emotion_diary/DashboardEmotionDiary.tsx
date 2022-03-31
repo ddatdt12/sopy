@@ -6,7 +6,7 @@ import Box from '@src/components/Box';
 import Loading from '@src/components/Loading';
 import {useAppSelector} from '@src/store';
 import {Feel} from '@src/types';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {VictoryPie} from 'victory-native';
@@ -18,18 +18,18 @@ import {Feeling, feelingStatistics as data} from './data';
 type Props = {};
 
 const size = scaleSize(SIZES.WindowWidth) - 100;
-const DashboardEmotionScreen: React.FC<Props> = props => {
+const DashboardEmotionScreen: React.FC<any> = ({route}) => {
     const {t} = useTranslation();
     const [feelingStatistic, setFeelingStatistic] = useState<Feeling[]>([]);
     const [selectedFeel, setSelectedFeel] = useState<Feeling | null>(null);
     const [diaryList, setDiaryList] = useState<Feel[]>([]);
     const user = useAppSelector(state => state.auth.user);
     const [loading, setLoading] = useState(false);
-
     useEffect(() => {
         setSelectedFeel(prev => feelingStatistic.find(f => f.name === prev?.name) || null);
     }, [feelingStatistic]);
 
+    console.log('Route: ', route);
     const calculatePercent = (statistics: Feeling[]): Feeling[] => {
         const total = statistics.reduce((a, b) => a + (b.value || 0), 0);
         return statistics.map(feel => {
@@ -37,44 +37,41 @@ const DashboardEmotionScreen: React.FC<Props> = props => {
             return {...feel, y: feel.value !== 0 ? percentage : 0, percentage: `${Math.round(percentage * 100)}%`};
         });
     };
-    const handleChange = (value: string) => {
-        setFeelingStatistic(
-            calculatePercent(
-                data.map(feel => {
-                    return {...feel, value: Math.random() * 10 + 20};
-                }),
-            ),
-        );
-    };
 
-    useEffect(() => {
-        let mounted = true;
-        setLoading(true);
-        (async () => {
-            try {
-                let i = 1;
-                const res = await feelApi.getUserFeel(user.firebase_user_id);
-                if (mounted && res) {
-                    data.map(item => {
-                        const feel = res.filter(detail => detail.feel_id === i);
-                        item.value = feel.length;
-                        i++;
-                    });
-                    setDiaryList(res);
-                    setFeelingStatistic(calculatePercent(data));
+    useFocusEffect(
+        useCallback(() => {
+            let mounted = true;
+            setLoading(true);
+            (async () => {
+                try {
+                    let i = 1;
+
+                    const userId = route?.params?.userId ?? user?.firebase_user_id;
+                    const res = await feelApi.getUserFeel(userId);
+                    if (mounted && res) {
+                        data.map(item => {
+                            const feel = res.filter(detail => detail.feel_id === i);
+                            item.value = feel.length;
+                            i++;
+                        });
+                        setDiaryList(res);
+                        if (mounted) {
+                            setFeelingStatistic(calculatePercent(data));
+                        }
+                    }
+                } catch (error) {
+                    console.log(error);
                 }
-            } catch (error) {
-                console.log(error);
-            }
-            if (mounted) {
-                setLoading(false);
-            }
-        })();
+                if (mounted) {
+                    setLoading(false);
+                }
+            })();
 
-        return () => {
-            mounted = false;
-        };
-    }, [user.firebase_user_id]);
+            return () => {
+                mounted = false;
+            };
+        }, [user, route?.params?.userId]),
+    );
 
     return (
         <Box bgColor={COLORS.gray_1} safeArea={false} container>
@@ -158,7 +155,7 @@ const DashboardEmotionScreen: React.FC<Props> = props => {
                             />
                             <View style={styles.centerCircle}>
                                 {!selectedFeel ? (
-                                    <Text style={[styles.text]}>Dashboard</Text>
+                                    <Text style={[styles.text]}>{t('Dashboard')}</Text>
                                 ) : (
                                     <>
                                         <Text style={[styles.text, {color: selectedFeel?.color}]}>
@@ -178,7 +175,7 @@ const DashboardEmotionScreen: React.FC<Props> = props => {
                         .map(diary => (
                             <DiaryCard
                                 key={diary.id}
-                                time={diary.created_at!}
+                                time={new Date(diary?.created_at! * 1000)}
                                 feel={Feelings[diary.feel_id - 1].name}
                                 reason={diary.reason}
                             />

@@ -1,8 +1,9 @@
 import {Feel} from '@src/types';
-import axiosInstance from './instance';
+import axiosInstance, {setToken} from './instance';
 
 const feelApi = {
-    getUserFeel: async (): Promise<Feel[]> => {
+    getUserFeel: async (firebase_user_id: string): Promise<Feel[]> => {
+        setToken(firebase_user_id);
         const {
             data: {data},
         } = await axiosInstance.get('/user-feel');

@@ -5,6 +5,7 @@ import Button from '@src/components/Button';
 import Input from '@src/components/Input';
 import {AppStackProps} from '@src/navigation/AppStackParams';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {Text, View} from 'react-native';
 import styles from './styles';
 
@@ -12,6 +13,7 @@ const SendResetPassEmail: React.FC<AppStackProps<'SendResetPassEmail'>> = ({navi
     const [email, setEmail] = React.useState('');
 
     const sendEmail = () => {};
+    const {t} = useTranslation();
 
     return (
         <Box container bgColor={COLORS.gray_1} paddingHorizontal={scaleSize(10)}>
@@ -28,11 +30,11 @@ const SendResetPassEmail: React.FC<AppStackProps<'SendResetPassEmail'>> = ({navi
                 style={{paddingHorizontal: scaleSize(2), marginTop: scaleSize(10)}}
             />
             <View>
-                <Text style={styles.note}>We’ll send you a code to reset your password</Text>
+                <Text style={styles.note}>{t("We’ll send you a code to reset your password")}</Text>
             </View>
 
             <View style={{alignItems: 'flex-end', marginRight: scaleSize(10)}}>
-                <Button title="Send" textStyle={{color: COLORS.black_1}} onPress={sendEmail} />
+                <Button title={t("Send")} textStyle={{color: COLORS.black_1}} onPress={sendEmail} />
             </View>
         </Box>
     );

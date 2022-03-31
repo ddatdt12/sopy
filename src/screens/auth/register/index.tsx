@@ -37,8 +37,8 @@ const RegisterScreen: React.FC<AppStackProps<'Register'>> = ({navigation}) => {
             <ScrollView contentContainerStyle={{flexGrow: 1, paddingBottom: scaleSize(20)}}>
                 <View style={styles.contentWrapper}>
                     <View style={styles.textWrapper}>
-                        <Text style={styles.title}>Welcome</Text>
-                        <Text style={styles.subtitle}>Let's get started</Text>
+                        <Text style={styles.title}>{t('Welcome')}</Text>
+                        <Text style={styles.subtitle}>{t("Let's get started")}</Text>
                     </View>
 
                     <RegisterForm />

@@ -33,12 +33,7 @@ const PostDetails: React.FC<Props> = ({post, onClose}) => {
                     </View>
                     <Image source={{uri: post.picture}} style={styles.image} />
                     <View style={styles.marginY}>
-                        <Text style={styles.description}>
-                            {post?.detail}
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem veritatis tempora totam
-                            qui eius quas magni vero sunt sed. Corrupti, unde omnis excepturi in qui labore
-                            exercitationem necessitatibus error.
-                        </Text>
+                        <Text style={styles.description}>{post?.detail}</Text>
                     </View>
                     <Box marginTop={scaleSize(20)}>
                         <Text>{post?.expert.name}</Text>

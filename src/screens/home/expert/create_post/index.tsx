@@ -8,6 +8,7 @@ import Input from '@src/components/Input';
 import {ExpertStackProps} from '@src/navigation/expert/type';
 import {uploadImage} from '@src/services/firebaseStorage';
 import {useAppSelector} from '@src/store';
+import {convertEmotion} from '@src/utils';
 import React, {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
@@ -46,8 +47,9 @@ const CreatePostScreen: React.FC<ExpertStackProps<'CreatePost'>> = ({navigation}
     };
     const onSubmit = async (data: Data) => {
         console.log({...data, selectedTag});
-        const emotion = FEELS.findIndex(item => item === selectedTag) + 1;
-
+        if (!selectedTag) {
+            return;
+        }
         if (!image) {
             Alert.alert('Notice', 'Please select an image');
             return;
@@ -59,6 +61,7 @@ const CreatePostScreen: React.FC<ExpertStackProps<'CreatePost'>> = ({navigation}
             setLoading(false);
             return;
         }
+        const emotion = (convertEmotion(selectedTag) as number) + 1;
         const post = {
             title: data.title,
             detail: data.description,
@@ -166,7 +169,7 @@ const CreatePostScreen: React.FC<ExpertStackProps<'CreatePost'>> = ({navigation}
                                         }}>
                                         <Image
                                             source={{uri: image}}
-                                            style={{backgroundColor: 'red', zIndex: 1000}}
+                                            style={{zIndex: 1000}}
                                             width={250}
                                             height={150}
                                             resizeMode="cover"
