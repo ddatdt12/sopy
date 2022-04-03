@@ -15,12 +15,10 @@ import FeelingCard from './FeelingCard';
 import Textarea from './Textarea';
 
 interface IFeelingModal {
-    modalVisible?: boolean;
-    setModalVisible: (_: boolean) => void;
 }
 const width = Dimensions.get('screen').width / 3 - scaleSize(20);
 
-const FeelingModal: React.FC<IFeelingModal> = ({modalVisible, setModalVisible}) => {
+const FeelingModal: React.FC<IFeelingModal> = () => {
     const {t} = useTranslation();
     const [selectedFeel, setSelectedFeel] = useState<Feeling | undefined>(undefined);
     const [reason, setReason] = useState<string>('');
@@ -60,25 +58,15 @@ const FeelingModal: React.FC<IFeelingModal> = ({modalVisible, setModalVisible}) 
         Notice();
     };
     const handleCancelPress = () => {
-        setModalVisible(false);
         setSelectedFeel(undefined);
         setReason('');
     };
     return (
-        <ReactNativeModal
-            isVisible={modalVisible}
-            onBackdropPress={() => setModalVisible(false)}
-            onSwipeComplete={() => {
-                setModalVisible(false);
-            }}
-            swipeDirection={'down'}
-            style={{margin: 0, justifyContent: 'flex-end'}}
-            backdropOpacity={0.4}>
+        <View style={styles.container}>
             <DismissKeyboardView>
-                <View style={styles.container}>
                     <KeyboardAvoidingView behavior="padding">
                         <View style={styles.header}>
-                            <Text style={styles.title}>{t('How are you feeling')}</Text>
+                            <Text style={styles.title}>{t('How are you feeling today?')}</Text>
                         </View>
                         <ScrollView>
                             <Stack direction="row" style={styles.feelingWrapper}>
@@ -135,49 +123,47 @@ const FeelingModal: React.FC<IFeelingModal> = ({modalVisible, setModalVisible}) 
                             />
                         </Stack>
                     </KeyboardAvoidingView>
-                </View>
             </DismissKeyboardView>
-        </ReactNativeModal>
+        </View>
     );
 };
 
 export default FeelingModal;
 
 const styles = StyleSheet.create({
-    backdrop: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.5)',
-    },
     container: {
         width: '100%',
         height: '85%',
-        backgroundColor: COLORS.gray_1,
         borderTopEndRadius: scaleSize(44),
         borderTopStartRadius: scaleSize(44),
+        marginTop: scaleSize(49)
     },
     header: {
-        padding: scaleSize(16),
         borderBottomColor: '#D8D8D8',
         borderBottomWidth: 1,
-        width: '100%',
+        width: scaleSize(302),
+        alignSelf: 'center',
+        paddingBottom: scaleSize(9)
     },
     title: {
         textAlign: 'center',
         fontSize: scaleSize(25),
         fontWeight: '500',
         color: COLORS.black_1,
+        alignSelf: 'center',
+        width: scaleSize(302),
     },
     feelingWrapper: {
         flexWrap: 'wrap',
         justifyContent: 'center',
         paddingHorizontal: scaleSize(4),
         marginTop: scaleSize(24),
+        height: scaleSize(350),
         // width: '100%',
+        backgroundColor: '#EBF3FA',
     },
     buttonWrapper: {
-        marginTop: scaleSize(20),
+        marginTop: scaleSize(48),
         justifyContent: 'center',
         alignItems: 'center',
     },

@@ -16,35 +16,7 @@ import PostDetails from './components/PostDetails';
 
 const HomeScreen: React.FC = () => {
     const {t} = useTranslation();
-    const [modalVisible, setModalVisible] = useState(false);
-    const [postList, setPostList] = useState<Post[]>([]);
-    const [loading, setLoading] = useState(false);
     const user = useAppSelector(state => state.auth.user);
-    const [selectedPost, setSelectedPost] = useState<Post>();
-
-    useFocusEffect(
-        React.useCallback(() => {
-            let mounted = true;
-            setLoading(true);
-            (async () => {
-                try {
-                    const data = await postApi.getTop5NewPost();
-                    if (mounted) {
-                        setPostList(data);
-                    }
-                } catch (error) {
-                    console.log(error);
-                }
-                if (mounted) {
-                    setLoading(false);
-                }
-            })();
-
-            return () => {
-                mounted = false;
-            };
-        }, []),
-    );
 
     return (
         <View style={styles.container}>
@@ -56,51 +28,9 @@ const HomeScreen: React.FC = () => {
                 <Text style={styles.text1}>
                     {t('Hi')} {user?.name},
                 </Text>
-                <Text style={styles.text2}>{t('Suggest for you')}</Text>
             </View>
 
-            <View
-                style={{
-                    paddingBottom: SIZES.bottomBarHeight + scaleSize(30),
-                    flex: 1,
-                }}>
-                <View
-                    style={{
-                        flex: 1,
-                    }}>
-                    {loading ? (
-                        <Loading />
-                    ) : (
-                        <ScrollView
-                            contentContainerStyle={{paddingBottom: scaleSize(10), paddingHorizontal: scaleSize(20)}}>
-                            {postList.map((post, index) => (
-                                <PostCard
-                                    key={post.id}
-                                    title={post.title}
-                                    authorName={post.expert.name}
-                                    picture={post.picture}
-                                    direction={index % 2 !== 0 ? 'left' : 'right'}
-                                    onPress={() => setSelectedPost(post)}
-                                />
-                            ))}
-                        </ScrollView>
-                    )}
-                </View>
-                <View
-                    style={{
-                        alignItems: 'center',
-                        width: '100%',
-                        marginTop: scaleSize(10),
-                    }}>
-                    <TouchableOpacity style={styles.Slide} onPress={() => setModalVisible(true)}>
-                        <Ionicons name="chevron-up" size={30} color="#8F9BB2" />
-                        <Text style={styles.SlideText}>{t('How are you feeling')}</Text>
-                        <Ionicons name="chevron-up" size={30} color="#8F9BB2" />
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <FeelingModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
-            {selectedPost && <PostDetails post={selectedPost} onClose={() => setSelectedPost(undefined)} />}
+            <FeelingModal/>
         </View>
     );
 };
@@ -115,14 +45,14 @@ const styles = StyleSheet.create({
     backgroundTop: {
         flex: 1,
         position: 'absolute',
-        top: 40,
+        top: 9,
         right: 10,
     },
     backgroundCenter: {
         flex: 1,
         position: 'absolute',
-        bottom: 450,
-        left: 50,
+        bottom: 135,
+        right: 45
     },
     backgroundBottom: {
         flex: 1,
@@ -131,7 +61,7 @@ const styles = StyleSheet.create({
         right: 30,
     },
     textContainer: {
-        marginTop: 100,
+        marginTop: scaleSize(28),
         marginLeft: -10,
     },
     text1: {

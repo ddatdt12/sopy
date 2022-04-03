@@ -262,7 +262,6 @@ const HeaderChat: React.FC<IHeaderChat> = props => {
                     ) : null}
                 </View>
             </View>
-            <Image source={IMAGES.lineChat} style={styles.line} />
         </Box>
     );
 };
