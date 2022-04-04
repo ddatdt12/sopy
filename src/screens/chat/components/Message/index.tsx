@@ -166,14 +166,15 @@ const Messages: React.FC<MessagesProps> = ({friend, isAnonymous}) => {
                 wrapperStyle={{
                     right: {
                         backgroundColor: COLORS.light_blue_2,
-                        ...STYLES.deepShadow,
-                        marginBottom: scaleSize(20),
+                        ...STYLES.shadow,
+                        marginVertical: scaleSize(6),
                         paddingVertical: scaleSize(4),
                     },
                     left: {
                         backgroundColor: COLORS.white_3,
                         paddingVertical: scaleSize(4),
-                        ...STYLES.deepShadow,
+                        marginVertical: scaleSize(6),
+                        ...STYLES.shadow,
                     },
                 }}
                 textStyle={{
@@ -199,7 +200,7 @@ const Messages: React.FC<MessagesProps> = ({friend, isAnonymous}) => {
     };
 
     const scrollToBottomComponent = () => {
-        return <Ionicons name="chevron-down-outline" size={22} color="#8F9BB2" />;
+        return <Ionicons name="chevron-down-outline" size={28} color={COLORS.dark_blue_1} />;
     };
 
     const renderInputToolbar = (toolBarProps: InputToolbar['props']) => {
@@ -219,6 +220,10 @@ const Messages: React.FC<MessagesProps> = ({friend, isAnonymous}) => {
             renderInputToolbar={renderInputToolbar}
             loadEarlier={loading}
             isLoadingEarlier={true}
+            scrollToBottomStyle={{
+                backgroundColor: COLORS.white_2,
+                ...STYLES.mediumShadow,
+            }}
         />
     );
 };

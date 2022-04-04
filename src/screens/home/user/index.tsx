@@ -1,18 +1,11 @@
 import {scaleSize} from '@core/utils';
-import {useFocusEffect} from '@react-navigation/native';
-import postApi from '@src/api/postApi';
 import {IMAGES} from '@src/assets';
 import {SIZES, STYLES} from '@src/assets/const';
-import Loading from '@src/components/Loading';
 import {useAppSelector} from '@src/store';
-import {Post} from '@src/types';
-import React, {useState} from 'react';
+import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FeelingModal from './components/FeelingModal';
-import PostCard from './components/PostCard';
-import PostDetails from './components/PostDetails';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import FeelingForm from './components/FeelingForm';
 
 const HomeScreen: React.FC = () => {
     const {t} = useTranslation();
@@ -24,13 +17,15 @@ const HomeScreen: React.FC = () => {
             <Image source={IMAGES.home_user.circle_box} style={styles.backgroundCenter} />
             <Image source={IMAGES.home_user.tam_giac} style={styles.backgroundBottom} />
 
-            <View style={styles.textContainer}>
-                <Text style={styles.text1}>
-                    {t('Hi')} {user?.name},
-                </Text>
-            </View>
+            <ScrollView contentContainerStyle={{paddingBottom: SIZES.bottomPadding + scaleSize(15)}}>
+                <View style={styles.textContainer}>
+                    <Text style={styles.text1}>
+                        {t('Hi')} {user?.name},
+                    </Text>
+                </View>
 
-            <FeelingModal/>
+                <FeelingForm />
+            </ScrollView>
         </View>
     );
 };
@@ -41,6 +36,7 @@ const styles = StyleSheet.create({
         //justifyContent: 'center',
         backgroundColor: '#EBF3FA',
         position: 'relative',
+        // paddingBottom: SIZES.bottomPadding + scaleSize(300),
     },
     backgroundTop: {
         flex: 1,
@@ -52,7 +48,7 @@ const styles = StyleSheet.create({
         flex: 1,
         position: 'absolute',
         bottom: 135,
-        right: 45
+        right: 45,
     },
     backgroundBottom: {
         flex: 1,
@@ -61,8 +57,7 @@ const styles = StyleSheet.create({
         right: 30,
     },
     textContainer: {
-        marginTop: scaleSize(28),
-        marginLeft: -10,
+        marginVertical: scaleSize(28),
     },
     text1: {
         marginHorizontal: 30,

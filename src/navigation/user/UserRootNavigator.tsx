@@ -37,6 +37,7 @@ const UserRootNavigator: React.FC = () => {
                 component={HomeScreen}
                 options={{
                     tabBarIcon: props => <Ionicons name="home-sharp" {...props} />,
+                    tabBarHideOnKeyboard: true,
                 }}
             />
             <Tab.Screen

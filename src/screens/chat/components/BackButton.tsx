@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
         height: scaleSize(40),
         width: scaleSize(40),
         borderRadius: scaleSize(60),
-        backgroundColor: '#E9F0F7',
         marginLeft: scaleSize(16),
         ...STYLES.center,
         ...STYLES.deepShadow,
