@@ -5,6 +5,9 @@ import (
 	"mental-health-api/pkg/const/firestoreCol"
 	"mental-health-api/pkg/firebase"
 
+	"bytes"
+	"encoding/json"
+	"log"
 	"time"
 
 	"cloud.google.com/go/firestore"
@@ -13,12 +16,34 @@ import (
 	"fmt"
 )
 
+var (
+	newline = []byte{'\n'}
+	space   = []byte{' '}
+)
+
 type messageResponse struct {
 	ID        string
 	CreatedAt time.Time
 	SenderID  string
 	Sender    models.User
 	Content   string
+}
+
+type UserRef struct {
+	Name      string
+	Email     string
+	Picture   string
+	CreatedAt int64
+}
+
+type MessageResponseAPI struct {
+	ID         string    `json:"id"`
+	SenderID   string    `json:"senderID"`
+	Sender     UserRef   `json:"sender"`
+	ReceiverID string    `json:"receiverID"`
+	Receiver   UserRef   `json:"receiver"`
+	Content    string    `json:"content"`
+	CreatedAt  time.Time `json:"createdAt"`
 }
 
 type MessagesResponse struct {
@@ -159,4 +184,103 @@ func ShowEmotion(ctx *fiber.Ctx) error {
 	})
 
 	return ctx.Status(200).JSON(!showEmotionStatus)
+}
+
+func getUserInfo(senderID, receiverID string) (UserRef, UserRef, error) {
+	var sender models.User
+	var receiver models.User
+	var errUser UserRef
+	// get users
+	if err := sender.GetOne(senderID, ""); err != nil {
+		fmt.Println("Get_user_id: ", err)
+		return errUser, errUser, err
+	}
+
+	if sender.Picture == "" {
+		sender.Picture = firestoreCol.DEFAULT_PICTURE
+	}
+
+	senderRef := UserRef{
+		Name:      sender.Name,
+		Email:     sender.Email,
+		Picture:   sender.Picture,
+		CreatedAt: sender.CreatedAt,
+	}
+	if err := receiver.GetOne(receiverID, ""); err != nil {
+		fmt.Println("Get_user_id: ", err)
+		return errUser, errUser, err
+	}
+
+	if receiver.Picture == "" {
+		receiver.Picture = firestoreCol.DEFAULT_PICTURE
+	}
+
+	receiverRef := UserRef{
+		Name:      receiver.Name,
+		Email:     receiver.Email,
+		Picture:   receiver.Picture,
+		CreatedAt: receiver.CreatedAt,
+	}
+
+	// convert User to []byte
+	byteBuffer := new(bytes.Buffer)
+
+	err := json.NewEncoder(byteBuffer).Encode(senderRef)
+	if err != nil {
+		log.Fatal("encode error:", err)
+	}
+	senderByte := byteBuffer.Bytes()
+	senderByte = bytes.TrimSpace(bytes.Replace([]byte(senderByte), newline, space, -1))
+
+	err = json.NewEncoder(byteBuffer).Encode(receiverRef)
+	if err != nil {
+		log.Fatal("encode error:", err)
+	}
+	receiverByte := byteBuffer.Bytes()
+	receiverByte = bytes.TrimSpace(bytes.Replace([]byte(receiverByte), newline, space, -1))
+
+	return senderRef, receiverRef, nil
+}
+
+// Send Message
+// @Summary Send Message
+// @Tags /chat
+// @Accept json
+// @Produce json
+// @Param userid path string true "UserID"
+// @Success 200 ""
+// @Router /chat/{userid} [post]
+func SendMessage(ctx *fiber.Ctx) error {
+	var receivedMessage models.ReceivedMessage
+	senderID := ctx.Params("userid")
+	if err := ctx.BodyParser(&receivedMessage); err != nil {
+		fmt.Println(err)
+		return ctx.Status(400).JSON(err)
+	}
+
+	//database
+	id, message, err := models.NewMessage(receivedMessage.ReceiverID, senderID, []byte(receivedMessage.Content))
+	if err != nil {
+		fmt.Println("messageid err: ", err)
+		return ctx.Status(400).JSON(err)
+	}
+	sender, receiver, err := getUserInfo(senderID, receivedMessage.ReceiverID)
+	if err != nil {
+		return ctx.Status(400).JSON(err)
+	}
+	messageRes := MessageResponseAPI{
+		ID:         id,
+		SenderID:   senderID,
+		Sender:     sender,
+		ReceiverID: receivedMessage.ReceiverID,
+		Receiver:   receiver,
+		Content:    receivedMessage.Content,
+		CreatedAt:  message.CreatedAt,
+	}
+
+	fmt.Println("MessageID: ", id)
+	return ctx.JSON(models.Response{
+		Status:  fiber.StatusCreated,
+		Message: "Send Message successfully",
+		Data:    messageRes})
 }

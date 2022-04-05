@@ -147,6 +147,35 @@ const docTemplate = `{
                         "description": ""
                     }
                 }
+<<<<<<< HEAD
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "/chat"
+                ],
+                "summary": "Send Message",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "UserID",
+                        "name": "userid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+=======
+>>>>>>> 6051be67b771e84552cb6b338d2f7f788fb3ba6a
             }
         },
         "/post": {
@@ -641,6 +670,12 @@ const docTemplate = `{
                 "firebase_user_id": {
                     "type": "string"
                 },
+<<<<<<< HEAD
+                "id": {
+                    "type": "string"
+                },
+=======
+>>>>>>> 6051be67b771e84552cb6b338d2f7f788fb3ba6a
                 "reason": {
                     "type": "string"
                 },

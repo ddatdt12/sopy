@@ -38,6 +38,8 @@ func ConnectFirebase() {
 	FirebaseApp.Auth = auth
 }
 
+//"chatdemo-bfd28"
+//"PROJECT_ID"
 func ConnectFirestore() {
 	client, err := firestore.NewClient(Ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
