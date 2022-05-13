@@ -27,7 +27,7 @@ interface IButtonProps extends TouchableHighlightProps {
 const Button: React.FC<IButtonProps> = props => {
     const {title, style, selected, variant = 'primary', textStyle, color, loading, disabled, ...otherProps} = props;
     let bgColorStyle: {backgroundColor: ColorValue} = {
-        backgroundColor: COLORS.white_3,
+        backgroundColor: COLORS.gray_1,
     };
     if (variant === 'secondary') {
         bgColorStyle = {
@@ -68,12 +68,12 @@ const Button: React.FC<IButtonProps> = props => {
     }
 
     return (
-        <TouchableOpacity
+        <TouchableHighlight
             style={[styles.wrapper, STYLES.mediumShadow, bgColorStyle, style]}
-            activeOpacity={0.8}
+            underlayColor="#D7E7F7"
             {...otherProps}>
             <Text style={[styles.text, styles[variant], textStyle]}>{title}</Text>
-        </TouchableOpacity>
+        </TouchableHighlight>
     );
 };
 
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         paddingVertical: scaleSize(4),
         paddingHorizontal: scaleSize(24),
         borderRadius: scaleSize(60),
-        backgroundColor: COLORS.white_3,
+        backgroundColor: COLORS.gray_1,
     },
     text: {
         fontSize: scaleSize(20),

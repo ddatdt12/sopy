@@ -39,7 +39,6 @@ const PostsScreen: React.FC<Props> = ({postList, loading, forceRefresh}) => {
 
     const renderItem: ListRenderItem<Post> = ({item}) => {
         return (
-            // FIXME: now Data not correct
             <PostCard
                 title={item.title}
                 author={item.expert.name}

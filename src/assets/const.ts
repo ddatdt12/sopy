@@ -21,7 +21,7 @@ export const COLORS = {
     black_2: '#1D325E',
     black_3: '#728AB7',
 
-    gray_1: '#EBF3FA', // background
+    gray_1: '#F6FBFF', // background
     gray_2: '#B6BAC1',
     gray_3: '#E9E9E9',
     gray_4: '#6D7FA0',

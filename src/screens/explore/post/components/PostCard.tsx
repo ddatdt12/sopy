@@ -1,10 +1,8 @@
 import {scaleSize} from '@core/utils';
-import {useNavigation} from '@react-navigation/native';
 import {COLORS, FONTS, STYLES} from '@src/assets/const';
 import Card from '@src/components/Card';
-import {ExploreScreenProps} from '@src/navigation/ExploreStackScreen';
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View} from 'react-native';
 import {GestureResponderEvent} from 'react-native-modal';
 
 interface IPostCard {
@@ -18,21 +16,21 @@ interface IPostCard {
     onPress?: (event: GestureResponderEvent) => void;
 }
 const PostCard: React.FC<IPostCard> = props => {
-    const navigation = useNavigation<ExploreScreenProps['navigation']>();
     const {title, author, image, onPress, style} = props;
 
     return (
-        <View style={STYLES.shadow}>
-            <TouchableOpacity onPress={onPress}>
-                <Card style={[styles.card, {width: style?.width, margin: style?.margin}]}>
-                    <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
-                    <View style={styles.content}>
-                        <Text style={styles.title}>{title}</Text>
-                        <Text style={styles.subtitle}>{author}</Text>
-                    </View>
-                </Card>
-            </TouchableOpacity>
-        </View>
+        <TouchableHighlight
+            underlayColor={'#D7E7F7'}
+            onPress={onPress}
+            style={[styles.card, {width: style?.width, margin: style?.margin, ...STYLES.deepShadow}]}>
+            <View style={{height: '100%'}}>
+                <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
+                <View style={styles.content}>
+                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.subtitle}>{author}</Text>
+                </View>
+            </View>
+        </TouchableHighlight>
     );
 };
 
@@ -43,8 +41,7 @@ const styles = StyleSheet.create({
     card: {
         height: scaleSize(225),
         backgroundColor: COLORS.white_1,
-        //shadow
-        borderRadius: scaleSize(6),
+        borderRadius: scaleSize(10),
         overflow: 'hidden',
         // flex: 1,
         minWidth: width - scaleSize(24),
